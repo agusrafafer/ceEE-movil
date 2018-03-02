@@ -1,0 +1,21 @@
+<ion-view title="Login" id="page4">
+  <ion-content padding="true" class="has-header">
+    <form id="login-form1" class="list">
+      <ion-list id="login-list2">
+        <label class="item item-input" id="login-input1">
+          <span class="input-label">Usuario: </span>
+          <input type="text" placeholder="Nombre usuario" ng-model="usuario.login">
+          {{usuario.login}}
+        </label>
+        <label class="item item-input" id="login-input2">
+          <span class="input-label">Clave: </span>
+          <input type="password" placeholder="" ng-model="usuario.clave">
+        </label>
+      </ion-list>
+      <div class="spacer" style="height: 40px;"></div>
+      <a ng-click="validarUsuario()" class="button button-positive button-block">Ingresar</a>
+      <!--<a ui-sref="menu.home()" id="login-button1" class="button button-stable button-block">Log in</a>-->
+      <a ng-click="recuperarClave()" id="login-button2" class="button button-positive button-block button-clear">Olvide mi contrase&ntilde;a</a>
+    </form>
+  </ion-content>
+</ion-view>
