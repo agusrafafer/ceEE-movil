@@ -34,6 +34,16 @@ angular.module('app.routes', [])
                                 controller: 'loginCtrl'
                             }
                         }
+                    })
+
+                    .state('menu.mensajes', {
+                        url: '/mensajes',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/mensajes.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
                     });
 
             $urlRouterProvider.otherwise('/side-menu21/page1')

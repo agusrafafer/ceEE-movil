@@ -1,7 +1,7 @@
 angular.module('app.usuarioService', [])
 
-        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory',
-            function ($http, $q, wsFactory, usuarioFactory) {
+        .service('usuarioService', ['$http', '$q', 'wsFactory',
+            function ($http, $q, wsFactory) {
 
                 this.validarLogin = function (login, password) {
                     //defered = diferido (asincrono)
@@ -19,6 +19,27 @@ angular.module('app.usuarioService', [])
 
                     return promise;
                 };
+                
+                
+                this.obtenerMensajesUsuario = function(idUsuario) {
+                    var defered = $q.defer();
+                    var promise = defered.promise;
+
+                    $http.get(wsFactory.url + '/usuario/mensaje/' + idUsuario)
+                            .success(function (data) {
+                                defered.resolve(data);
+                            })
+                            .error(function (data, status) {
+                                defered.reject(data, status);
+                            });
+
+                    return promise;
+                };
 
 
-            }]);
+            }
+        
+
+
+
+]);

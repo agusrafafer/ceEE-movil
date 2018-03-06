@@ -9,8 +9,7 @@ angular.module('app.factories', [])
             return {
                 usuario: "",
                 tituloMenu: "Escolar App",
-                clientIdMp: "",
-                clientSecretMp: "",
+                mensajes: "",
                 idAuth: -1,
                 auth: {},
                 authDate: -1

@@ -1,0 +1,25 @@
+<ion-view title="Mensajes" id="page6">
+    <ion-content padding="true" class="has-header">
+        <ion-list id="mensajes-list5">
+            <ion-item 
+                ng-repeat="msj in getMensajes()"
+                class="item-avatar item-icon-right" id="mensajes-list-item5">
+                <img src="img/bzLkm2sRw2tDnAQNimp0_imagenmialinkedin.jpg">
+                <h2>{{msj.idMensaje.asunto}}</h2>
+                <p>{{msj.idMensaje.texto}}</p>
+                <i class="icon ion-email-unread"></i>
+                <ion-option-button class="button-assertive">
+                    <i class="icon ion-ios-trash-outline"></i>
+                </ion-option-button>
+            </ion-item>
+            <!--<ion-item class="item-avatar item-icon-right" id="mensajes-list-item13">
+              <h2>Asunto</h2>
+              <p>Contenido Mensaje</p>
+              <i class="icon ion-ios-email-outline"></i>
+              <ion-option-button class="button-assertive">
+                  <i class="icon ion-ios-trash-outline"></i>
+              </ion-option-button>
+            </ion-item>-->
+        </ion-list>
+    </ion-content>
+</ion-view>

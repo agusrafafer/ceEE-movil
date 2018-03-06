@@ -1,23 +1,32 @@
 <ion-side-menus enable-menu-with-back-views="false">
-  <ion-side-menu-content>
-    <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button></ion-nav-back-button>
-      <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
-    <ion-nav-view name="side-menu21"></ion-nav-view>
-  </ion-side-menu-content>
-  <ion-side-menu side="left" id="side-menu21">
-    <ion-header-bar class="bar-stable">
-      <div class="title">Menu</div>
-    </ion-header-bar>
-    <ion-content padding="false" class="side-menu-left has-header ">
-      <ion-list id="menu-list1">
-        <ion-item id="menu-list-item1" ui-sref="menu.home()" menu-close="">Home</ion-item>
-        <ion-item id="menu-list-item4" ui-sref="menu.login()" menu-close="" ng-hide="isLogueado()">Login</ion-item>
-        <ion-item id="menu-list-item5" ng-click="salir()" menu-close="" ng-hide="!isLogueado()">Salir</ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-side-menu>
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive">
+            <ion-nav-back-button></ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="side-menu21"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" id="side-menu21">
+        <ion-header-bar class="bar-stable">
+            <div class="title">Menu</div>
+        </ion-header-bar>
+        <ion-content padding="false" class="side-menu-left has-header ">
+            <ion-list id="menu-list1">
+                <ion-item class="item-icon-right" id="menu-list-item1" ui-sref="menu.home()" menu-close="">Home
+                    <i class="icon ion-ios-home-outline"></i>
+                </ion-item>
+                <ion-item ng-controller="usuarioCtrl" class="item-icon-right" id="menu-list-item12" ng-click="buscarMensajesUsuario()" ng-hide="!isLogueado()" menu-close="">Mensajes
+                    <i class="icon ion-ios-email-outline"></i>
+                </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item4" ui-sref="menu.login()" ng-hide="isLogueado()" menu-close="">Login
+                    <i class="icon ion-ios-unlocked-outline"></i>
+                </ion-item>
+                <ion-item ng-controller="menuCtrl" class="item-icon-right" ng-click="salir()" ng-hide="!isLogueado()" menu-close="">Salir
+                    <i class="icon ion-android-exit"></i>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
 </ion-side-menus>
