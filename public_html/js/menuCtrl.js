@@ -7,8 +7,8 @@
 
 angular.module('app.menuCtrl', [])
 
-        .controller('menuCtrl', ['$scope', '$state', '$stateParams', '$ionicPopup', 'usuarioFactory', 'usuarioService',
-            function ($scope, $state, $stateParams, $ionicPopup, usuarioFactory, usuarioService) {
+        .controller('menuCtrl', ['$scope', '$state', '$stateParams', '$ionicHistory', '$ionicPopup', 'usuarioFactory', 'usuarioService',
+            function ($scope, $state, $stateParams, $ionicHistory, $ionicPopup, usuarioFactory, usuarioService) {
 
 
                 $scope.isLogueado = function () {
@@ -32,6 +32,9 @@ angular.module('app.menuCtrl', [])
                     confirmPopup.then(function (res) {
                         if (res) {
                             usuarioFactory.usuario = "";
+                            $ionicHistory.nextViewOptions({
+                                disableBack: true
+                            });
                             $state.go('menu.home', {}, {location: "replace"});
                         }
                     });
