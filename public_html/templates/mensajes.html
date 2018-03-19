@@ -4,7 +4,7 @@
             <ion-item 
                 ng-repeat="msj in getMensajes()"
                 class="item-avatar item-icon-right" id="mensajes-list-item5">
-                <img src="img/bzLkm2sRw2tDnAQNimp0_imagenmialinkedin.jpg">
+                <img src="http://108.160.155.140:8080/azules/faces/resources/images/fotos/{{msj.idMensaje.idUsuarioEnvia.idPersona.foto}}">
                 <h2>{{msj.idMensaje.asunto}}</h2>
                 <p>{{msj.idMensaje.texto}}</p>
                 <i class="icon ion-email-unread"></i>
