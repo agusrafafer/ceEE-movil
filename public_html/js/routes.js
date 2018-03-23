@@ -14,7 +14,7 @@ angular.module('app.routes', [])
                         views: {
                             'side-menu21': {
                                 templateUrl: 'templates/home.html',
-                                controller: 'homeCtrl'
+                                controller: 'usuarioCtrl'
                             }
                         }
                     })
@@ -23,7 +23,7 @@ angular.module('app.routes', [])
                     .state('menu', {
                         url: '/side-menu21',
                         templateUrl: 'templates/menu.html',
-                        controller: 'menuCtrl'
+                        controller: 'usuarioCtrl'
                     })
 
                     .state('menu.login', {
@@ -41,6 +41,26 @@ angular.module('app.routes', [])
                         views: {
                             'side-menu21': {
                                 templateUrl: 'templates/mensajes.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
+
+                    .state('menu.mensajeDetalle', {
+                        url: '/page7',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/mensajeDetalle.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
+                    
+                    .state('menu.miCuenta', {
+                        url: '/page8',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/miCuenta.html',
                                 controller: 'usuarioCtrl'
                             }
                         }

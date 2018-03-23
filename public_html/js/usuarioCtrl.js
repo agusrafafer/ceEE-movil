@@ -12,29 +12,53 @@ angular.module('app.usuarioCtrl', [])
                     login: "",
                     clave: ""
                 };
+                
+                $scope.isLogueado = function () {
+                    if (typeof (usuarioFactory.usuario) === "undefined")
+                        return false;
+                    if (usuarioFactory.usuario === "") {
+                        return false;
+                    }
+                    return true;
+                };
+                
+                $scope.isAlumno = function () {
+                    if (typeof (usuarioFactory.usuario) === "undefined")
+                        return false;
+                    if (usuarioFactory.usuario === "") {
+                        return false;
+                    }
+                    if (usuarioFactory.usuario.idPersona.idPadre === null && 
+                            usuarioFactory.usuario.idPersona.idMadre === null &&
+                            usuarioFactory.usuario.idPersona.idTutor === null) {
+                        return false;
+                    }
+                    return true;
+                };
 
                 $scope.buscarMensajesUsuario = function () {
-                    
+
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
 
-
                     usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario)
                             .then(function (data) {
                                 $ionicLoading.hide();
+
                                 usuarioFactory.mensajes = data;
+
                                 $ionicHistory.nextViewOptions({
                                     disableBack: true
                                 });
                                 $state.go('menu.mensajes', {}, {location: "replace"});
-                                
+
                             })
-                            .catch(function (data, status) {
+                            .catch(function (data) {
                                 $ionicLoading.hide();
                                 $ionicPopup.alert({
                                     title: 'Info',
-                                    template: 'Hubo un error al cargar los mensajes.'
+                                    template: data
                                 });
                             });
 
@@ -45,6 +69,91 @@ angular.module('app.usuarioCtrl', [])
                 $scope.getMensajes = function () {
                     return usuarioFactory.mensajes;
                 };
+
+                $scope.verMensaje = function (index) {
+                    usuarioFactory.mensajeSel = usuarioFactory.mensajes[index];
+                    $state.go('menu.mensajeDetalle', {}, {location: "replace"});
+                };
+                
+                $scope.getMensajeSel = function () {
+                    return usuarioFactory.mensajeSel;
+                };
+                
+                $scope.getUsuario = function () {
+                    if (typeof (usuarioFactory.usuario) === "undefined")
+                        return null;
+                    if (usuarioFactory.usuario === "") {
+                        return null;
+                    }
+                    unificarHijos();
+                    return usuarioFactory.usuario;
+                };
+
+                function unificarHijos() {
+                    var hijos = [];
+
+                    //cargo en un array auxiliar los hijos del tutor en primera medida
+                    var vecHijosTutor = usuarioFactory.usuario.idPersona.personaCollection;
+                    for (var i in vecHijosTutor) {
+                        hijos.push(vecHijosTutor[i]);
+                    }
+
+
+                    //verifico y cargo los hijos del padre siempre y cuando no hayan sido cargados desde el array del tutor
+                    var vecHijosPadre = usuarioFactory.usuario.idPersona.personaCollection1;
+                    for (var i in vecHijosPadre) {
+                        var existe = false;
+                        for (var j in hijos) {
+                            if (vecHijosPadre[i].idPersona === hijos[j].idPersona) {
+                                existe = true;
+                                break;
+                            }
+                        }
+                        if (!existe) {
+                            hijos.push(vecHijosPadre[i]);
+                        }
+                    }
+
+                    //verifico y cargo los hijos de la madre siempre y cuando no hayan sido cargados desde el array del tutor
+                    var vecHijosMadre = usuarioFactory.usuario.idPersona.personaCollection2;
+                    for (var i in vecHijosMadre) {
+                        var existe = false;
+                        for (var j in hijos) {
+                            if (vecHijosMadre[i].idPersona === hijos[j].idPersona) {
+                                existe = true;
+                                break;
+                            }
+                        }
+                        if (!existe) {
+                            hijos.push(vecHijosMadre[i]);
+                        }
+                    }
+
+                    usuarioFactory.usuario.personaCollection = hijos;
+                }
+
+                $scope.salir = function () {
+                    var confirmPopup = $ionicPopup.confirm({
+                        title: 'Info',
+                        template: '¿Seguro desea salir?',
+                        okText: 'Si',
+                        cancelText: 'No'
+                    });
+
+                    confirmPopup.then(function (res) {
+                        if (res) {
+                            usuarioFactory.usuario = "";
+                            $ionicHistory.nextViewOptions({
+                                disableBack: true
+                            });
+                            $state.go('menu.home', {}, {location: "replace"});
+                        }
+                    });
+
+                };
+                
+
+
 
 
             }]);

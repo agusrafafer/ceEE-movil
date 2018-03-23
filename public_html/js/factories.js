@@ -10,9 +10,9 @@ angular.module('app.factories', [])
                 usuario: "",
                 tituloMenu: "Escolar App",
                 mensajes: "",
-                idAuth: -1,
-                auth: {},
-                authDate: -1
+                mensajeSel: "",
+                authToken: "",
+                authExpDate: -1
             };
         })
 
@@ -20,6 +20,12 @@ angular.module('app.factories', [])
         .factory('wsFactory', function () {
             return {
                 url: "http://localhost:8080/azules/webresources"
+            };
+        })
+        
+        .factory('urlFoto', function () {
+            return {
+                url: "http://108.160.155.140:8080/azules/faces/resources/images/fotos/"
             };
         });
 

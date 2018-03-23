@@ -17,13 +17,16 @@
                 <ion-item class="item-icon-right" id="menu-list-item1" ui-sref="menu.home()" menu-close="">Home
                     <i class="icon ion-ios-home-outline"></i>
                 </ion-item>
-                <ion-item ng-controller="usuarioCtrl" class="item-icon-right" id="menu-list-item12" ng-click="buscarMensajesUsuario()" ng-hide="!isLogueado()" menu-close="">Mensajes
+                <ion-item class="item-icon-right" id="menu-list-item1" ng-hide="!isLogueado()" ui-sref="menu.miCuenta" menu-close="">Mi cuenta
+                    <i class="icon ion-person"></i>
+                </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item12" ng-click="buscarMensajesUsuario()" ng-hide="!isLogueado()" menu-close="">Mensajes
                     <i class="icon ion-ios-email-outline"></i>
                 </ion-item>
                 <ion-item class="item-icon-right" id="menu-list-item4" ui-sref="menu.login()" ng-hide="isLogueado()" menu-close="">Login
                     <i class="icon ion-ios-unlocked-outline"></i>
                 </ion-item>
-                <ion-item ng-controller="menuCtrl" class="item-icon-right" ng-click="salir()" ng-hide="!isLogueado()" menu-close="">Salir
+                <ion-item class="item-icon-right" ng-click="salir()" ng-hide="!isLogueado()" menu-close="">Salir
                     <i class="icon ion-android-exit"></i>
                 </ion-item>
             </ion-list>

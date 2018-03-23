@@ -1,0 +1,19 @@
+<ion-view title="Detalle de mensaje">
+    <ion-content padding="true" class="has-header">
+        <h3 style="color:#000000;">{{getMensajeSel().idMensaje.asunto}}</h3>
+        <div class="list card">
+            <ion-item class="item-avatar">
+                <img src="http://108.160.155.140:8080/azules/faces/resources/images/fotos/{{getMensajeSel().idMensaje.idUsuarioEnvia.idPersona.foto}}">
+                <h2>{{getMensajeSel().idMensaje.idUsuarioEnvia.idPersona.apellido}}</h2>
+                <p>{{getMensajeSel().idMensaje.idUsuarioEnvia.idPersona.nombre}}</p>
+            </ion-item>
+            <div class="item item-body">
+                <div class="show-list-numbers-and-dots">
+                    <p style="margin-top:0px;color:#000000;">
+                        {{getMensajeSel().idMensaje.texto}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

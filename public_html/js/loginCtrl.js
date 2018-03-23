@@ -17,23 +17,30 @@ angular.module('app.loginCtrl', [])
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
-                    
-                    
+
+
                     usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave)
-                            .then(function (data) {
+                            .then(function (response) {
                                 $ionicLoading.hide();
-                                usuarioFactory.usuario = data;
-//                                alert("Hola: " + usuarioFactory.usuario.nombre);
-                                $ionicHistory.nextViewOptions({
-                                    disableBack: true
-                                });
-                                $state.go('menu.home', {}, {location: "replace"});
+                                usuarioService.tratarTokenAutorizacion(response.headers()['authorization']);
+                                if (usuarioFactory.usuario !== null) {
+                                    $ionicHistory.nextViewOptions({
+                                        disableBack: true
+                                    });
+                                    $state.go('menu.home', {}, {location: "replace"});
+                                } else {
+                                    usuarioFactory.usuario = "";
+                                    $ionicPopup.alert({
+                                        title: 'Info',
+                                        template: 'Usuario o clave incorrecta'
+                                    });
+                                }
                             })
-                            .catch(function (data, status) {
+                            .catch(function (data) {
                                 $ionicLoading.hide();
                                 $ionicPopup.alert({
                                     title: 'Info',
-                                    template: 'Hubo un error al intentar ingresar.'
+                                    template: data
                                 });
                             });
 

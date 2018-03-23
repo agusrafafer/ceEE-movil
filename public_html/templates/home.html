@@ -1,3 +1,20 @@
-<ion-view title="Home" id="page1">
-  <ion-content padding="true" class="has-header"></ion-content>
+<ion-view title="Escolar movil" id="page1">
+    <ion-content padding="true" class="has-header">
+        <ion-item 
+            class="item-avatar item-icon-right" id="mensajes-list-item5"
+            ng-show="isAlumno()">
+            <img src="http://108.160.155.140:8080/azules/faces/resources/images/fotos/{{getUsuario().idPersona.foto}}">
+            <h2>{{getUsuario().idPersona.apellido}}</h2>
+            <p>{{getUsuario().idPersona.nombre}}</p>
+            <i class="icon ion-chevron-right"></i>
+        </ion-item>
+        <ion-item 
+            ng-repeat="per in getUsuario().personaCollection"
+            class="item-avatar item-icon-right" id="mensajes-list-item5">
+            <img src="http://108.160.155.140:8080/azules/faces/resources/images/fotos/{{per.foto}}">
+            <h2>{{per.apellido}}</h2>
+            <p>{{per.nombre}}</p>
+            <i class="icon ion-chevron-right"></i>
+        </ion-item>
+    </ion-content>
 </ion-view>
