@@ -132,25 +132,7 @@ angular.module('app.usuarioCtrl', [])
                     usuarioFactory.usuario.personaCollection = hijos;
                 }
 
-                $scope.salir = function () {
-                    var confirmPopup = $ionicPopup.confirm({
-                        title: 'Info',
-                        template: '¿Seguro desea salir?',
-                        okText: 'Si',
-                        cancelText: 'No'
-                    });
-
-                    confirmPopup.then(function (res) {
-                        if (res) {
-                            usuarioFactory.usuario = "";
-                            $ionicHistory.nextViewOptions({
-                                disableBack: true
-                            });
-                            $state.go('menu.home', {}, {location: "replace"});
-                        }
-                    });
-
-                };
+                
                 
 
 
