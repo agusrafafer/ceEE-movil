@@ -27,7 +27,7 @@ angular.module('app.usuarioService', [])
                     var tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
                     usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
                     usuarioFactory.authExpDate = tokenPayload.exp;
-                    localStorage.setItem("usuarioFactory.usuario", usuarioFactory.usuario);
+                    //localStorage.setItem("usuarioFactory.usuario", usuarioFactory.usuario);
                     localStorage.setItem("usuarioFactory.authToken", usuarioFactory.authToken);
                     localStorage.setItem("usuarioFactory.authExpDate", usuarioFactory.authExpDate);
                 };
