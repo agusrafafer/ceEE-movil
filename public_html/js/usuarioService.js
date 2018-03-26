@@ -1,6 +1,6 @@
 angular.module('app.usuarioService', [])
 
-        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory', 'jwtHelper',
+        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory', 'jwtHelper', 
             function ($http, $q, wsFactory, usuarioFactory, jwtHelper) {
 
                 this.validarLogin = function (login, password) {
@@ -27,6 +27,20 @@ angular.module('app.usuarioService', [])
                     var tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
                     usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
                     usuarioFactory.authExpDate = tokenPayload.exp;
+                    localStorage.setItem("usuarioFactory.usuario", usuarioFactory.usuario);
+                    localStorage.setItem("usuarioFactory.authToken", usuarioFactory.authToken);
+                    localStorage.setItem("usuarioFactory.authExpDate", usuarioFactory.authExpDate);
+                };
+                
+                this.verificarExpiraToken = function () {
+                    var expira = localStorage.getItem("usuarioFactory.authExpDate");
+                    var fecha = new Date();
+                    //fecha.
+                    if(fecha.getMilliseconds() > expira){
+                        var response = this.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.clave);
+                        this.tratarTokenAutorizacion(response.headers()['authorization']);
+                    }
+                    
                 };
 
 
