@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+'use-strict';
+
 angular.module('app.usuarioCtrl', [])
 
         .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService',
@@ -12,7 +15,7 @@ angular.module('app.usuarioCtrl', [])
                     login: "",
                     clave: ""
                 };
-                
+
                 $scope.isLogueado = function () {
                     if (typeof (usuarioFactory.usuario) === "undefined")
                         return false;
@@ -21,14 +24,14 @@ angular.module('app.usuarioCtrl', [])
                     }
                     return true;
                 };
-                
+
                 $scope.isAlumno = function () {
                     if (typeof (usuarioFactory.usuario) === "undefined")
                         return false;
                     if (usuarioFactory.usuario === "") {
                         return false;
                     }
-                    if (usuarioFactory.usuario.idPersona.idPadre === null && 
+                    if (usuarioFactory.usuario.idPersona.idPadre === null &&
                             usuarioFactory.usuario.idPersona.idMadre === null &&
                             usuarioFactory.usuario.idPersona.idTutor === null) {
                         return false;
@@ -61,24 +64,55 @@ angular.module('app.usuarioCtrl', [])
                                     template: data
                                 });
                             });
-
-
-
                 };
 
                 $scope.getMensajes = function () {
                     return usuarioFactory.mensajes;
                 };
 
-                $scope.verMensaje = function (index) {
+                $scope.verMensaje = function (index, navegar) {
                     usuarioFactory.mensajeSel = usuarioFactory.mensajes[index];
-                    $state.go('menu.mensajeDetalle', {}, {location: "replace"});
+                    $ionicLoading.show({
+                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
+                    });
+
+                    if (!usuarioFactory.mensajeSel.leido) {
+                        usuarioService.marcarMensajeUsuarioComoLeido(usuarioFactory.mensajeSel.idMensaje.idMensaje)
+                                .then(function (data) {
+                                    usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario)
+                                            .then(function (data) {
+                                                $ionicLoading.hide();
+
+                                                usuarioFactory.mensajes = data;
+
+                                            })
+                                            .catch(function (data) {
+                                                $ionicLoading.hide();
+                                                $ionicPopup.alert({
+                                                    title: 'Info',
+                                                    template: data
+                                                });
+                                            });
+
+                                })
+                                .catch(function (data) {
+                                    $ionicLoading.hide();
+                                    $ionicPopup.alert({
+                                        title: 'Info',
+                                        template: data
+                                    });
+                                });
+                    }
+                    $ionicLoading.hide();
+                    if (navegar) {
+                        $state.go('menu.mensajeDetalle', {}, {location: "replace"});
+                    }
                 };
-                
+
                 $scope.getMensajeSel = function () {
                     return usuarioFactory.mensajeSel;
                 };
-                
+
                 $scope.getUsuario = function () {
                     if (typeof (usuarioFactory.usuario) === "undefined")
                         return null;
@@ -132,8 +166,8 @@ angular.module('app.usuarioCtrl', [])
                     usuarioFactory.usuario.personaCollection = hijos;
                 }
 
-                
-                
+
+
 
 
 

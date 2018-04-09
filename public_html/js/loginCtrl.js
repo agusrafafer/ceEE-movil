@@ -12,8 +12,8 @@ angular.module('app.loginCtrl', [])
                     login: "",
                     clave: ""
                 };
-
-                $scope.onloadCtrl = function () {
+                
+                $scope.$on('$ionicView.loaded', function(event) {
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
@@ -42,7 +42,38 @@ angular.module('app.loginCtrl', [])
                     } else {
                         $ionicLoading.hide();
                     }
-                };
+                });
+
+//                $scope.onloadCtrl = function () {
+//                    $ionicLoading.show({
+//                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
+//                    });
+//                    var authToken = localStorage.getItem("usuarioFactory.authToken");
+//                    if (authToken !== null) {
+//                        usuarioService.tratarTokenAutorizacion(authToken);
+//                        var expira = localStorage.getItem("usuarioFactory.authExpDate");
+//                        var fecha = new Date();
+//                        if (fecha.getTime() > Number.parseInt(expira)) {
+//                            usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
+//                                    .then(function (response) {
+//                                        $ionicLoading.hide();
+//                                        usuarioService.tratarTokenAutorizacion(response.headers()['authorization']);
+//                                        $ionicHistory.nextViewOptions({
+//                                            disableBack: true
+//                                        });
+//                                        $state.go('menu.home', {}, {location: "replace"});
+//                                    })
+//                                    .catch(function (data) {
+//                                        $ionicLoading.hide();
+//                                        usuarioFactory.usuario = "";
+//                                        usuarioFactory.authToken = "";
+//                                        usuarioFactory.authExpDate = -1;
+//                                    });
+//                        }
+//                    } else {
+//                        $ionicLoading.hide();
+//                    }
+//                };
 
                 $scope.validarUsuario = function () {
                     $ionicLoading.show({
