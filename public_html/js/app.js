@@ -103,5 +103,5 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
 function taskChequeoMsj() {
     alert("Hola loop");
-    window.timeout(taskChequeoMsj, 5000);
+    window.setTimeout(taskChequeoMsj, '5000');
 }
