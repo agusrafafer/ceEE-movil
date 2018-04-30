@@ -31,23 +31,22 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                     text: 'Executing background tasks.'
                 });
 
+                cordova.plugins.backgroundMode.on('enable', function () {
+                    //your code here, will execute when background tasks is enabled
+
+                    taskChequeoMsj();
+
+                });
+
+                function taskChequeoMsj() {
+                    alert("HOLA loop");
+                    $timeout(taskChequeoMsj, 5000);
+                }
+
                 // Enable background mode
                 cordova.plugins.backgroundMode.enable();
 
-                // Called when background mode has been activated
-                cordova.plugins.backgroundMode.onactivate = function () {
 
-                    // Set an interval of 30 minutes (1800000 milliseconds)
-                    setInterval(function () {
-
-                        $ionicPopup.alert({
-                            title: 'Info',
-                            template: 'HOLA BG'
-                        });
-                        alert('HOLA BG');
-
-                    }, 5000);
-                };
             });
         })
 
