@@ -12,7 +12,8 @@ angular.module('app.factories', [])
                 mensajes: "",
                 mensajeSel: "",
                 authToken: "",
-                authExpDate: -1
+                authExpDate: -1,
+                cont: 0
             };
         })
 

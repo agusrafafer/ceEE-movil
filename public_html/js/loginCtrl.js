@@ -68,7 +68,8 @@ angular.module('app.loginCtrl', [])
                 function taskChequeoMsj() {
 //                    console.log("Hola loop");
 //                    alert("Hola loop");
-                    $scope.usuario.cont += 1;
+                    usuarioFactory.cont += 1;
+                    $scope.usuario.cont = usuarioFactory.cont;
                     window.setTimeout(taskChequeoMsj, 5000);
                 }
 
