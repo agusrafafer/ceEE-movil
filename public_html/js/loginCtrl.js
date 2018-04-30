@@ -31,7 +31,6 @@ angular.module('app.loginCtrl', [])
                                             disableBack: true
                                         });
                                         $state.go('menu.home', {}, {location: "replace"});
-                                        $scope.loopChequeo();
                                     })
                                     .catch(function (data) {
                                         $ionicLoading.hide();
@@ -155,29 +154,7 @@ angular.module('app.loginCtrl', [])
 
 
 
-                $scope.loopChequeo = function () {
-
-                    cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Proceso en background',
-                        text: 'Ejecutando en background'
-                    });
-
-                    // Enable background mode while track is playing
-                    cordova.plugins.backgroundMode.enable();
-
-                    // Called when background mode has been activated
-                    cordova.plugins.backgroundMode.onactivate = function () {
-                        taskChequeoMsj();
-                    };
-
-
-                };
-
-
-                function taskChequeoMsj() {
-                    alert("Hola loop");
-                    window.setTimeout(taskChequeoMsj, 5000);
-                }
+                
 
 
             }]);

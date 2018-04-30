@@ -125,6 +125,34 @@ angular.module('app.usuarioCtrl', [])
                     unificarHijos();
                     return usuarioFactory.usuario;
                 };
+                
+                $scope.$on('$ionicView.loaded', function (event) {
+                    $scope.loopChequeo();
+                });
+                
+                $scope.loopChequeo = function () {
+
+                    cordova.plugins.backgroundMode.setDefaults({
+                        title: 'Proceso en background1',
+                        text: 'Ejecutando en background1'
+                    });
+
+                    // Enable background mode while track is playing
+                    cordova.plugins.backgroundMode.enable();
+
+                    // Called when background mode has been activated
+                    cordova.plugins.backgroundMode.onactivate = function () {
+                        taskChequeoMsj();
+                    };
+
+
+                };
+
+
+                function taskChequeoMsj() {
+                    alert("Hola loop");
+                    window.setTimeout(taskChequeoMsj, 5000);
+                }
 
                 function unificarHijos() {
                     var hijos = [];
