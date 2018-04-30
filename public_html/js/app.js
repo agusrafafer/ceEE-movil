@@ -13,7 +13,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
         })
 
-        .run(function ($ionicPlatform, $ionicPopup) {
+        .run(function ($ionicPlatform) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -27,8 +27,8 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                 }
 
                 cordova.plugins.backgroundMode.setDefaults({
-                    title: 'TheTitleOfYourProcess',
-                    text: 'Executing background tasks.'
+                    title: 'Proceso en background',
+                    text: 'Ejecutando en background'
                 });
 
                 cordova.plugins.backgroundMode.on('enable', function () {
@@ -39,8 +39,8 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                 });
 
                 function taskChequeoMsj() {
-                    alert("HOLA loop");
-                    $timeout(taskChequeoMsj, 5000);
+                    alert("Hola loop");
+                    window.timeout(taskChequeoMsj, 5000);
                 }
 
                 // Enable background mode
