@@ -31,6 +31,7 @@ angular.module('app.loginCtrl', [])
                                             disableBack: true
                                         });
                                         $state.go('menu.home', {}, {location: "replace"});
+                                        $scope.loopChequeo();
                                     })
                                     .catch(function (data) {
                                         $ionicLoading.hide();
