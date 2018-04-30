@@ -150,7 +150,9 @@ angular.module('app.usuarioCtrl', [])
 
 
                 function taskChequeoMsj() {
-                    alert("Hola loop");
+                    console.log("Hola loop");
+                    
+                    
                     window.setTimeout(taskChequeoMsj, 5000);
                 }
 

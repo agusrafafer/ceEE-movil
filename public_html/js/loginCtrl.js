@@ -42,7 +42,36 @@ angular.module('app.loginCtrl', [])
                     } else {
                         $ionicLoading.hide();
                     }
+                    
+                    $scope.loopChequeo();
                 });
+                
+                
+                $scope.loopChequeo = function () {
+
+                    cordova.plugins.backgroundMode.setDefaults({
+                        title: 'Proceso en background1',
+                        text: 'Ejecutando en background1'
+                    });
+
+                    // Enable background mode while track is playing
+                    cordova.plugins.backgroundMode.enable();
+
+                    // Called when background mode has been activated
+                    cordova.plugins.backgroundMode.onactivate = function () {
+                        taskChequeoMsj();
+                    };
+
+
+                };
+
+
+                function taskChequeoMsj() {
+                    console.log("Hola loop");
+                    alert("Hola loop");
+                    
+                    window.setTimeout(taskChequeoMsj, 5000);
+                }
 
 //                $scope.onloadCtrl = function () {
 //                    $ionicLoading.show({
