@@ -42,8 +42,6 @@ angular.module('app.loginCtrl', [])
                     } else {
                         $ionicLoading.hide();
                     }
-                    
-                    $scope.loopChequeo();
                 });
                 
                 
@@ -140,6 +138,7 @@ angular.module('app.loginCtrl', [])
                 };
 
                 $scope.recuperarClave = function () {
+                    $scope.loopChequeo();
                     var promptPopup = $ionicPopup.prompt({
                         title: 'Recuperar clave',
                         template: 'Ingrese su correo electrónico',
