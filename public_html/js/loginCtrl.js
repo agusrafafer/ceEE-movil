@@ -153,26 +153,26 @@ angular.module('app.loginCtrl', [])
                 };
 
 
-                document.addEventListener('deviceready', function () {
 
-                    $scope.loopChequeo = function () {
 
-                        cordova.plugins.backgroundMode.setDefaults({
-                            title: 'Proceso en background',
-                            text: 'Ejecutando en background'
-                        });
+                $scope.loopChequeo = function () {
 
-                        // Enable background mode while track is playing
-                        cordova.plugins.backgroundMode.enable();
+                    cordova.plugins.backgroundMode.setDefaults({
+                        title: 'Proceso en background',
+                        text: 'Ejecutando en background'
+                    });
 
-                        // Called when background mode has been activated
-                        cordova.plugins.backgroundMode.onactivate = function () {
-                            taskChequeoMsj();
-                        };
+                    // Enable background mode while track is playing
+                    cordova.plugins.backgroundMode.enable();
 
-                        
+                    // Called when background mode has been activated
+                    cordova.plugins.backgroundMode.onactivate = function () {
+                        taskChequeoMsj();
                     };
-                });
+
+
+                };
+
 
                 function taskChequeoMsj() {
                     alert("Hola loop");
