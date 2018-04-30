@@ -1,6 +1,6 @@
 angular.module('app.usuarioService', [])
 
-        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory', 'jwtHelper', 
+        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory', 'jwtHelper',
             function ($http, $q, wsFactory, usuarioFactory, jwtHelper) {
 
                 this.validarLogin = function (login, password) {
@@ -31,7 +31,7 @@ angular.module('app.usuarioService', [])
                     localStorage.setItem("usuarioFactory.authToken", usuarioFactory.authToken);
                     localStorage.setItem("usuarioFactory.authExpDate", usuarioFactory.authExpDate);
                 };
-                
+
                 this.verificarExpiraToken = function () {
                     var expira = localStorage.getItem("usuarioFactory.authExpDate");
                     var fecha = new Date();
@@ -40,7 +40,7 @@ angular.module('app.usuarioService', [])
                         var response = this.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.clave);
                         this.tratarTokenAutorizacion(response.headers()['authorization']);
                     }
-                    
+
                 };
 
 
@@ -49,7 +49,7 @@ angular.module('app.usuarioService', [])
 
                     var configuracion = {
                         headers: {
-                            'authorization': token 
+                            'authorization': token
                         }
                     };
 
@@ -69,7 +69,7 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al cargar los mensajes";
                             });
                 };
-                
+
                 this.marcarMensajeUsuarioComoLeido = function (idMensaje) {
                     var token = usuarioFactory.authToken;
 
@@ -79,7 +79,7 @@ angular.module('app.usuarioService', [])
                         }
                     };
 
-                    return $http.put(wsFactory.url + '/usuario/mensaje/', {'idMensaje':idMensaje}, configuracion)
+                    return $http.put(wsFactory.url + '/usuario/mensaje/', {'idMensaje': idMensaje}, configuracion)
                             .then(function (response) {
                                 //todo ok
                                 //The response object has these properties:

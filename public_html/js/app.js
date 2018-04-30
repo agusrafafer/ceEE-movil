@@ -25,6 +25,25 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
+
+                cordova.plugins.backgroundMode.setDefaults({
+                    title: 'TheTitleOfYourProcess',
+                    text: 'Executing background tasks.'
+                });
+
+                // Enable background mode
+                cordova.plugins.backgroundMode.enable();
+
+                // Called when background mode has been activated
+                cordova.plugins.backgroundMode.onactivate = function () {
+
+                    // Set an interval of 30 minutes (1800000 milliseconds)
+                    setInterval(function () {
+
+                        alert('HOLA BG');
+
+                    }, 5000);
+                }
             });
         })
 

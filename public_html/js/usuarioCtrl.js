@@ -26,6 +26,9 @@ angular.module('app.usuarioCtrl', [])
                 };
 
                 $scope.isAlumno = function () {
+                    //El padre debe aparecer en el listado si solo fue alumno
+
+
                     if (typeof (usuarioFactory.usuario) === "undefined")
                         return false;
                     if (usuarioFactory.usuario === "") {
