@@ -12,8 +12,8 @@ angular.module('app.loginCtrl', [])
                     login: "",
                     clave: ""
                 };
-                
-                $scope.$on('$ionicView.loaded', function(event) {
+
+                $scope.$on('$ionicView.loaded', function (event) {
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
@@ -150,6 +150,33 @@ angular.module('app.loginCtrl', [])
                     });
 
                 };
+
+
+                document.addEventListener('deviceready', function () {
+
+                    $scope.loopChequeo = function () {
+
+                        cordova.plugins.backgroundMode.setDefaults({
+                            title: 'Proceso en background',
+                            text: 'Ejecutando en background'
+                        });
+
+                        // Enable background mode while track is playing
+                        cordova.plugins.backgroundMode.enable();
+
+                        // Called when background mode has been activated
+                        cordova.plugins.backgroundMode.onactivate = function () {
+                            taskChequeoMsj();
+                        };
+
+                        
+                    };
+                });
+
+                function taskChequeoMsj() {
+                    alert("Hola loop");
+                    window.setTimeout(taskChequeoMsj, 5000);
+                }
 
 
             }]);

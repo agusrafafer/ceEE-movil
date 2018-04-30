@@ -26,22 +26,22 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                     StatusBar.styleDefault();
                 }
 
-                cordova.plugins.backgroundMode.setDefaults({
-                    title: 'Proceso en background',
-                    text: 'Ejecutando en background'
-                });
+//                cordova.plugins.backgroundMode.setDefaults({
+//                    title: 'Proceso en background',
+//                    text: 'Ejecutando en background'
+//                });
 
-                cordova.plugins.backgroundMode.on('enable', function () {
-                    //your code here, will execute when background tasks is enabled
-
-                    taskChequeoMsj();
-
-                });
-
-
-
-                // Enable background mode
-                cordova.plugins.backgroundMode.enable();
+//                cordova.plugins.backgroundMode.on('enable', function () {
+//                    //your code here, will execute when background tasks is enabled
+//
+//                    taskChequeoMsj();
+//
+//                });
+//
+//
+//
+//                // Enable background mode
+//                cordova.plugins.backgroundMode.enable();
 
 
             });
@@ -101,7 +101,3 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
             };
         });
 
-function taskChequeoMsj() {
-    alert("Hola loop");
-    window.setTimeout(taskChequeoMsj, '5000');
-}
