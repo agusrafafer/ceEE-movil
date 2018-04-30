@@ -10,7 +10,8 @@ angular.module('app.loginCtrl', [])
 
                 $scope.usuario = {
                     login: "",
-                    clave: ""
+                    clave: "",
+                    cont: 0
                 };
 
                 $scope.$on('$ionicView.loaded', function (event) {
@@ -43,8 +44,8 @@ angular.module('app.loginCtrl', [])
                         $ionicLoading.hide();
                     }
                 });
-                
-                
+
+
                 $scope.loopChequeo = function () {
 
                     cordova.plugins.backgroundMode.setDefaults({
@@ -65,9 +66,9 @@ angular.module('app.loginCtrl', [])
 
 
                 function taskChequeoMsj() {
-                    console.log("Hola loop");
-                    alert("Hola loop");
-                    
+//                    console.log("Hola loop");
+//                    alert("Hola loop");
+                    $scope.usuario.cont += 1;
                     window.setTimeout(taskChequeoMsj, 5000);
                 }
 
@@ -182,7 +183,7 @@ angular.module('app.loginCtrl', [])
 
 
 
-                
+
 
 
             }]);
