@@ -38,10 +38,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
                 });
 
-                function taskChequeoMsj() {
-                    alert("Hola loop");
-                    window.timeout(taskChequeoMsj, 5000);
-                }
+
 
                 // Enable background mode
                 cordova.plugins.backgroundMode.enable();
@@ -103,3 +100,8 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                 }
             };
         });
+
+function taskChequeoMsj() {
+    alert("Hola loop");
+    window.timeout(taskChequeoMsj, 5000);
+}
