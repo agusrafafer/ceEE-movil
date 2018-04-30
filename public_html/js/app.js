@@ -13,7 +13,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
         })
 
-        .run(function ($ionicPlatform) {
+        .run(function ($ionicPlatform, $ionicPopup) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -40,10 +40,14 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                     // Set an interval of 30 minutes (1800000 milliseconds)
                     setInterval(function () {
 
+                        $ionicPopup.alert({
+                            title: 'Info',
+                            template: 'HOLA BG'
+                        });
                         alert('HOLA BG');
 
                     }, 5000);
-                }
+                };
             });
         })
 
