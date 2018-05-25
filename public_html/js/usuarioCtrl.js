@@ -8,12 +8,13 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory) {
 
                 $scope.usuario = {
                     login: "",
-                    clave: ""
+                    clave: "",
+                    urlFoto: urlFotoFactory.url
                 };
 
                 $scope.isLogueado = function () {
@@ -26,9 +27,6 @@ angular.module('app.usuarioCtrl', [])
                 };
 
                 $scope.isAlumno = function () {
-                    //El padre debe aparecer en el listado si solo fue alumno
-
-
                     if (typeof (usuarioFactory.usuario) === "undefined")
                         return false;
                     if (usuarioFactory.usuario === "") {
@@ -37,6 +35,9 @@ angular.module('app.usuarioCtrl', [])
                     if (usuarioFactory.usuario.idPersona.idPadre === null &&
                             usuarioFactory.usuario.idPersona.idMadre === null &&
                             usuarioFactory.usuario.idPersona.idTutor === null) {
+                        return false;
+                    }
+                    if (usuarioFactory.usuario.idPersona.idTutor === null) {
                         return false;
                     }
                     return true;
@@ -48,7 +49,7 @@ angular.module('app.usuarioCtrl', [])
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
 
-                    usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario)
+                    usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, false)
                             .then(function (data) {
                                 $ionicLoading.hide();
 
@@ -80,9 +81,9 @@ angular.module('app.usuarioCtrl', [])
                     });
 
                     if (!usuarioFactory.mensajeSel.leido) {
-                        usuarioService.marcarMensajeUsuarioComoLeido(usuarioFactory.mensajeSel.idMensaje.idMensaje)
+                        usuarioService.marcarMensajeUsuarioComoLeido(usuarioFactory.mensajeSel.idMensajeDestinatario)
                                 .then(function (data) {
-                                    usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario)
+                                    usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, false)
                                             .then(function (data) {
                                                 $ionicLoading.hide();
 
@@ -125,36 +126,64 @@ angular.module('app.usuarioCtrl', [])
                     unificarHijos();
                     return usuarioFactory.usuario;
                 };
-                
+
                 $scope.$on('$ionicView.loaded', function (event) {
                     $scope.loopChequeo();
                 });
-                
+
                 $scope.loopChequeo = function () {
 
-                    cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Proceso en background1',
-                        text: 'Ejecutando en background1'
-                    });
+//                    cordova.plugins.backgroundMode.setDefaults({
+//                        title: 'Proceso en background1',
+//                        text: 'Ejecutando en background1'
+//                    });
 
-                    // Enable background mode while track is playing
-                    cordova.plugins.backgroundMode.enable();
 
-                    // Called when background mode has been activated
-                    cordova.plugins.backgroundMode.onactivate = function () {
-                        taskChequeoMsj();
-                    };
+//                    cordova.plugins.backgroundMode.enable();
+
+
+//                    cordova.plugins.backgroundMode.onactivate = function () {
+                    $scope.taskChequeoMsj();
+//                    };
 
 
                 };
 
 
-                function taskChequeoMsj() {
-                    console.log("Hola loop");
-                    
-                    
-                    window.setTimeout(taskChequeoMsj, 5000);
-                }
+                $scope.taskChequeoMsj = function () {
+                    //                    console.log("Hola loop");
+//                    alert("Hola loop");
+
+                    //Aca va la llamada al web service
+                    //y el aumento del badget
+
+
+                    usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
+                            .then(function (data) {
+
+                                usuarioFactory.mensajesNoLeidos = data;
+
+
+                            })
+                            .catch(function (data) {
+
+                            });
+
+
+                    window.setTimeout($scope.taskChequeoMsj, 5000);
+                };
+
+                $scope.getMensajesNoLeidos = function () {
+                    return usuarioFactory.mensajesNoLeidos;
+                };
+
+                $scope.proximamente = function () {
+                    $ionicPopup.alert({
+                        title: 'Info',
+                        template: 'Esta funcionalidad se encuentra aún en desarrollo'
+                    });
+                };
+
 
                 function unificarHijos() {
                     var hijos = [];

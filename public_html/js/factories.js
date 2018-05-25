@@ -9,11 +9,11 @@ angular.module('app.factories', [])
             return {
                 usuario: "",
                 tituloMenu: "Escolar App",
-                mensajes: "",
+                mensajes: [],
+                mensajesNoLeidos: [],
                 mensajeSel: "",
                 authToken: "",
-                authExpDate: -1,
-                cont: 0
+                authExpDate: -1
             };
         })
 
@@ -21,10 +21,11 @@ angular.module('app.factories', [])
         .factory('wsFactory', function () {
             return {
                 url: "http://localhost:8080/azules/webresources"
+//                url: "http://108.160.155.140:8080/loreto/webresources"
             };
         })
         
-        .factory('urlFoto', function () {
+        .factory('urlFotoFactory', function () {
             return {
                 url: "http://108.160.155.140:8080/azules/faces/resources/images/fotos/"
             };

@@ -2,17 +2,17 @@
     <ion-content padding="true" class="has-header">
         <div class="list card" id="miCuenta-card21">
             <ion-item class="item-avatar" id="miCuenta-list-item8">
-                <img src="http://108.160.155.140:8080/azules/faces/resources/images/fotos/{{getUsuario().idPersona.foto}}">
+                <img src="{{usuario.urlFoto}}{{getUsuario().idPersona.foto}}">
                 <h2>{{getUsuario().idPersona.apellido}}</h2>
                 <p>{{getUsuario().idPersona.nombre}}</p>
             </ion-item>
             <!--<ion-item class="item-icon-left item-icon-right dark" id="miCuenta-list-item9">
                 <i class="icon ion-camera"></i>Cambiar foto
                 <i class="icon ion-ios-arrow-right"></i>
-            </ion-item>-->
+            </ion-item>
             <ion-item class="item-icon-left item-icon-right positive" id="miCuenta-list-item11">
                 <i class="icon ion-android-unlock"></i>Cambiar clave
-                <i class="icon ion-ios-arrow-right"></i>
+                <i class="icon ion-ios-arrow-right"></i>-->
             </ion-item>
         </div>
     </ion-content>

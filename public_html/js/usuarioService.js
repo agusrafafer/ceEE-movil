@@ -44,7 +44,7 @@ angular.module('app.usuarioService', [])
                 };
 
 
-                this.obtenerMensajesUsuario = function (idUsuario) {
+                this.obtenerMensajesUsuario = function (idUsuario, banderaLeidos) {
                     var token = usuarioFactory.authToken;
 
                     var configuracion = {
@@ -53,7 +53,7 @@ angular.module('app.usuarioService', [])
                         }
                     };
 
-                    return $http.get(wsFactory.url + '/usuario/mensaje/' + idUsuario, configuracion)
+                    return $http.get(wsFactory.url + '/usuario/mensaje/' + idUsuario + '/' + banderaLeidos, configuracion)
                             .then(function (response) {
                                 //todo ok
                                 //The response object has these properties:

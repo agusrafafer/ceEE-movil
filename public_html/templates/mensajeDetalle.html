@@ -3,7 +3,7 @@
         <h3 style="color:#000000;">{{getMensajeSel().idMensaje.asunto}}</h3>
         <div class="list card">
             <ion-item class="item-avatar">
-                <img src="http://108.160.155.140:8080/azules/faces/resources/images/fotos/{{getMensajeSel().idMensaje.idUsuarioEnvia.idPersona.foto}}">
+                <img src="{{usuario.urlFoto}}{{getMensajeSel().idMensaje.idUsuarioEnvia.idPersona.foto}}">
                 <h2>{{getMensajeSel().idMensaje.idUsuarioEnvia.idPersona.apellido}}</h2>
                 <p>{{getMensajeSel().idMensaje.idUsuarioEnvia.idPersona.nombre}}</p>
             </ion-item>

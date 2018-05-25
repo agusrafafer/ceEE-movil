@@ -10,8 +10,7 @@ angular.module('app.loginCtrl', [])
 
                 $scope.usuario = {
                     login: "",
-                    clave: "",
-                    cont: 0
+                    clave: ""
                 };
 
                 $scope.$on('$ionicView.loaded', function (event) {
@@ -45,33 +44,6 @@ angular.module('app.loginCtrl', [])
                     }
                 });
 
-
-                $scope.loopChequeo = function () {
-
-                    cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Proceso en background1',
-                        text: 'Ejecutando en background1'
-                    });
-
-                    // Enable background mode while track is playing
-                    cordova.plugins.backgroundMode.enable();
-
-                    // Called when background mode has been activated
-                    cordova.plugins.backgroundMode.onactivate = function () {
-                        taskChequeoMsj();
-                    };
-
-
-                };
-
-
-                function taskChequeoMsj() {
-//                    console.log("Hola loop");
-//                    alert("Hola loop");
-                    usuarioFactory.cont += 1;
-                    $scope.usuario.cont = usuarioFactory.cont;
-                    window.setTimeout(taskChequeoMsj, 5000);
-                }
 
 //                $scope.onloadCtrl = function () {
 //                    $ionicLoading.show({
@@ -140,7 +112,6 @@ angular.module('app.loginCtrl', [])
                 };
 
                 $scope.recuperarClave = function () {
-                    $scope.loopChequeo();
                     var promptPopup = $ionicPopup.prompt({
                         title: 'Recuperar clave',
                         template: 'Ingrese su correo electrónico',
