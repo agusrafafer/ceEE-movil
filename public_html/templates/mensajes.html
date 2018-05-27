@@ -1,5 +1,7 @@
 <ion-view title="Mensajes" id="page6">
-    <ion-content padding="true" class="has-header">
+    <ion-content padding="true" 
+                 style="background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
+                 class="has-header">
         <ion-list id="mensajes-list5">
             <ion-item 
                 ng-repeat="msj in getMensajes()"
@@ -16,6 +18,13 @@
                                    ng-click="verMensaje($index, false)">
                     <i class="icon ion-checkmark"></i>
                 </ion-option-button>
+            </ion-item>
+            <ion-item 
+                ng-show="{{getMensajes().length === 0}}"
+                class="item-avatar item-icon-right" 
+                id="mensajes-list-item5">
+                <h2>Sin mensajes</h2>
+                <p>No posees ningún mensaje en tu bandeja</p>
             </ion-item>
         </ion-list>
     </ion-content>

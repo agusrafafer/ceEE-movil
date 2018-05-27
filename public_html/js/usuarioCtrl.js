@@ -18,6 +18,9 @@ angular.module('app.usuarioCtrl', [])
                 };
 
                 $scope.isLogueado = function () {
+                    if (usuarioFactory.usuario === null) {
+                        return false;
+                    }
                     if (typeof (usuarioFactory.usuario) === "undefined")
                         return false;
                     if (usuarioFactory.usuario === "") {
@@ -30,6 +33,9 @@ angular.module('app.usuarioCtrl', [])
                     if (typeof (usuarioFactory.usuario) === "undefined")
                         return false;
                     if (usuarioFactory.usuario === "") {
+                        return false;
+                    }
+                    if (usuarioFactory.usuario === null) {
                         return false;
                     }
                     if (usuarioFactory.usuario.idPersona.idPadre === null &&
@@ -157,18 +163,18 @@ angular.module('app.usuarioCtrl', [])
                     //Aca va la llamada al web service
                     //y el aumento del badget
 
+                    if ($scope.isLogueado()) {
+                        usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
+                                .then(function (data) {
 
-                    usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
-                            .then(function (data) {
-
-                                usuarioFactory.mensajesNoLeidos = data;
+                                    usuarioFactory.mensajesNoLeidos = data;
 
 
-                            })
-                            .catch(function (data) {
+                                })
+                                .catch(function (data) {
 
-                            });
-
+                                });
+                    }
 
                     window.setTimeout($scope.taskChequeoMsj, 5000);
                 };
