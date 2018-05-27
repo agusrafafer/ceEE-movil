@@ -140,8 +140,8 @@ angular.module('app.usuarioCtrl', [])
                 $scope.loopChequeo = function () {
 
                     cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Proceso en background1',
-                        text: 'Ejecutando en background1'
+                        title: 'Escolar móvil',
+                        text: 'Verificando en background'
                     });
 
 
