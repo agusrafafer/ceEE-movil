@@ -192,46 +192,52 @@ angular.module('app.usuarioCtrl', [])
 
 
                 function unificarHijos() {
-                    var hijos = [];
+                    try {
+                        var hijos = [];
 
-                    //cargo en un array auxiliar los hijos del tutor en primera medida
-                    var vecHijosTutor = usuarioFactory.usuario.idPersona.personaCollection;
-                    for (var i in vecHijosTutor) {
-                        hijos.push(vecHijosTutor[i]);
-                    }
+                        //cargo en un array auxiliar los hijos del tutor en primera medida
+                        var vecHijosTutor = usuarioFactory.usuario.idPersona.personaCollection;
+                        for (var i in vecHijosTutor) {
+                            hijos.push(vecHijosTutor[i]);
+                        }
 
 
-                    //verifico y cargo los hijos del padre siempre y cuando no hayan sido cargados desde el array del tutor
-                    var vecHijosPadre = usuarioFactory.usuario.idPersona.personaCollection1;
-                    for (var i in vecHijosPadre) {
-                        var existe = false;
-                        for (var j in hijos) {
-                            if (vecHijosPadre[i].idPersona === hijos[j].idPersona) {
-                                existe = true;
-                                break;
+                        //verifico y cargo los hijos del padre siempre y cuando no hayan sido cargados desde el array del tutor
+                        var vecHijosPadre = usuarioFactory.usuario.idPersona.personaCollection1;
+                        for (var i in vecHijosPadre) {
+                            var existe = false;
+                            for (var j in hijos) {
+                                if (vecHijosPadre[i].idPersona === hijos[j].idPersona) {
+                                    existe = true;
+                                    break;
+                                }
+                            }
+                            if (!existe) {
+                                hijos.push(vecHijosPadre[i]);
                             }
                         }
-                        if (!existe) {
-                            hijos.push(vecHijosPadre[i]);
-                        }
-                    }
 
-                    //verifico y cargo los hijos de la madre siempre y cuando no hayan sido cargados desde el array del tutor
-                    var vecHijosMadre = usuarioFactory.usuario.idPersona.personaCollection2;
-                    for (var i in vecHijosMadre) {
-                        var existe = false;
-                        for (var j in hijos) {
-                            if (vecHijosMadre[i].idPersona === hijos[j].idPersona) {
-                                existe = true;
-                                break;
+                        //verifico y cargo los hijos de la madre siempre y cuando no hayan sido cargados desde el array del tutor
+                        var vecHijosMadre = usuarioFactory.usuario.idPersona.personaCollection2;
+                        for (var i in vecHijosMadre) {
+                            var existe = false;
+                            for (var j in hijos) {
+                                if (vecHijosMadre[i].idPersona === hijos[j].idPersona) {
+                                    existe = true;
+                                    break;
+                                }
+                            }
+                            if (!existe) {
+                                hijos.push(vecHijosMadre[i]);
                             }
                         }
-                        if (!existe) {
-                            hijos.push(vecHijosMadre[i]);
-                        }
+
+                        usuarioFactory.usuario.personaCollection = hijos;
+                    } catch (e) {
+                        usuarioFactory.usuario.personaCollection = [];
                     }
 
-                    usuarioFactory.usuario.personaCollection = hijos;
+
                 }
 
 
