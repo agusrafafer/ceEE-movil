@@ -139,18 +139,18 @@ angular.module('app.usuarioCtrl', [])
 
                 $scope.loopChequeo = function () {
 
-//                    cordova.plugins.backgroundMode.setDefaults({
-//                        title: 'Proceso en background1',
-//                        text: 'Ejecutando en background1'
-//                    });
+                    cordova.plugins.backgroundMode.setDefaults({
+                        title: 'Proceso en background1',
+                        text: 'Ejecutando en background1'
+                    });
 
 
-//                    cordova.plugins.backgroundMode.enable();
+                    cordova.plugins.backgroundMode.enable();
 
 
-//                    cordova.plugins.backgroundMode.onactivate = function () {
-                    $scope.taskChequeoMsj();
-//                    };
+                    cordova.plugins.backgroundMode.onactivate = function () {
+                        $scope.taskChequeoMsj();
+                    };
 
 
                 };
