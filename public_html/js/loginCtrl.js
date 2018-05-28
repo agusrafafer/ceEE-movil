@@ -49,7 +49,10 @@ angular.module('app.loginCtrl', [])
                                 tratarTokenAutorizacion(authToken);
                                 var expira = dateAuth;
                                 var fecha = new Date();
+                                alert('fecha: ' + fecha);
+                                alert('expira: ' + expira);
                                 if (fecha.getTime() > Number.parseInt(expira)) {
+                                    alert('usuarioFactory.usuario: ' + JSON.stringify(usuarioFactory.usuario));
 //                                    alert(usuarioFactory.usuario.login);
 //                                    alert(usuarioFactory.usuario.contrasenha);
                                     usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
@@ -80,7 +83,7 @@ angular.module('app.loginCtrl', [])
                 function tratarTokenAutorizacion(headerAutorizacion) {
                     usuarioFactory.authToken = headerAutorizacion;
                     var tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
-                    alert(tokenPayload.usuario);
+//                    alert(tokenPayload.usuario);
                     usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
                     usuarioFactory.authExpDate = tokenPayload.exp;
                     guardarAutorizacion();
