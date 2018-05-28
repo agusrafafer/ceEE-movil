@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes', 'app.directives', 'app.usuarioService', 'app.factories', 'angular-jwt', 'ngStorage'])
+angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes', 'app.directives', 'app.usuarioService', 'app.factories', 'angular-jwt', 'angular-websql'])
 
         .config(function ($ionicConfigProvider, $sceDelegateProvider) {
 
@@ -25,24 +25,6 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
-
-//                cordova.plugins.backgroundMode.setDefaults({
-//                    title: 'Proceso en background',
-//                    text: 'Ejecutando en background'
-//                });
-
-//                cordova.plugins.backgroundMode.on('enable', function () {
-//                    //your code here, will execute when background tasks is enabled
-//
-//                    taskChequeoMsj();
-//
-//                });
-//
-//
-//
-//                // Enable background mode
-//                cordova.plugins.backgroundMode.enable();
-
 
             });
         })

@@ -1,7 +1,7 @@
 angular.module('app.usuarioService', [])
 
-        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory', 'jwtHelper', '$localStorage',
-            function ($http, $q, wsFactory, usuarioFactory, jwtHelper, $localStorage) {
+        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory',
+            function ($http, $q, wsFactory, usuarioFactory) {
 
                 this.validarLogin = function (login, password) {
                     return $http.put(wsFactory.url + '/usuario', {login: login, clave: password})
@@ -21,28 +21,6 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al intentar ingresar";
                             });
                 };
-
-                this.tratarTokenAutorizacion = function (headerAutorizacion) {
-                    usuarioFactory.authToken = headerAutorizacion;
-                    var tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
-                    usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
-                    usuarioFactory.authExpDate = tokenPayload.exp;
-                    //localStorage.setItem("usuarioFactory.usuario", usuarioFactory.usuario);
-                    $localStorage.authToken = usuarioFactory.authToken;
-                    $localStorage.authExpDate = usuarioFactory.authExpDate;
-                };
-
-                this.verificarExpiraToken = function () {
-                    var expira = $localStorage.authExpDate;
-                    var fecha = new Date();
-                    //fecha.
-                    if(fecha.getMilliseconds() > expira){
-                        var response = this.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.clave);
-                        this.tratarTokenAutorizacion(response.headers()['authorization']);
-                    }
-
-                };
-
 
                 this.obtenerMensajesUsuario = function (idUsuario, banderaLeidos) {
                     var token = usuarioFactory.authToken;

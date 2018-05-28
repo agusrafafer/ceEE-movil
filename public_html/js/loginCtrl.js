@@ -5,8 +5,10 @@
  */
 angular.module('app.loginCtrl', [])
 
-        .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', '$localStorage',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, $localStorage) {
+        .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', '$webSql', 'jwtHelper',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, $webSql, jwtHelper) {
+
+                $scope.db = $webSql.openDatabase('dbCeEE', '1.0', 'dbCeEE', 2 * 1024 * 1024);
 
                 $scope.usuario = {
                     login: "",
@@ -14,37 +16,96 @@ angular.module('app.loginCtrl', [])
                 };
 
                 $scope.$on('$ionicView.loaded', function (event) {
+                    cordova.plugins.notification.badge.configure({ autoClear: true });
+                    cordova.plugins.backgroundMode.setDefaults({
+                        title: 'Escolar móvil',
+                        text: 'Verificando en background'
+                    });
+                    
+                    
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
-//                    var authToken = $localStorage.getItem("usuarioFactory.authToken");
-                    var authToken = $localStorage.authToken;
-                    if (typeof (authToken) !== "undefined" && authToken !== null) {
-                        usuarioService.tratarTokenAutorizacion(authToken);
-                        var expira = $localStorage.authExpDate;
-                        var fecha = new Date();
-                        if (fecha.getTime() > Number.parseInt(expira)) {
-                            usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
-                                    .then(function (response) {
-                                        $ionicLoading.hide();
-                                        usuarioService.tratarTokenAutorizacion(response.headers()['authorization']);
-                                        $ionicHistory.nextViewOptions({
-                                            disableBack: true
-                                        });
-                                        $state.go('menu.home', {}, {location: "replace"});
-                                    })
-                                    .catch(function (data) {
-                                        $ionicLoading.hide();
-                                        usuarioFactory.usuario = "";
-                                        usuarioFactory.authToken = "";
-                                        usuarioFactory.authExpDate = -1;
-                                    });
+
+                    $scope.db.createTable('authceEE', {
+                        "id": {
+                            "type": "INTEGER",
+                            "null": "NOT NULL", // default is "NULL" (if not defined)
+                            "primary": true, // primary
+                            "auto_increment": true // auto increment
+                        },
+                        "authToken": {
+                            "type": "TEXT",
+                            "null": "NOT NULL"
+                        },
+                        "authExpDate": {
+                            "type": "INTEGER"
                         }
-                    } else {
-                        $ionicLoading.hide();
-                    }
+                    });
+
+                    var authToken = "";
+                    var dateAuth = -1;
+
+                    $scope.db.selectAll("authceEE").then(function (results) {
+                        if (results.rows.length > 0) {
+                            authToken = results.rows.item(0).authToken;
+                            dateAuth = results.rows.item(0).authExpDate;
+                            if (typeof (authToken) !== "undefined" && authToken !== null && authToken !== '') {
+                                tratarTokenAutorizacion(authToken);
+                                var expira = dateAuth;
+                                var fecha = new Date();
+                                if (fecha.getTime() > Number.parseInt(expira)) {
+                                    usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
+                                            .then(function (response) {
+                                                $ionicLoading.hide();
+                                                tratarTokenAutorizacion(response.headers()['authorization']);
+                                                $ionicHistory.nextViewOptions({
+                                                    disableBack: true
+                                                });
+                                                $state.go('menu.home', {}, {location: "replace"});
+                                            })
+                                            .catch(function (data) {
+                                                $ionicLoading.hide();
+                                                usuarioFactory.usuario = "";
+                                                usuarioFactory.authToken = "";
+                                                usuarioFactory.authExpDate = -1;
+                                            });
+                                }
+                            } else {
+                                $ionicLoading.hide();
+                            }
+                        } else {
+                            $ionicLoading.hide();
+                        }
+                    });
                 });
 
+                function tratarTokenAutorizacion(headerAutorizacion) {
+                    usuarioFactory.authToken = headerAutorizacion;
+                    var tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
+                    usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
+                    usuarioFactory.authExpDate = tokenPayload.exp;
+                    guardarAutorizacion();
+                }
+                ;
+
+                function guardarAutorizacion() {
+                    $scope.db.selectAll("authceEE").then(function (results) {
+                        var id = -1;
+                        if (results.rows.length > 0) {
+                            id = results.rows.item(0).id;
+                            $scope.db.update("authceEE", {"authToken": JSON.stringify(usuarioFactory.authToken), "authExpDate": usuarioFactory.authExpDate}, {
+                                'id': id
+                            });
+                        } else {
+                            $scope.db.insert('authceEE', {"authToken": JSON.stringify(usuarioFactory.authToken), "authExpDate": usuarioFactory.authExpDate}).then(function (results) {
+
+                            });
+                        }
+                    });
+
+                }
+                ;
 
 //                $scope.onloadCtrl = function () {
 //                    $ionicLoading.show({
@@ -86,7 +147,7 @@ angular.module('app.loginCtrl', [])
                     usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave)
                             .then(function (response) {
                                 $ionicLoading.hide();
-                                usuarioService.tratarTokenAutorizacion(response.headers()['authorization']);
+                                tratarTokenAutorizacion(response.headers()['authorization']);
                                 if (usuarioFactory.usuario !== null) {
                                     $ionicHistory.nextViewOptions({
                                         disableBack: true

@@ -141,26 +141,18 @@ angular.module('app.usuarioCtrl', [])
 
                 $scope.loopChequeo = function () {
 
-//                    cordova.plugins.backgroundMode.setDefaults({
-//                        title: 'Escolar móvil',
-//                        text: 'Verificando en background'
-//                    });
+                    cordova.plugins.backgroundMode.enable();
 
 
-//                    cordova.plugins.backgroundMode.enable();
-
-
-//                    cordova.plugins.backgroundMode.onactivate = function () {
+                    cordova.plugins.backgroundMode.onactivate = function () {
                         $scope.taskChequeoMsj();
-//                    };
+                    };
 
 
                 };
 
 
                 $scope.taskChequeoMsj = function () {
-                    //                    console.log("Hola loop");
-//                    alert("Hola loop");
 
                     //Aca va la llamada al web service
                     //y el aumento del badget
@@ -170,7 +162,7 @@ angular.module('app.usuarioCtrl', [])
                                 .then(function (data) {
 
                                     usuarioFactory.mensajesNoLeidos = data;
-
+                                    cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
 
                                 })
                                 .catch(function (data) {
