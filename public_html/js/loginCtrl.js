@@ -44,6 +44,7 @@ angular.module('app.loginCtrl', [])
                         if (results.rows.length > 0) {
                             authToken = results.rows.item(0).authToken;
                             dateAuth = results.rows.item(0).authExpDate;
+                            alert(authToken);
                             if (typeof (authToken) !== "undefined" && authToken !== null && authToken !== '') {
                                 tratarTokenAutorizacion(authToken);
                                 var expira = dateAuth;
