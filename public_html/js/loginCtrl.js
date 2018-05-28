@@ -49,9 +49,9 @@ angular.module('app.loginCtrl', [])
                                 tratarTokenAutorizacion(authToken);
                                 var expira = dateAuth;
                                 var fecha = new Date();
-                                alert('fecha: ' + fecha);
-                                alert('expira: ' + expira);
-                                if (fecha.getTime() > Number.parseInt(expira)) {
+//                                alert('fecha: ' + fecha);
+//                                alert('expira: ' + expira);
+                                if (fecha.getTime() > expira) {
                                     alert('usuarioFactory.usuario: ' + JSON.stringify(usuarioFactory.usuario));
 //                                    alert(usuarioFactory.usuario.login);
 //                                    alert(usuarioFactory.usuario.contrasenha);
