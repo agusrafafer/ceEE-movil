@@ -32,6 +32,8 @@ angular.module('app.usuarioCtrl', [])
                 $scope.isAlumno = function () {
                     if (typeof (usuarioFactory.usuario) === "undefined")
                         return false;
+                    if (typeof (usuarioFactory.usuario) === "Undefined")
+                        return false;
                     if (usuarioFactory.usuario === "") {
                         return false;
                     }
@@ -139,18 +141,18 @@ angular.module('app.usuarioCtrl', [])
 
                 $scope.loopChequeo = function () {
 
-                    cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Escolar móvil',
-                        text: 'Verificando en background'
-                    });
+//                    cordova.plugins.backgroundMode.setDefaults({
+//                        title: 'Escolar móvil',
+//                        text: 'Verificando en background'
+//                    });
 
 
-                    cordova.plugins.backgroundMode.enable();
+//                    cordova.plugins.backgroundMode.enable();
 
 
-                    cordova.plugins.backgroundMode.onactivate = function () {
+//                    cordova.plugins.backgroundMode.onactivate = function () {
                         $scope.taskChequeoMsj();
-                    };
+//                    };
 
 
                 };

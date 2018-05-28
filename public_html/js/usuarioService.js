@@ -1,7 +1,7 @@
 angular.module('app.usuarioService', [])
 
-        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory', 'jwtHelper',
-            function ($http, $q, wsFactory, usuarioFactory, jwtHelper) {
+        .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory', 'jwtHelper', '$localStorage',
+            function ($http, $q, wsFactory, usuarioFactory, jwtHelper, $localStorage) {
 
                 this.validarLogin = function (login, password) {
                     return $http.put(wsFactory.url + '/usuario', {login: login, clave: password})
@@ -28,12 +28,12 @@ angular.module('app.usuarioService', [])
                     usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
                     usuarioFactory.authExpDate = tokenPayload.exp;
                     //localStorage.setItem("usuarioFactory.usuario", usuarioFactory.usuario);
-                    localStorage.setItem("usuarioFactory.authToken", usuarioFactory.authToken);
-                    localStorage.setItem("usuarioFactory.authExpDate", usuarioFactory.authExpDate);
+                    $localStorage.authToken = usuarioFactory.authToken;
+                    $localStorage.authExpDate = usuarioFactory.authExpDate;
                 };
 
                 this.verificarExpiraToken = function () {
-                    var expira = localStorage.getItem("usuarioFactory.authExpDate");
+                    var expira = $localStorage.authExpDate;
                     var fecha = new Date();
                     //fecha.
                     if(fecha.getMilliseconds() > expira){

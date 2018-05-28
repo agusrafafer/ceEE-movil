@@ -5,8 +5,8 @@
  */
 angular.module('app.loginCtrl', [])
 
-        .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService) {
+        .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', '$localStorage',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, $localStorage) {
 
                 $scope.usuario = {
                     login: "",
@@ -17,10 +17,11 @@ angular.module('app.loginCtrl', [])
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
-                    var authToken = localStorage.getItem("usuarioFactory.authToken");
-                    if (authToken !== null) {
+//                    var authToken = $localStorage.getItem("usuarioFactory.authToken");
+                    var authToken = $localStorage.authToken;
+                    if (typeof (authToken) !== "undefined" && authToken !== null) {
                         usuarioService.tratarTokenAutorizacion(authToken);
-                        var expira = localStorage.getItem("usuarioFactory.authExpDate");
+                        var expira = $localStorage.authExpDate;
                         var fecha = new Date();
                         if (fecha.getTime() > Number.parseInt(expira)) {
                             usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
@@ -49,10 +50,10 @@ angular.module('app.loginCtrl', [])
 //                    $ionicLoading.show({
 //                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
 //                    });
-//                    var authToken = localStorage.getItem("usuarioFactory.authToken");
+//                    var authToken = $localStorage.getItem("usuarioFactory.authToken");
 //                    if (authToken !== null) {
 //                        usuarioService.tratarTokenAutorizacion(authToken);
-//                        var expira = localStorage.getItem("usuarioFactory.authExpDate");
+//                        var expira = $localStorage.getItem("usuarioFactory.authExpDate");
 //                        var fecha = new Date();
 //                        if (fecha.getTime() > Number.parseInt(expira)) {
 //                            usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
