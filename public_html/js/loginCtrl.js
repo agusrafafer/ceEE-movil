@@ -44,7 +44,7 @@ angular.module('app.loginCtrl', [])
                         if (results.rows.length > 0) {
                             authToken = results.rows.item(0).authToken;
                             dateAuth = results.rows.item(0).authExpDate;
-                            alert(authToken);
+//                            alert(authToken);
                             if (typeof (authToken) !== "undefined" && authToken !== null && authToken !== '') {
                                 tratarTokenAutorizacion(authToken);
                                 var expira = dateAuth;
@@ -79,6 +79,8 @@ angular.module('app.loginCtrl', [])
                     usuarioFactory.authToken = headerAutorizacion;
                     var tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
                     usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
+                    alert(usuarioFactory.usuario);
+                    alert(usuarioFactory.usuario.login);
                     usuarioFactory.authExpDate = tokenPayload.exp;
                     guardarAutorizacion();
                 }
