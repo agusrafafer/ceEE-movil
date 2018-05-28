@@ -50,8 +50,8 @@ angular.module('app.loginCtrl', [])
                                 var expira = dateAuth;
                                 var fecha = new Date();
                                 if (fecha.getTime() > Number.parseInt(expira)) {
-                                    alert(usuarioFactory.usuario.login);
-                                    alert(usuarioFactory.usuario.contrasenha);
+//                                    alert(usuarioFactory.usuario.login);
+//                                    alert(usuarioFactory.usuario.contrasenha);
                                     usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
                                             .then(function (response) {
                                                 $ionicLoading.hide();
@@ -80,6 +80,7 @@ angular.module('app.loginCtrl', [])
                 function tratarTokenAutorizacion(headerAutorizacion) {
                     usuarioFactory.authToken = headerAutorizacion;
                     var tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
+                    alert(tokenPayload.usuario);
                     usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
                     usuarioFactory.authExpDate = tokenPayload.exp;
                     guardarAutorizacion();
