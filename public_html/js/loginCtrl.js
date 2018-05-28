@@ -15,13 +15,7 @@ angular.module('app.loginCtrl', [])
                     clave: ""
                 };
 
-                $scope.$on('$ionicView.loaded', function (event) {
-                    cordova.plugins.notification.badge.configure({ autoClear: true });
-                    cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Escolar móvil',
-                        text: 'Verificando en background'
-                    });
-                    
+                $scope.$on('$ionicView.loaded', function (event) {                   
                     
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
