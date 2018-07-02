@@ -186,7 +186,7 @@ angular.module('app.usuarioCtrl', [])
                 
                $scope.irAgestion = function () {
                    $state.go('menu.gestion', {}, {location: "replace"});
-               }
+               };
 
 
                 function unificarHijos() {
