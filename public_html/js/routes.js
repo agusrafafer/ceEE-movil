@@ -45,6 +45,16 @@ angular.module('app.routes', [])
                             }
                         }
                     })
+                    
+                    .state('menu.gestion', {
+                        url: '/gestion',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/gestion.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
 
                     .state('menu.mensajeDetalle', {
                         url: '/page7',

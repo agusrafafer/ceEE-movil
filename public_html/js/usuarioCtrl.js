@@ -40,12 +40,7 @@ angular.module('app.usuarioCtrl', [])
                     if (usuarioFactory.usuario === null) {
                         return false;
                     }
-                    if (usuarioFactory.usuario.idPersona.idPadre === null &&
-                            usuarioFactory.usuario.idPersona.idMadre === null &&
-                            usuarioFactory.usuario.idPersona.idTutor === null) {
-                        return false;
-                    }
-                    if (usuarioFactory.usuario.idPersona.idTutor === null) {
+                    if (usuarioFactory.usuario.alumno === null) {
                         return false;
                     }
                     return true;
@@ -188,6 +183,10 @@ angular.module('app.usuarioCtrl', [])
                         template: 'Esta funcionalidad se encuentra aún en desarrollo'
                     });
                 };
+                
+               $scope.irAgestion = function () {
+                   $state.go('menu.gestion', {}, {location: "replace"});
+               }
 
 
                 function unificarHijos() {

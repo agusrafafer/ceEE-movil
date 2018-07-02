@@ -13,14 +13,13 @@
                 <p>{{msj.idMensaje.texto}}</p>
                 <i class="icon ion-email-unread" ng-hide="{{msj.leido}}"></i>
                 <i class="icon ion-ios-email-outline" ng-show="{{msj.leido}}"></i>
-                {{msj.leido}}
                 <ion-option-button class="button-balanced"
                                    ng-click="verMensaje($index, false)">
                     <i class="icon ion-checkmark"></i>
                 </ion-option-button>
             </ion-item>
             <ion-item 
-                ng-show="{{getMensajes().length === 0}}"
+                ng-hide="getMensajes().length"
                 class="item-avatar item-icon-right" 
                 id="mensajes-list-item5">
                 <h2>Sin mensajes</h2>
