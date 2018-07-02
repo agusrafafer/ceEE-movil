@@ -25,13 +25,13 @@ angular.module('app.factories', [])
         .factory('wsFactory', function () {
             return {
 //                url: "http://localhost:8080/azules/webresources"
-                url: "http://108.160.155.140:8080/loreto/webresources"
+                url: "http://108.160.155.140:8080/azules/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-                url: "http://108.160.155.140:8080/loreto/faces/resources/images/fotos/"
+                url: "http://108.160.155.140:8080/azules/faces/resources/images/fotos/"
             };
         });
 
