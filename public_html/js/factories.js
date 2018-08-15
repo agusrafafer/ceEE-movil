@@ -13,15 +13,17 @@ angular.module('app.factories', [])
                 mensajesNoLeidos: [],
                 mensajeSel: "",
                 authToken: "",
-                authExpDate: -1
+                authExpDate: -1,
+                personaSel: null,
+                notasPersonaSel: []
             };
         })
 
 
         .factory('wsFactory', function () {
             return {
-//                url: "http://localhost:8080/azules/webresources"
-                url: "http://108.160.155.140:8080/loreto/webresources"
+                url: "http://localhost:8080/azules/webresources"
+//                url: "http://108.160.155.140:8080/loreto/webresources"
             };
         })
         

@@ -17,6 +17,8 @@ angular.module('app.usuarioCtrl', [])
                     urlFoto: urlFotoFactory.url
                 };
 
+                $scope.etapaSel = 1;
+
                 $scope.isLogueado = function () {
                     if (usuarioFactory.usuario === null) {
                         return false;
@@ -30,8 +32,6 @@ angular.module('app.usuarioCtrl', [])
                 };
 
                 $scope.isAlumno = function () {
-                    if (typeof (usuarioFactory.usuario) === "undefined")
-                        return false;
                     if (typeof (usuarioFactory.usuario) === "Undefined")
                         return false;
                     if (usuarioFactory.usuario === "") {
@@ -40,7 +40,7 @@ angular.module('app.usuarioCtrl', [])
                     if (usuarioFactory.usuario === null) {
                         return false;
                     }
-                    if (usuarioFactory.usuario.alumno === null) {
+                    if (usuarioFactory.usuario.idPersona.alumno === null) {
                         return false;
                     }
                     return true;
@@ -135,18 +135,18 @@ angular.module('app.usuarioCtrl', [])
                 });
 
                 $scope.loopChequeo = function () {
-                    cordova.plugins.notification.badge.configure({ autoClear: true });
-                    cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Escolar móvil',
-                        text: 'Verificando en background'
-                    });
-
-                    cordova.plugins.backgroundMode.enable();
-
-
-                    cordova.plugins.backgroundMode.onactivate = function () {
-                        $scope.taskChequeoMsj();
-                    };
+//                    cordova.plugins.notification.badge.configure({ autoClear: true });
+//                    cordova.plugins.backgroundMode.setDefaults({
+//                        title: 'Escolar móvil',
+//                        text: 'Verificando en background'
+//                    });
+//
+//                    cordova.plugins.backgroundMode.enable();
+//
+//
+//                    cordova.plugins.backgroundMode.onactivate = function () {
+//                        $scope.taskChequeoMsj();
+//                    };
 
 
                 };
@@ -183,10 +183,130 @@ angular.module('app.usuarioCtrl', [])
                         template: 'Esta funcionalidad se encuentra aún en desarrollo'
                     });
                 };
-                
-               $scope.irAgestion = function () {
-                   $state.go('menu.gestion', {}, {location: "replace"});
-               };
+
+                $scope.irAgestion = function (persona) {
+                    usuarioFactory.personaSel = persona;
+                    $state.go('menu.gestion', {}, {location: "replace"});
+                };
+
+                $scope.buscarCalificacionesPersona = function () {
+
+                    $ionicLoading.show({
+                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
+                    });
+
+                    usuarioService.obtenerCalificacionesPersona(usuarioFactory.personaSel.idPersona)
+                            .then(function (data) {
+                                $ionicLoading.hide();
+
+                                usuarioFactory.notasPersonaSel = data;
+
+//                                $ionicHistory.nextViewOptions({
+//                                    disableBack: true
+//                                });
+                                if (usuarioFactory.notasPersonaSel.length > 0) {
+                                    $state.go('menu.calificaciones', {}, {location: "replace"});
+                                } else {
+                                    $ionicPopup.alert({
+                                        title: 'Info',
+                                        template: 'No se encontraron notas cargadas para el alumno'
+                                    });
+                                }
+                            })
+                            .catch(function (data) {
+                                $ionicLoading.hide();
+                                $ionicPopup.alert({
+                                    title: 'Info',
+                                    template: data
+                                });
+                            });
+                };
+
+                $scope.getNotasPersonaSel = function () {
+                    return usuarioFactory.notasPersonaSel;
+                };
+
+                $scope.toggleGroup = function (nota) {
+                    if ($scope.isGroupShown(nota)) {
+                        $scope.shownGroup = null;
+                    } else {
+                        $scope.shownGroup = nota;
+                    }
+                };
+
+                $scope.isGroupShown = function (nota) {
+                    return $scope.shownGroup === nota;
+                };
+
+                $scope.cambiarEtapa = function (etapa) {
+                    $scope.etapaSel = etapa;
+                };
+
+                $scope.hayNotasEnMateria1eras5Etapa1 = function (materia) {
+                    if (materia.calificacionParcialE101 !== ''
+                            || materia.calificacionParcialE102 !== ''
+                            || materia.calificacionParcialE103 !== ''
+                            || materia.calificacionParcialE104 !== ''
+                            || materia.calificacionParcialE105 !== '') {
+                        return true;
+                    }
+                    return false;
+                };
+
+                $scope.hayNotasEnMateria2das5Etapa1 = function (materia) {
+                    if (materia.calificacionParcialE106 !== ''
+                            || materia.calificacionParcialE107 !== ''
+                            || materia.calificacionParcialE108 !== ''
+                            || materia.calificacionParcialE109 !== ''
+                            || materia.calificacionParcialE110 !== '') {
+                        return true;
+                    }
+                    return false;
+                };
+
+                $scope.hayNotasEnMateria1eras5Etapa2 = function (materia) {
+                    if (materia.calificacionParcialE201 !== ''
+                            || materia.calificacionParcialE202 !== ''
+                            || materia.calificacionParcialE203 !== ''
+                            || materia.calificacionParcialE204 !== ''
+                            || materia.calificacionParcialE205 !== '') {
+                        return true;
+                    }
+                    return false;
+                };
+
+                $scope.hayNotasEnMateria2das5Etapa2 = function (materia) {
+                    if (materia.calificacionParcialE206 !== ''
+                            || materia.calificacionParcialE207 !== ''
+                            || materia.calificacionParcialE208 !== ''
+                            || materia.calificacionParcialE209 !== ''
+                            || materia.calificacionParcialE210 !== '') {
+                        return true;
+                    }
+                    return false;
+                };
+
+                $scope.hayNotasEnMateria1eras5Etapa3 = function (materia) {
+                    if (materia.calificacionParcialE301 !== ''
+                            || materia.calificacionParcialE302 !== ''
+                            || materia.calificacionParcialE303 !== ''
+                            || materia.calificacionParcialE304 !== ''
+                            || materia.calificacionParcialE305 !== '') {
+                        return true;
+                    }
+                    return false;
+                };
+
+                $scope.hayNotasEnMateria2das5Etapa3 = function (materia) {
+                    if (materia.calificacionParcialE306 !== ''
+                            || materia.calificacionParcialE307 !== ''
+                            || materia.calificacionParcialE308 !== ''
+                            || materia.calificacionParcialE309 !== ''
+                            || materia.calificacionParcialE310 !== '') {
+                        return true;
+                    }
+                    return false;
+                };
 
 
                 function unificarHijos() {
