@@ -55,6 +55,16 @@ angular.module('app.routes', [])
                             }
                         }
                     })
+                    
+                    .state('menu.calificaciones', {
+                        url: '/calificaciones',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/calificaciones.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
 
                     .state('menu.mensajeDetalle', {
                         url: '/page7',
