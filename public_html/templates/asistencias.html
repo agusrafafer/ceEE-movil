@@ -19,7 +19,7 @@
             <ion-item class="item-icon-right" ng-repeat="asi in getAsistenciasPersonaSel()">
                 <h2>Fecha: {{asi.diaDelMes}}/{{asi.mes}}/{{asi.anho}}</h2>
                 <p ng-hide="asi.comentario === null">Comentario: {{asi.comentario}}</p>
-                <p>Codigo: {{asi.idCodigoInasistenciaAlumno.nombre}}</p>
+                <p>Tipo: {{asi.idCodigoInasistenciaAlumno.nombre}}</p>
                 <i ng-show="asi.justificada" class="icon ion-checkmark icon-accessory"></i>
                 <i ng-hide="asi.justificada" class="icon ion-android-alert icon-accessory"></i>
             </ion-item>
