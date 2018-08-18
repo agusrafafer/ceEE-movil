@@ -1,0 +1,32 @@
+<ion-view title="Asistencias">
+    <ion-content padding="true" 
+                 style="background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
+                 class="has-header">
+        <h3 style="display: inline-block;
+            height: 32px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(0,0,0,0.6);
+            line-height: 32px;
+            padding: 0 12px;
+            border-radius: 16px;
+            background-color: #e4e4e4;
+            margin-bottom: 5px;
+            margin-right: 5px;">Cantidad total: {{getAsistenciasPersonaSel().length}} -- Ref: 
+            <i class="icon ion-checkmark icon-accessory"></i>=Justificada ; 
+            <i class="icon ion-android-alert icon-accessory"></i>=Injustificada
+        </h3>
+            <ion-item class="item-icon-right" ng-repeat="asi in getAsistenciasPersonaSel()">
+                <h2>Fecha: {{asi.diaDelMes}}/{{asi.mes}}/{{asi.anho}}</h2>
+                <p ng-hide="asi.comentario === null">Comentario: {{asi.comentario}}</p>
+                <p>Codigo: {{asi.idCodigoInasistenciaAlumno.nombre}}</p>
+                <i ng-show="asi.justificada" class="icon ion-checkmark icon-accessory"></i>
+                <i ng-hide="asi.justificada" class="icon ion-android-alert icon-accessory"></i>
+            </ion-item>
+            <ion-item ng-hide="getAsistenciasPersonaSel().length">
+                <h2>Sin asistencias</h2>
+                <p>No posees ningún asistencia cargada</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

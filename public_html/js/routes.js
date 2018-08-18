@@ -65,6 +65,16 @@ angular.module('app.routes', [])
                             }
                         }
                     })
+                    
+                    .state('menu.asistencias', {
+                        url: '/asistencias',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/asistencias.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
 
                     .state('menu.mensajeDetalle', {
                         url: '/page7',

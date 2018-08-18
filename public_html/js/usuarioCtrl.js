@@ -307,6 +307,43 @@ angular.module('app.usuarioCtrl', [])
                     }
                     return false;
                 };
+                
+                $scope.buscarAsistenciaPersona = function () {
+
+                    $ionicLoading.show({
+                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
+                    });
+
+                    usuarioService.obtenerAsistenciaPersona(usuarioFactory.personaSel.idPersona)
+                            .then(function (data) {
+                                $ionicLoading.hide();
+
+                                usuarioFactory.asistenciasPersonaSel = data;
+
+//                                $ionicHistory.nextViewOptions({
+//                                    disableBack: true
+//                                });
+                                if (usuarioFactory.asistenciasPersonaSel.length > 0) {
+                                    $state.go('menu.asistencias', {}, {location: "replace"});
+                                } else {
+                                    $ionicPopup.alert({
+                                        title: 'Info',
+                                        template: 'No se encontraron asistencias cargadas para el alumno'
+                                    });
+                                }
+                            })
+                            .catch(function (data) {
+                                $ionicLoading.hide();
+                                $ionicPopup.alert({
+                                    title: 'Info',
+                                    template: data
+                                });
+                            });
+                };
+                
+                $scope.getAsistenciasPersonaSel = function () {
+                    return usuarioFactory.asistenciasPersonaSel;
+                };
 
 
                 function unificarHijos() {

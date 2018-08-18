@@ -103,6 +103,36 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al cargar las notas del alumno";
                             });
                 };
+                
+                this.obtenerAsistenciaPersona = function (idPersona) {
+                    var token = usuarioFactory.authToken;
+
+                    var configuracion = {
+                        headers: {
+                            'authorization': token
+                        }
+                    };
+                    
+                    var hoy = new Date();
+                    var anho = hoy.getFullYear().toString();
+                    var anho = '2017';
+
+                    return $http.get(wsFactory.url + '/usuario/asistencia/' + idPersona + '/' + anho, configuracion)
+                            .then(function (response) {
+                                //todo ok
+                                //The response object has these properties:
+                                //data – {string|Object} – The response body transformed with the transform functions.
+                                //status – {number} – HTTP status code of the response.
+                                //headers – {function([headerName])} – Header getter function.
+                                //config – {Object} – The configuration object that was used to generate the request.
+                                //statusText – {string} – HTTP status text of the response.
+                                //xhrStatus – {string} – Status of the XMLHttpRequest (complete, error, timeout or abort).
+                                return response.data;
+                            }, function (response) {
+                                //Todo mal
+                                throw "Hubo un error al cargar las asistencias del alumno";
+                            });
+                };
 
 
             }
