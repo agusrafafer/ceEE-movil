@@ -15,6 +15,7 @@
             <a class="button" ng-click="cambiarEtapa(1)" ng-class="etapaSel === 1 ? 'button-calm' : ''">1º Etapa</a>
             <a class="button" ng-click="cambiarEtapa(2)" ng-class="etapaSel === 2 ? 'button-calm' : ''">2º Etapa</a>
             <a class="button" ng-click="cambiarEtapa(3)" ng-class="etapaSel === 3 ? 'button-calm' : ''">3º Etapa</a>
+            <a class="button" ng-click="cambiarEtapa(4)" ng-class="etapaSel === 4 ? 'button-calm' : ''">Final</a>
         </div>
     </div>
     <ion-content style="margin-top: 40px; background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
@@ -308,6 +309,73 @@
                             </div>
                         </div>
                     </div>  
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+    <ion-content style="margin-top: 40px; background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
+                 has-header="true"
+                 has-subheader="true" 
+                 padding="false"
+                 ng-show="etapaSel === 4">
+        <ion-list>
+            <div ng-repeat="materia in getNotasPersonaSel()">
+                <ion-item class="item-stable"
+                          ng-click="toggleGroup(materia)"
+                          ng-class="{active: isGroupShown(materia)}">
+                    <i class="icon" ng-class="isGroupShown(materia) ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;
+                    {{materia.idMateriaAnhoLectivo.idMateria.nombre}} 
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(materia)">
+                    <div class="row" ng-show="materia.calificacionAnual === '' && materia.calificacionColoquio === '' && materia.calificacionComplementario === '' && materia.calificacionFinal === ''">
+                        <div class="col">
+                            <div class="col-nota">
+                                No hay nota cargada 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="materia.calificacionAnual !== ''">
+                        <div class="col">
+                            Anual: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.calificacionAnual}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="materia.calificacionColoquio !== ''">
+                        <div class="col">
+                            Coloquio: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.calificacionColoquio}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="materia.calificacionComplementario !== ''">
+                        <div class="col">
+                            Complem.: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.calificacionComplementario}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="materia.calificacionFinal !== ''">
+                        <div class="col">
+                            Final: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.calificacionFinal}}
+                            </div>
+                        </div>
+                    </div>
                 </ion-item>
             </div>
         </ion-list>
