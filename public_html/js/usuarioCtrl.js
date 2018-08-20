@@ -344,6 +344,43 @@ angular.module('app.usuarioCtrl', [])
                 $scope.getAsistenciasPersonaSel = function () {
                     return usuarioFactory.asistenciasPersonaSel;
                 };
+                
+                $scope.buscarSancionPersona = function () {
+
+                    $ionicLoading.show({
+                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
+                    });
+
+                    usuarioService.obtenerSancionPersona(usuarioFactory.personaSel.idPersona)
+                            .then(function (data) {
+                                $ionicLoading.hide();
+
+                                usuarioFactory.sancionesPersonaSel = data;
+
+//                                $ionicHistory.nextViewOptions({
+//                                    disableBack: true
+//                                });
+                                if (usuarioFactory.sancionesPersonaSel.length > 0) {
+                                    $state.go('menu.sanciones', {}, {location: "replace"});
+                                } else {
+                                    $ionicPopup.alert({
+                                        title: 'Info',
+                                        template: 'No se encontraron acuerdos cargados para el alumno'
+                                    });
+                                }
+                            })
+                            .catch(function (data) {
+                                $ionicLoading.hide();
+                                $ionicPopup.alert({
+                                    title: 'Info',
+                                    template: data
+                                });
+                            });
+                };
+                
+                $scope.getSancionesPersonaSel = function () {
+                    return usuarioFactory.sancionesPersonaSel;
+                };
 
 
                 function unificarHijos() {

@@ -16,7 +16,8 @@ angular.module('app.factories', [])
                 authExpDate: -1,
                 personaSel: null,
                 notasPersonaSel: [],
-                asistenciasPersonaSel: []
+                asistenciasPersonaSel: [],
+                sancionesPersonaSel: []
             };
         })
 

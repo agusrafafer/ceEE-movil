@@ -75,6 +75,16 @@ angular.module('app.routes', [])
                             }
                         }
                     })
+                    
+                    .state('menu.sanciones', {
+                        url: '/sanciones',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/sanciones.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
 
                     .state('menu.mensajeDetalle', {
                         url: '/page7',
