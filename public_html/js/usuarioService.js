@@ -115,7 +115,7 @@ angular.module('app.usuarioService', [])
                     
                     var hoy = new Date();
                     var anho = hoy.getFullYear().toString();
-                    var anho = '2017';
+                    //var anho = '2017';
 
                     return $http.get(wsFactory.url + '/usuario/asistencia/' + idPersona + '/' + anho, configuracion)
                             .then(function (response) {
@@ -145,7 +145,7 @@ angular.module('app.usuarioService', [])
                     
                     var hoy = new Date();
                     var anho = hoy.getFullYear().toString();
-                    var anho = '2017';
+//                    var anho = '2017';
 
                     return $http.get(wsFactory.url + '/usuario/sancion/' + idPersona + '/' + anho, configuracion)
                             .then(function (response) {
