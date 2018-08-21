@@ -13,7 +13,11 @@ angular.module('app.factories', [])
                 mensajesNoLeidos: [],
                 mensajeSel: "",
                 authToken: "",
-                authExpDate: -1
+                authExpDate: -1,
+                personaSel: null,
+                notasPersonaSel: [],
+                asistenciasPersonaSel: [],
+                sancionesPersonaSel: []
             };
         })
 
@@ -30,5 +34,4 @@ angular.module('app.factories', [])
                 url: "http://108.160.155.140:8080/fhDiehl/faces/resources/images/fotos/"
             };
         });
-
 
