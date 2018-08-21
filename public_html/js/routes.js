@@ -55,6 +55,36 @@ angular.module('app.routes', [])
                             }
                         }
                     })
+                    
+                    .state('menu.calificaciones', {
+                        url: '/calificaciones',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/calificaciones.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
+                    
+                    .state('menu.asistencias', {
+                        url: '/asistencias',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/asistencias.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
+                    
+                    .state('menu.sanciones', {
+                        url: '/sanciones',
+                        views: {
+                            'side-menu21': {
+                                templateUrl: 'templates/sanciones.html',
+                                controller: 'usuarioCtrl'
+                            }
+                        }
+                    })
 
                     .state('menu.mensajeDetalle', {
                         url: '/page7',

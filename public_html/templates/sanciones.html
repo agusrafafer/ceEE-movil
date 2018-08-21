@@ -1,0 +1,29 @@
+<ion-view title="Acuerdos">
+    <ion-content padding="true" 
+                 style="background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
+                 class="has-header">
+        <h3 style="display: inline-block;
+            height: 32px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(0,0,0,0.6);
+            line-height: 32px;
+            padding: 0 12px;
+            border-radius: 16px;
+            background-color: #e4e4e4;
+            margin-bottom: 5px;
+            margin-right: 5px;">Cantidad total: {{getSancionesPersonaSel().length}} 
+        </h3>
+            <ion-item class="item-icon-right" ng-repeat="san in getSancionesPersonaSel()">
+                <h2>Fecha: {{san.diaDelMes}}/{{san.mes}}/{{san.anho}}</h2>
+                <p ng-hide="san.motivo === ''">Motivo: <b>{{san.motivo}}</b></p>
+                <p>Tipo: {{san.idSancionAlumnoTipo.nombre}}</p>
+                <p ng-hide="san.solicitadaPor === ''">Solicitado por: <b>{{san.solicitadaPor}}</b></p>
+            </ion-item>
+            <ion-item ng-hide="getSancionesPersonaSel().length">
+                <h2>Sin acuerdos</h2>
+                <p>No posees ningún acuerdo cargado</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

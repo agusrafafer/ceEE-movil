@@ -1,0 +1,383 @@
+<style>
+    .col-nota {
+        padding: 5px;
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        background: #f7f7f7;
+        text-align: center;
+    }
+</style>
+<ion-view title="Calificaciones">
+    <div class="bar bar-subheader">
+
+        <div class="button-bar bar-stable">
+            <a class="button" ng-click="cambiarEtapa(1)" ng-class="etapaSel === 1 ? 'button-calm' : ''">1º Etapa</a>
+            <a class="button" ng-click="cambiarEtapa(2)" ng-class="etapaSel === 2 ? 'button-calm' : ''">2º Etapa</a>
+            <a class="button" ng-click="cambiarEtapa(3)" ng-class="etapaSel === 3 ? 'button-calm' : ''">3º Etapa</a>
+            <a class="button" ng-click="cambiarEtapa(4)" ng-class="etapaSel === 4 ? 'button-calm' : ''">Final</a>
+        </div>
+    </div>
+    <ion-content style="margin-top: 40px; background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
+                 has-header="true"
+                 has-subheader="true" 
+                 padding="false"
+                 ng-show="etapaSel === 1">
+        <ion-list>
+            <div ng-repeat="materia in getNotasPersonaSel()">
+                <ion-item class="item-stable"
+                          ng-click="toggleGroup(materia)"
+                          ng-class="{
+                                      active: isGroupShown(materia)
+                                  }">
+                    <i class="icon" ng-class="isGroupShown(materia) ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;
+                    {{materia.idMateriaAnhoLectivo.idMateria.nombre}} 
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(materia)">
+                    <div class="row">
+                        <div class="col" ng-show="hayNotasEnMateria1eras5Etapa1(materia) && hayNotasEnMateria2das5Etapa1(materia)">
+                            Notas: 
+                        </div>
+                        <div class="col" ng-show="!hayNotasEnMateria1eras5Etapa1(materia) && !hayNotasEnMateria2das5Etapa1(materia)">
+                            <div class="col-nota">
+                                No hay notas cargadas 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="hayNotasEnMateria1eras5Etapa1(materia)">
+                        <div class="col" ng-show="materia.calificacionParcialE101 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE101}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE102 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE102}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE103 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE103}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE104 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE104}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE105 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE105}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="hayNotasEnMateria2das5Etapa1(materia)">
+                        <div class="col" ng-show="materia.calificacionParcialE106 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE106}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE107 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE107}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE108 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE108}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE109 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE109}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE110 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE110}}
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(materia) && materia.promedioParcialE1 !== ''">
+                    <div class="row">
+                        <div class="col">
+                            Promedio: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.promedioParcialE1}}
+                            </div>
+                        </div>
+                    </div>  
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+    <ion-content style="margin-top: 40px; background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
+                 has-header="true"
+                 has-subheader="true" 
+                 padding="false"
+                 ng-show="etapaSel === 2">
+        <ion-list>
+            <div ng-repeat="materia in getNotasPersonaSel()">
+                <ion-item class="item-stable"
+                          ng-click="toggleGroup(materia)"
+                          ng-class="{
+                                      active: isGroupShown(materia)
+                                  }">
+                    <i class="icon" ng-class="isGroupShown(materia) ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;
+                    {{materia.idMateriaAnhoLectivo.idMateria.nombre}} 
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(materia)">
+                    <div class="row">
+                        <div class="col" ng-show="hayNotasEnMateria1eras5Etapa2(materia) && hayNotasEnMateria2das5Etapa2(materia)">
+                            Notas: 
+                        </div>
+                        <div class="col" ng-show="!hayNotasEnMateria1eras5Etapa2(materia) && !hayNotasEnMateria2das5Etapa2(materia)">
+                            <div class="col-nota">
+                                No hay notas cargadas 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="hayNotasEnMateria1eras5Etapa2(materia)">
+                        <div class="col" ng-show="materia.calificacionParcialE201 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE201}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE202 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE202}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE203 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE203}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE204 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE204}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE205 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE205}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="hayNotasEnMateria2das5Etapa2(materia)">
+                        <div class="col" ng-show="materia.calificacionParcialE206 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE206}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE207 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE207}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE208 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE208}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE209 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE209}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE210 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE210}}
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(materia) && materia.promedioParcialE2 !== ''">
+                    <div class="row">
+                        <div class="col">
+                            Promedio: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.promedioParcialE2}}
+                            </div>
+                        </div>
+                    </div>  
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+    <ion-content style="margin-top: 40px; background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
+                 has-header="true"
+                 has-subheader="true" 
+                 padding="false"
+                 ng-show="etapaSel === 3">
+        <ion-list>
+            <div ng-repeat="materia in getNotasPersonaSel()">
+                <ion-item class="item-stable"
+                          ng-click="toggleGroup(materia)"
+                          ng-class="{active: isGroupShown(materia)}">
+                    <i class="icon" ng-class="isGroupShown(materia) ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;
+                    {{materia.idMateriaAnhoLectivo.idMateria.nombre}} 
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(materia)">
+                    <div class="row">
+                        <div class="col" ng-show="hayNotasEnMateria1eras5Etapa3(materia) && hayNotasEnMateria2das5Etapa3(materia)">
+                            Notas: 
+                        </div>
+                        <div class="col" ng-show="!hayNotasEnMateria1eras5Etapa3(materia) && !hayNotasEnMateria2das5Etapa3(materia)">
+                            <div class="col-nota">
+                                No hay notas cargadas 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="hayNotasEnMateria1eras5Etapa3(materia)">
+                        <div class="col" ng-show="materia.calificacionParcialE301 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE301}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE302 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE302}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE303 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE303}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE304 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE304}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE305 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE305}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="hayNotasEnMateria2das5Etapa3(materia)">
+                        <div class="col" ng-show="materia.calificacionParcialE306 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE306}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE307 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE307}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE308 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE308}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE309 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE309}}
+                            </div>
+                        </div>
+                        <div class="col" ng-show="materia.calificacionParcialE310 !== ''">
+                            <div class="col-nota">
+                                {{materia.calificacionParcialE310}}
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(materia) && materia.promedioParcialE3 !== ''">
+                    <div class="row">
+                        <div class="col">
+                            Promedio: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.promedioParcialE3}}
+                            </div>
+                        </div>
+                    </div>  
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+    <ion-content style="margin-top: 40px; background: url(https://s3.amazonaws.com/ionic-io-static/iNWtxrPXQ6mnyBlnXqCM_secundario_fondo.jpg) no-repeat center;background-size:cover;"
+                 has-header="true"
+                 has-subheader="true" 
+                 padding="false"
+                 ng-show="etapaSel === 4">
+        <ion-list>
+            <div ng-repeat="materia in getNotasPersonaSel()">
+                <ion-item class="item-stable"
+                          ng-click="toggleGroup(materia)"
+                          ng-class="{active: isGroupShown(materia)}">
+                    <i class="icon" ng-class="isGroupShown(materia) ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;
+                    {{materia.idMateriaAnhoLectivo.idMateria.nombre}} 
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(materia)">
+                    <div class="row" ng-show="materia.calificacionAnual === '' && materia.calificacionColoquio === '' && materia.calificacionComplementario === '' && materia.calificacionFinal === ''">
+                        <div class="col">
+                            <div class="col-nota">
+                                No hay nota cargada 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="materia.calificacionAnual !== ''">
+                        <div class="col">
+                            Anual: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.calificacionAnual}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="materia.calificacionColoquio !== ''">
+                        <div class="col">
+                            Coloquio: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.calificacionColoquio}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="materia.calificacionComplementario !== ''">
+                        <div class="col">
+                            Complem.: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.calificacionComplementario}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="materia.calificacionFinal !== ''">
+                        <div class="col">
+                            Final: 
+                        </div>
+                        <div class="col">
+                            <div class="col-nota">
+                                {{materia.calificacionFinal}}
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -12,7 +12,7 @@
         <ion-item 
             class="item-avatar item-icon-right" id="mensajes-list-item5"
             ng-show="isAlumno()"
-            ng-click="irAgestion()">
+            ng-click="irAgestion(getUsuario().idPersona)">
             <img src="{{usuario.urlFoto}}{{getUsuario().idPersona.foto}}">
             <h2>{{getUsuario().idPersona.apellido}}</h2>
             <p>{{getUsuario().idPersona.nombre}}</p>
@@ -21,7 +21,7 @@
         <ion-item 
             ng-repeat="per in getUsuario().personaCollection"
             class="item-avatar item-icon-right" id="mensajes-list-item5"
-            ng-click="irAgestion()">
+            ng-click="irAgestion(per)">
             <img src="{{usuario.urlFoto}}{{per.foto}}">
             <h2>{{per.apellido}}</h2>
             <p>{{per.nombre}}</p>
