@@ -135,6 +135,7 @@ angular.module('app.usuarioCtrl', [])
                 });
 
                 $scope.loopChequeo = function () {
+                    //Comentar para pruebas locales
                     cordova.plugins.notification.badge.configure({ autoClear: true });
                     cordova.plugins.backgroundMode.setDefaults({
                         title: 'Escolar móvil',
@@ -143,12 +144,15 @@ angular.module('app.usuarioCtrl', [])
 
                     cordova.plugins.backgroundMode.enable();
 
+
                     cordova.plugins.backgroundMode.onactivate = function () {
                         $scope.taskChequeoMsj();
                     };
 
 
                 };
+
+
                 $scope.taskChequeoMsj = function () {
 
                     //Aca va la llamada al web service
@@ -180,7 +184,6 @@ angular.module('app.usuarioCtrl', [])
                         template: 'Esta funcionalidad se encuentra aún en desarrollo'
                     });
                 };
-                
 
                 $scope.irAgestion = function (persona) {
                     usuarioFactory.personaSel = persona;
@@ -429,12 +432,6 @@ angular.module('app.usuarioCtrl', [])
 
 
                 }
-
-
-
-
-
-
 
             }]);
 
