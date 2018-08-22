@@ -151,8 +151,6 @@ angular.module('app.usuarioCtrl', [])
 
 
                 };
-
-
                 $scope.taskChequeoMsj = function () {
 
                     //Aca va la llamada al web service
