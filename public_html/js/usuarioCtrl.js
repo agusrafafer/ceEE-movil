@@ -135,18 +135,19 @@ angular.module('app.usuarioCtrl', [])
                 });
 
                 $scope.loopChequeo = function () {
-//                    cordova.plugins.notification.badge.configure({ autoClear: true });
-//                    cordova.plugins.backgroundMode.setDefaults({
-//                        title: 'Escolar móvil',
-//                        text: 'Verificando en background'
-//                    });
-//
-//                    cordova.plugins.backgroundMode.enable();
-//
-//
-//                    cordova.plugins.backgroundMode.onactivate = function () {
-//                        $scope.taskChequeoMsj();
-//                    };
+                    //Comentar para pruebas locales
+                    cordova.plugins.notification.badge.configure({ autoClear: true });
+                    cordova.plugins.backgroundMode.setDefaults({
+                        title: 'Escolar móvil',
+                        text: 'Verificando en background'
+                    });
+
+                    cordova.plugins.backgroundMode.enable();
+
+
+                    cordova.plugins.backgroundMode.onactivate = function () {
+                        $scope.taskChequeoMsj();
+                    };
 
 
                 };
@@ -431,12 +432,6 @@ angular.module('app.usuarioCtrl', [])
 
 
                 }
-
-
-
-
-
-
 
             }]);
 
