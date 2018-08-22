@@ -135,23 +135,22 @@ angular.module('app.usuarioCtrl', [])
                 });
 
                 $scope.loopChequeo = function () {
-//                    cordova.plugins.notification.badge.configure({ autoClear: true });
-//                    cordova.plugins.backgroundMode.setDefaults({
-//                        title: 'Escolar móvil',
-//                        text: 'Verificando en background'
-//                    });
-//
-//                    cordova.plugins.backgroundMode.enable();
-//
-//
-//                    cordova.plugins.backgroundMode.onactivate = function () {
-//                        $scope.taskChequeoMsj();
-//                    };
+                    //Comentar para pruebas locales
+                    cordova.plugins.notification.badge.configure({ autoClear: true });
+                    cordova.plugins.backgroundMode.setDefaults({
+                        title: 'Escolar móvil',
+                        text: 'Verificando en background'
+                    });
+
+                    cordova.plugins.backgroundMode.enable();
+
+
+                    cordova.plugins.backgroundMode.onactivate = function () {
+                        $scope.taskChequeoMsj();
+                    };
 
 
                 };
-
-
                 $scope.taskChequeoMsj = function () {
 
                     //Aca va la llamada al web service
@@ -431,12 +430,6 @@ angular.module('app.usuarioCtrl', [])
 
 
                 }
-
-
-
-
-
-
 
             }]);
 
