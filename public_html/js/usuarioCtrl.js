@@ -180,6 +180,7 @@ angular.module('app.usuarioCtrl', [])
                         template: 'Esta funcionalidad se encuentra aún en desarrollo'
                     });
                 };
+                
 
                 $scope.irAgestion = function (persona) {
                     usuarioFactory.personaSel = persona;
