@@ -14,7 +14,7 @@
             margin-bottom: 5px;
             margin-right: 5px;">Cantidad total: {{getSancionesPersonaSel().length}} 
         </h3>
-            <ion-item class="item-icon-right" ng-repeat="san in getSancionesPersonaSel()">
+        <ion-item class="item-icon-right" ng-repeat="san in getSancionesPersonaSel()" ng-click="verDetalleSancionPersonaSel(san)">
                 <h2>Fecha: {{san.diaDelMes}}/{{san.mes}}/{{san.anho}}</h2>
                 <p ng-hide="san.motivo === ''">Motivo: <b>{{san.motivo}}</b></p>
                 <p>Tipo: {{san.idSancionAlumnoTipo.nombre}}</p>

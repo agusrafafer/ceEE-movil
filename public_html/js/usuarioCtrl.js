@@ -8,8 +8,8 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$timeout',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $timeout) {
 
                 $scope.usuario = {
                     login: "",
@@ -146,7 +146,7 @@ angular.module('app.usuarioCtrl', [])
 
 
                     cordova.plugins.backgroundMode.onactivate = function () {
-                        $scope.taskChequeoMsj();
+                    $scope.taskChequeoMsj();
                     };
 
 
@@ -161,7 +161,7 @@ angular.module('app.usuarioCtrl', [])
                                 .then(function (data) {
 
                                     usuarioFactory.mensajesNoLeidos = data;
-                                    cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
+//                                    cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
 
                                 })
                                 .catch(function (data) {
@@ -169,7 +169,7 @@ angular.module('app.usuarioCtrl', [])
                                 });
                     }
 
-                    window.setTimeout($scope.taskChequeoMsj, 5000);
+                    $timeout($scope.taskChequeoMsj, 5000);
                 };
 
                 $scope.getMensajesNoLeidos = function () {
@@ -306,7 +306,7 @@ angular.module('app.usuarioCtrl', [])
                     }
                     return false;
                 };
-                
+
                 $scope.buscarAsistenciaPersona = function () {
 
                     $ionicLoading.show({
@@ -339,11 +339,11 @@ angular.module('app.usuarioCtrl', [])
                                 });
                             });
                 };
-                
+
                 $scope.getAsistenciasPersonaSel = function () {
                     return usuarioFactory.asistenciasPersonaSel;
                 };
-                
+
                 $scope.buscarSancionPersona = function () {
 
                     $ionicLoading.show({
@@ -376,9 +376,21 @@ angular.module('app.usuarioCtrl', [])
                                 });
                             });
                 };
-                
+
                 $scope.getSancionesPersonaSel = function () {
                     return usuarioFactory.sancionesPersonaSel;
+                };
+
+                $scope.verDetalleSancionPersonaSel = function (sancion) {                    
+                    let texto = "<ul><li>Fecha: <b>" + sancion.diaDelMes + "/" + sancion.mes + "/" + sancion.anho + "</b></li>";
+                    texto += (sancion.motivo === '' )? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
+                    texto += "<li>Tipo: <b>" + sancion.idSancionAlumnoTipo.nombre + "</b></li>";
+                    texto += (sancion.solicitadaPor === '')? "" : ("<li>Solicitado por: <b>"  + sancion.solicitadaPor + "</b></li></ul>");
+                    
+                    $ionicPopup.alert({
+                        title: 'Detalle de Acuerdo',
+                        template: texto
+                    });
                 };
 
 
@@ -427,8 +439,6 @@ angular.module('app.usuarioCtrl', [])
                     } catch (e) {
                         usuarioFactory.usuario.personaCollection = [];
                     }
-
-
                 }
 
             }]);
