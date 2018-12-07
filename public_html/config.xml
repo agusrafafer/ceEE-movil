@@ -6,12 +6,12 @@
         version="0.0.1" 
         versionCode="001" 
         android-versionCode="001">
-    <name>Loreto móvil</name>
+    <name>Huerto móvil</name>
     <description>
         App Escolar móvil.
     </description>
     <author email="agusrafafer@gmail.com" href="http://www.agura.com.ar">
-        GS y Agura
+        GrupoSistemas y Agura
     </author>
     <access origin="*"/>
     <content src="index.html" />
