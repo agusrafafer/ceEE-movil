@@ -24,14 +24,14 @@ angular.module('app.factories', [])
 
         .factory('wsFactory', function () {
             return {
-//                url: "http://localhost:8080/loreto/webresources"
-                url: "http://108.160.155.140:8080/loreto/webresources"
+//                url: "http://localhost:8080/velez/webresources"
+                url: "http://108.160.155.140:8080/velez/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-                url: "http://108.160.155.140:8080/loreto/faces/resources/images/fotos/"
+                url: "http://108.160.155.140:8080/velez/faces/resources/images/fotos/"
             };
         });
 
