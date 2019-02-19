@@ -161,7 +161,7 @@ angular.module('app.usuarioCtrl', [])
                                 .then(function (data) {
 
                                     usuarioFactory.mensajesNoLeidos = data;
-//                                    cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
+                                    cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
 
                                 })
                                 .catch(function (data) {
