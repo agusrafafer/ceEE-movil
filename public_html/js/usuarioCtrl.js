@@ -130,13 +130,13 @@ angular.module('app.usuarioCtrl', [])
                     return usuarioFactory.usuario;
                 };
 
-                $scope.$on('$ionicView.loaded', function (event) {
+                $scope.$on('$ionicView.afterEnter', function (event) {
                     $scope.loopChequeo();
                 });
 
                 $scope.loopChequeo = function () {
                     //Comentar para pruebas locales
-                    cordova.plugins.notification.badge.configure({ autoClear: true });
+                    cordova.plugins.notification.badge.configure({autoClear: true});
                     cordova.plugins.backgroundMode.setDefaults({
                         title: 'Escolar móvil',
                         text: 'Verificando en background'
@@ -146,11 +146,12 @@ angular.module('app.usuarioCtrl', [])
 
 
                     cordova.plugins.backgroundMode.onactivate = function () {
-                    $scope.taskChequeoMsj();
+                        $scope.taskChequeoMsj();
                     };
 
 
                 };
+                
                 $scope.taskChequeoMsj = function () {
 
                     //Aca va la llamada al web service
@@ -381,12 +382,12 @@ angular.module('app.usuarioCtrl', [])
                     return usuarioFactory.sancionesPersonaSel;
                 };
 
-                $scope.verDetalleSancionPersonaSel = function (sancion) {                    
+                $scope.verDetalleSancionPersonaSel = function (sancion) {
                     let texto = "<ul><li>Fecha: <b>" + sancion.diaDelMes + "/" + sancion.mes + "/" + sancion.anho + "</b></li>";
-                    texto += (sancion.motivo === '' )? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
+                    texto += (sancion.motivo === '') ? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
                     texto += "<li>Tipo: <b>" + sancion.idSancionAlumnoTipo.nombre + "</b></li>";
-                    texto += (sancion.solicitadaPor === '')? "" : ("<li>Solicitado por: <b>"  + sancion.solicitadaPor + "</b></li></ul>");
-                    
+                    texto += (sancion.solicitadaPor === '') ? "" : ("<li>Solicitado por: <b>" + sancion.solicitadaPor + "</b></li></ul>");
+
                     $ionicPopup.alert({
                         title: 'Detalle de Acuerdo',
                         template: texto
