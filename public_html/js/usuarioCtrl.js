@@ -8,8 +8,8 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$cordovaLocalNotification', '$rootScope', '$cordovaBadge',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $cordovaLocalNotification, $rootScope, $cordovaBadge) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$cordovaLocalNotification', '$cordovaBadge',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $cordovaLocalNotification, $cordovaBadge) {
 
                 $scope.usuario = {
                     login: "",
@@ -136,12 +136,49 @@ angular.module('app.usuarioCtrl', [])
                     $scope.taskChequeoMsj();
                 });
 
-                $rootScope.$on('$cordovaLocalNotification:trigger', function (event, notification, state) {
-                    if (notification.id !== 1) {
+                $scope.lanzarNotificacion = function (idNoti) {
+                    let now = new Date().getTime();
+                    let _5SegDesdeAhora = new Date(now + 5000);
+                    let cantMensajesNoLeidos = usuarioFactory.mensajesNoLeidos.length;
+                    let mensajeNotif = cantMensajesNoLeidos !== 1 ? 'Tienes ' + cantMensajesNoLeidos + ' mensajes desde la escuela' : 'Tienes ' + cantMensajesNoLeidos + ' mensaje desde la escuela';
+
+                    $cordovaLocalNotification.isPresent(idNoti).then(function (present) {
+                        if (present) {
+                            $cordovaLocalNotification.update({
+                                id: idNoti,
+                                date: _5SegDesdeAhora,
+                                text: mensajeNotif,
+                                title: 'Notificación escolar'
+                            }).then(function (result) {
+                                $ionicPopup.alert({
+                                    title: 'Info',
+                                    template: 'Noyificacion actualizada'
+                                });
+                            });
+                        } else {
+                            $cordovaLocalNotification.add({
+                                id: idNoti,
+                                date: _5SegDesdeAhora,
+                                text: mensajeNotif,
+                                title: 'Notificación escolar'
+                            }).then(function () {
+                                $ionicPopup.alert({
+                                    title: 'Info',
+                                    template: 'Noyificacion agendada'
+                                });
+                            });
+                        }
+                    });
+                };
+
+                $scope.$on('$cordovaLocalNotification:trigger', function (id, state, json) {
+                    if (id !== 1) {
                         return;
                     }
                     $scope.taskChequeoMsj();
                 });
+
+
 
                 $scope.taskChequeoMsj = function () {
 
@@ -155,41 +192,7 @@ angular.module('app.usuarioCtrl', [])
                                     usuarioFactory.mensajesNoLeidos = data;
                                     cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
 
-                                    let now = new Date().getTime();
-                                    let _5SegDesdeAhora = new Date(now + 5000);
-                                    let cantMensajesNoLeidos = usuarioFactory.mensajesNoLeidos.length;
-                                    let mensajeNotif = cantMensajesNoLeidos !== 1 ? 'Tienes ' + cantMensajesNoLeidos + ' mensajes desde la escuela' : 'Tienes ' + cantMensajesNoLeidos + ' mensaje desde la escuela';
-
-                                    $cordovaLocalNotification.isPresent(1).then(function (present) {
-                                        if (present) {
-                                            $cordovaLocalNotification.update({
-                                                id: 1,
-                                                date: _5SegDesdeAhora,
-                                                text: mensajeNotif,
-                                                title: 'Notificación escolar'
-                                            }).then(function (result) {
-                                                $ionicPopup.alert({
-                                                    title: 'Info',
-                                                    template: 'Noyificacion actualizada'
-                                                });
-                                            });
-
-
-                                        } else {
-                                            $cordovaLocalNotification.schedule({
-                                                id: 1,
-                                                date: _5SegDesdeAhora,
-                                                text: mensajeNotif,
-                                                title: 'Notificación escolar'
-                                            }).then(function (result) {
-                                                $ionicPopup.alert({
-                                                    title: 'Info',
-                                                    template: 'Noyificacion agendada'
-                                                });
-                                            });
-
-                                        }
-                                    });
+                                    $scope.lanzarNotificacion(1);
 
                                 })
                                 .catch(function (data) {

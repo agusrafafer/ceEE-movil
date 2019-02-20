@@ -13,7 +13,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
         })
 
-        .run(function ($ionicPlatform) {
+        .run(function ($ionicPlatform, $rootScope, $timeout) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -25,6 +25,21 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
+
+                if (device.platform === "iOS") {
+                    window.plugin.notification.local.promptForPermission();
+                }
+
+                window.plugin.notification.local.ontrigger = function (id, state, json) {
+                    var notification = {
+                        id: id,
+                        state: state,
+                        json: json
+                    };
+                    $timeout(function () {
+                        $rootScope.$broadcast("$cordovaLocalNotification:trigger", notification);
+                    });
+                };
 
             });
         })
