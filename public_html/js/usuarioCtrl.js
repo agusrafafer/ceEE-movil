@@ -8,8 +8,8 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$cordovaLocalNotification', '$cordovaBadge', '$ionicPlatform',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $cordovaLocalNotification, $cordovaBadge, $ionicPlatform) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform) {
 
                 $scope.usuario = {
                     login: "",
@@ -136,6 +136,18 @@ angular.module('app.usuarioCtrl', [])
                     $scope.taskChequeoMsj();
                 });
 
+                $ionicPlatform.ready(function () {
+
+                    $scope.agendar = function () {
+                        cordova.plugins.notification.local.schedule({
+                            id: 1,
+                            text: "Tienes " + usuarioFactory.mensajesNoLeidos.length + " mensaje/s",
+                            title: 'Notificación escolar',
+                            every: 1// every 1 minutes
+                        });
+                    }
+                });
+
 //                $ionicPlatform.ready(function () {
 //                    $scope.lanzarNotificacion = function (idNoti) {
 //                        let now = new Date().getTime();
@@ -193,29 +205,34 @@ angular.module('app.usuarioCtrl', [])
                                     usuarioFactory.mensajesNoLeidos = data;
                                     //cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
                                     if (usuarioFactory.mensajesNoLeidos.length > 0) {
-                                        $cordovaBadge.set(usuarioFactory.mensajesNoLeidos.length).then(function () {
-                                            $ionicPopup.alert({
-                                                title: 'Info',
-                                                template: 'Con Permisos'
-                                            });
-                                        }, function (err) {
-                                            $ionicPopup.alert({
-                                                title: 'Info',
-                                                template: 'Sin Permisos'
-                                            });
+//                                        $cordovaBadge.set(usuarioFactory.mensajesNoLeidos.length).then(function () {
+//                                            $ionicPopup.alert({
+//                                                title: 'Info',
+//                                                template: 'Con Permisos'
+//                                            });
+//                                        }, function (err) {
+//                                            $ionicPopup.alert({
+//                                                title: 'Info',
+//                                                template: 'Sin Permisos'
+//                                            });
+//                                        });
+                                        $scope.agendar();
+                                        $ionicPopup.alert({
+                                            title: 'Info',
+                                            template: 'Notificacion agendada'
                                         });
                                     } else {
-                                        $cordovaBadge.clear().then(function () {
-                                            $ionicPopup.alert({
-                                                title: 'Info',
-                                                template: 'Con Permisos'
-                                            });
-                                        }, function (err) {
-                                            $ionicPopup.alert({
-                                                title: 'Info',
-                                                template: 'Sin Permisos'
-                                            });
-                                        });
+//                                        $cordovaBadge.clear().then(function () {
+//                                            $ionicPopup.alert({
+//                                                title: 'Info',
+//                                                template: 'Con Permisos'
+//                                            });
+//                                        }, function (err) {
+//                                            $ionicPopup.alert({
+//                                                title: 'Info',
+//                                                template: 'Sin Permisos'
+//                                            });
+//                                        });
                                     }
                                     //$scope.lanzarNotificacion(1);
 
