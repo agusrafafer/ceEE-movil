@@ -136,17 +136,79 @@ angular.module('app.usuarioCtrl', [])
                     $scope.taskChequeoMsj();
                 });
 
-                $ionicPlatform.ready(function () {
 
-                    $scope.agendar = function () {
-                        cordova.plugins.notification.local.schedule({
-                            id: 1,
-                            text: "Tienes " + usuarioFactory.mensajesNoLeidos.length + " mensaje/s",
-                            title: 'Notificación escolar',
-                            every: 1// every 1 minutes
+                $scope.agendar = function (){
+
+                    document.addEventListener("deviceready", function () {
+
+                        //console.warn("testNotifications Started");
+
+                        // Checks for permission
+                        cordova.plugin.notification.local.hasPermission(function (granted) {
+
+                            //console.warn("Testing permission");
+
+                            if (granted === false) {
+
+                                //console.warn("No permission");
+                                // If app doesnt have permission request it
+                                cordova.plugin.notification.local.registerPermission(function (granted) {
+
+                                    //console.warn("Ask for permission");
+                                    if (granted === true) {
+
+                                        //console.warn("Permission accepted");
+                                        // If app is given permission try again
+                                        $scope.agendar();
+
+                                    } else {
+                                        alert("Necesitas permisos para ver notificaciones");
+                                    }
+
+                                });
+                            } else {
+
+                                var pathArray = window.location.pathname.split("/www/"),
+                                        secondLevelLocation = window.location.protocol + "//" + pathArray[0],
+                                        now = new Date();
+
+
+                                //console.warn("sending notification");
+
+                                var isAndroid = false;
+
+                                if (device.platform === "Android") {
+                                    isAndroid = true;
+                                }
+
+                                cordova.plugin.notification.local.schedule({
+                                    id: 9,
+                                    title: "Test notification 9",
+                                    text: "This is a test notification",
+                                    at: new Date(new Date().getTime() + 10)
+                                            // data: { secret:key }
+                                });
+
+                            }
+
                         });
-                    }
-                });
+
+                    }, false);
+
+                }
+                ;
+
+//                $ionicPlatform.ready(function () {
+//
+//                    $scope.agendar = function () {
+//                        cordova.plugins.notification.local.schedule({
+//                            id: 1,
+//                            text: "Tienes " + usuarioFactory.mensajesNoLeidos.length + " mensaje/s",
+//                            title: 'Notificación escolar',
+//                            every: 1// every 1 minutes
+//                        });
+//                    }
+//                });
 
 //                $ionicPlatform.ready(function () {
 //                    $scope.lanzarNotificacion = function (idNoti) {
