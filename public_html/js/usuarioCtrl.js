@@ -145,21 +145,19 @@ angular.module('app.usuarioCtrl', [])
                     //cada 5 segundos
 
                     if ($scope.isLogueado()) {
-                        $ionicLoading.show({
-                            template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
-                        });
+
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
-                                    $ionicLoading.hide();
+                                    
                                     usuarioFactory.mensajesNoLeidos = data;
 
                                 })
                                 .catch(function (data) {
-                                    $ionicLoading.hide();
+                                    
                                 });
                     }
 
-                    $timeout($scope.taskChequeoMsj, 5000);
+                    $timeout($scope.taskChequeoMsj, 60000);//Chequeo mensajes cada 1 minuto
                 };
 
                 $scope.getMensajesNoLeidos = function () {
