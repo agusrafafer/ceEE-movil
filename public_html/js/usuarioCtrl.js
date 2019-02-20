@@ -147,7 +147,7 @@ angular.module('app.usuarioCtrl', [])
                             if (present) {
                                 $cordovaLocalNotification.update({
                                     id: idNoti,
-                                    date: _5SegDesdeAhora,
+                                    //date: _5SegDesdeAhora,
                                     text: mensajeNotif,
                                     title: 'Notificación escolar'
                                 }).then(function (result) {
@@ -159,7 +159,7 @@ angular.module('app.usuarioCtrl', [])
                             } else {
                                 $cordovaLocalNotification.schedule({
                                     id: idNoti,
-                                    date: _5SegDesdeAhora,
+                                    //date: _5SegDesdeAhora,
                                     text: mensajeNotif,
                                     title: 'Notificación escolar'
                                 }).then(function () {
