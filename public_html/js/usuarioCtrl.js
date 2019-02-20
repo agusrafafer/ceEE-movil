@@ -8,8 +8,8 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout) {
 
                 $scope.usuario = {
                     login: "",
@@ -131,180 +131,34 @@ angular.module('app.usuarioCtrl', [])
                 };
 
                 $scope.$on('$ionicView.afterEnter', function (event) {
-                    //$scope.loopChequeo();
-                    //cordova.plugins.notification.badge.configure({autoClear: true});
                     $scope.taskChequeoMsj();
                 });
 
-
-                $scope.agendar = function (){
-
-                    document.addEventListener("deviceready", function () {
-
-                        //console.warn("testNotifications Started");
-
-                        // Checks for permission
-                        cordova.plugin.notification.local.hasPermission(function (granted) {
-
-                            //console.warn("Testing permission");
-
-                            if (granted === false) {
-
-                                //console.warn("No permission");
-                                // If app doesnt have permission request it
-                                cordova.plugin.notification.local.registerPermission(function (granted) {
-
-                                    //console.warn("Ask for permission");
-                                    if (granted === true) {
-
-                                        //console.warn("Permission accepted");
-                                        // If app is given permission try again
-                                        $scope.agendar();
-
-                                    } else {
-                                        alert("Necesitas permisos para ver notificaciones");
-                                    }
-
-                                });
-                            } else {
-
-                                var pathArray = window.location.pathname.split("/www/"),
-                                        secondLevelLocation = window.location.protocol + "//" + pathArray[0],
-                                        now = new Date();
-
-
-                                //console.warn("sending notification");
-
-                                var isAndroid = false;
-
-                                if (device.platform === "Android") {
-                                    isAndroid = true;
-                                }
-
-                                cordova.plugin.notification.local.schedule({
-                                    id: 9,
-                                    title: "Test notification 9",
-                                    text: "This is a test notification",
-                                    at: new Date(new Date().getTime() + 10)
-                                            // data: { secret:key }
-                                });
-
-                            }
-
-                        });
-
-                    }, false);
-
-                }
-                ;
-
-//                $ionicPlatform.ready(function () {
-//
-//                    $scope.agendar = function () {
-//                        cordova.plugins.notification.local.schedule({
-//                            id: 1,
-//                            text: "Tienes " + usuarioFactory.mensajesNoLeidos.length + " mensaje/s",
-//                            title: 'Notificación escolar',
-//                            every: 1// every 1 minutes
-//                        });
-//                    }
-//                });
-
-//                $ionicPlatform.ready(function () {
-//                    $scope.lanzarNotificacion = function (idNoti) {
-//                        let now = new Date().getTime();
-//                        let _5SegDesdeAhora = new Date(now + 5000);
-//                        let cantMensajesNoLeidos = usuarioFactory.mensajesNoLeidos.length;
-//                        let mensajeNotif = cantMensajesNoLeidos !== 1 ? 'Tienes ' + cantMensajesNoLeidos + ' mensajes desde la escuela' : 'Tienes ' + cantMensajesNoLeidos + ' mensaje desde la escuela';
-//
-//                        $cordovaLocalNotification.isPresent(idNoti).then(function (present) {
-//                            if (present) {
-//                                $cordovaLocalNotification.update({
-//                                    id: idNoti,
-//                                    //date: _5SegDesdeAhora,
-//                                    text: mensajeNotif,
-//                                    title: 'Notificación escolar'
-//                                }).then(function (result) {
-//                                    $ionicPopup.alert({
-//                                        title: 'Info',
-//                                        template: 'Notificacion actualizada'
-//                                    });
-//                                });
-//                            } else {
-//                                $cordovaLocalNotification.schedule({
-//                                    id: idNoti,
-//                                    //date: _5SegDesdeAhora,
-//                                    text: mensajeNotif,
-//                                    title: 'Notificación escolar'
-//                                }).then(function () {
-//                                    $ionicPopup.alert({
-//                                        title: 'Info',
-//                                        template: 'Notificacion agendada'
-//                                    });
-//                                });
-//                            }
-//                        });
-//                    };
-//
-//                    $scope.$on('$cordovaLocalNotification:trigger', function (id, state, json) {
-//                        if (id !== 1) {
-//                            return;
-//                        }
-//                        $scope.taskChequeoMsj();
-//                    });
-//
-//                });
+                $scope.$on('$ionicView.afterLeave', function () {
+                    // Anything you can think of
+                    $timeout.cancel();
+                });
 
                 $scope.taskChequeoMsj = function () {
 
                     //Aca va la llamada al web service
-                    //y el aumento del badget
-
+                    //cada 5 segundos
+                    $ionicLoading.show({
+                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
+                    });
                     if ($scope.isLogueado()) {
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
-
+                                    $ionicLoading.hide();
                                     usuarioFactory.mensajesNoLeidos = data;
-                                    //cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
-                                    if (usuarioFactory.mensajesNoLeidos.length > 0) {
-//                                        $cordovaBadge.set(usuarioFactory.mensajesNoLeidos.length).then(function () {
-//                                            $ionicPopup.alert({
-//                                                title: 'Info',
-//                                                template: 'Con Permisos'
-//                                            });
-//                                        }, function (err) {
-//                                            $ionicPopup.alert({
-//                                                title: 'Info',
-//                                                template: 'Sin Permisos'
-//                                            });
-//                                        });
-                                        $scope.agendar();
-                                        $ionicPopup.alert({
-                                            title: 'Info',
-                                            template: 'Notificacion agendada'
-                                        });
-                                    } else {
-//                                        $cordovaBadge.clear().then(function () {
-//                                            $ionicPopup.alert({
-//                                                title: 'Info',
-//                                                template: 'Con Permisos'
-//                                            });
-//                                        }, function (err) {
-//                                            $ionicPopup.alert({
-//                                                title: 'Info',
-//                                                template: 'Sin Permisos'
-//                                            });
-//                                        });
-                                    }
-                                    //$scope.lanzarNotificacion(1);
 
                                 })
                                 .catch(function (data) {
-
+                                    $ionicLoading.hide();
                                 });
                     }
 
-                    //$timeout($scope.taskChequeoMsj, 5000);
+                    $timeout($scope.taskChequeoMsj, 5000);
                 };
 
                 $scope.getMensajesNoLeidos = function () {
