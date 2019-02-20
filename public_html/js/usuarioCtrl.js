@@ -8,8 +8,8 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$cordovaLocalNotification', '$cordovaBadge',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $cordovaLocalNotification, $cordovaBadge) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$cordovaLocalNotification', '$cordovaBadge', '$ionicPlatform',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $cordovaLocalNotification, $cordovaBadgel, $ionicPlatform) {
 
                 $scope.usuario = {
                     login: "",
@@ -136,49 +136,50 @@ angular.module('app.usuarioCtrl', [])
                     $scope.taskChequeoMsj();
                 });
 
-                $scope.lanzarNotificacion = function (idNoti) {
-                    let now = new Date().getTime();
-                    let _5SegDesdeAhora = new Date(now + 5000);
-                    let cantMensajesNoLeidos = usuarioFactory.mensajesNoLeidos.length;
-                    let mensajeNotif = cantMensajesNoLeidos !== 1 ? 'Tienes ' + cantMensajesNoLeidos + ' mensajes desde la escuela' : 'Tienes ' + cantMensajesNoLeidos + ' mensaje desde la escuela';
+                $ionicPlatform.ready(function () {
+                    $scope.lanzarNotificacion = function (idNoti) {
+                        let now = new Date().getTime();
+                        let _5SegDesdeAhora = new Date(now + 5000);
+                        let cantMensajesNoLeidos = usuarioFactory.mensajesNoLeidos.length;
+                        let mensajeNotif = cantMensajesNoLeidos !== 1 ? 'Tienes ' + cantMensajesNoLeidos + ' mensajes desde la escuela' : 'Tienes ' + cantMensajesNoLeidos + ' mensaje desde la escuela';
 
-                    $cordovaLocalNotification.isPresent(idNoti).then(function (present) {
-                        if (present) {
-                            $cordovaLocalNotification.update({
-                                id: idNoti,
-                                date: _5SegDesdeAhora,
-                                text: mensajeNotif,
-                                title: 'Notificación escolar'
-                            }).then(function (result) {
-                                $ionicPopup.alert({
-                                    title: 'Info',
-                                    template: 'Notificacion actualizada'
+                        $cordovaLocalNotification.isPresent(idNoti).then(function (present) {
+                            if (present) {
+                                $cordovaLocalNotification.update({
+                                    id: idNoti,
+                                    date: _5SegDesdeAhora,
+                                    text: mensajeNotif,
+                                    title: 'Notificación escolar'
+                                }).then(function (result) {
+                                    $ionicPopup.alert({
+                                        title: 'Info',
+                                        template: 'Notificacion actualizada'
+                                    });
                                 });
-                            });
-                        } else {
-                            $cordovaLocalNotification.add({
-                                id: idNoti,
-                                date: _5SegDesdeAhora,
-                                text: mensajeNotif,
-                                title: 'Notificación escolar'
-                            }).then(function () {
-                                $ionicPopup.alert({
-                                    title: 'Info',
-                                    template: 'Notificacion agendada'
+                            } else {
+                                $cordovaLocalNotification.schedule({
+                                    id: idNoti,
+                                    date: _5SegDesdeAhora,
+                                    text: mensajeNotif,
+                                    title: 'Notificación escolar'
+                                }).then(function () {
+                                    $ionicPopup.alert({
+                                        title: 'Info',
+                                        template: 'Notificacion agendada'
+                                    });
                                 });
-                            });
+                            }
+                        });
+                    };
+
+                    $scope.$on('$cordovaLocalNotification:trigger', function (id, state, json) {
+                        if (id !== 1) {
+                            return;
                         }
+                        $scope.taskChequeoMsj();
                     });
-                };
 
-                $scope.$on('$cordovaLocalNotification:trigger', function (id, state, json) {
-                    if (id !== 1) {
-                        return;
-                    }
-                    $scope.taskChequeoMsj();
                 });
-
-
 
                 $scope.taskChequeoMsj = function () {
 
@@ -192,12 +193,7 @@ angular.module('app.usuarioCtrl', [])
                                     usuarioFactory.mensajesNoLeidos = data;
                                     cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
 
-                                    //$scope.lanzarNotificacion(1);
-                                    cordova.plugins.notification.local.schedule({
-                                        title: 'My first notification',
-                                        text: 'Thats pretty easy...',
-                                        foreground: true
-                                    });
+                                    $scope.lanzarNotificacion(1);
 
                                 })
                                 .catch(function (data) {
