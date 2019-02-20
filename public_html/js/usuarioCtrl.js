@@ -161,27 +161,33 @@ angular.module('app.usuarioCtrl', [])
                                     let mensajeNotif = cantMensajesNoLeidos !== 1 ? 'Tienes ' + cantMensajesNoLeidos + ' mensajes desde la escuela' : 'Tienes ' + cantMensajesNoLeidos + ' mensaje desde la escuela';
 
                                     $cordovaLocalNotification.isPresent(1).then(function (present) {
-                                        if (!present) {
-
-                                            $cordovaLocalNotification.schedule({
-                                                id: 1,
-                                                date: _5SegDesdeAhora,
-                                                text: mensajeNotif,
-                                                title: 'Notificación escolar'
-                                            }).then(function () {
-                                                //console.log("Notification After 5 seconds set");
-                                            });
-
-                                        } else {
-
+                                        if (present) {
                                             $cordovaLocalNotification.update({
                                                 id: 1,
                                                 date: _5SegDesdeAhora,
                                                 text: mensajeNotif,
                                                 title: 'Notificación escolar'
                                             }).then(function (result) {
-                                                //console.log('Updated Notification Text');
+                                                $ionicPopup.alert({
+                                                    title: 'Info',
+                                                    template: 'Noyificacion actualizada'
+                                                });
                                             });
+
+
+                                        } else {
+                                            $cordovaLocalNotification.schedule({
+                                                id: 1,
+                                                date: _5SegDesdeAhora,
+                                                text: mensajeNotif,
+                                                title: 'Notificación escolar'
+                                            }).then(function (result) {
+                                                $ionicPopup.alert({
+                                                    title: 'Info',
+                                                    template: 'Noyificacion agendada'
+                                                });
+                                            });
+
                                         }
                                     });
 
