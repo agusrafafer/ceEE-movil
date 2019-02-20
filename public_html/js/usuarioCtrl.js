@@ -152,7 +152,7 @@ angular.module('app.usuarioCtrl', [])
                             }).then(function (result) {
                                 $ionicPopup.alert({
                                     title: 'Info',
-                                    template: 'Noyificacion actualizada'
+                                    template: 'Notificacion actualizada'
                                 });
                             });
                         } else {
@@ -164,7 +164,7 @@ angular.module('app.usuarioCtrl', [])
                             }).then(function () {
                                 $ionicPopup.alert({
                                     title: 'Info',
-                                    template: 'Noyificacion agendada'
+                                    template: 'Notificacion agendada'
                                 });
                             });
                         }
