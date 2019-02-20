@@ -8,8 +8,8 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$cordovaLocalNotification', '$rootScope',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $cordovaLocalNotification, $rootScope) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$cordovaLocalNotification', '$rootScope', '$cordovaBadge',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $cordovaLocalNotification, $rootScope, $cordovaBadge) {
 
                 $scope.usuario = {
                     login: "",
