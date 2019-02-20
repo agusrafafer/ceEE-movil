@@ -192,7 +192,12 @@ angular.module('app.usuarioCtrl', [])
                                     usuarioFactory.mensajesNoLeidos = data;
                                     cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
 
-                                    $scope.lanzarNotificacion(1);
+                                    //$scope.lanzarNotificacion(1);
+                                    cordova.plugins.notification.local.schedule({
+                                        title: 'My first notification',
+                                        text: 'Thats pretty easy...',
+                                        foreground: true
+                                    });
 
                                 })
                                 .catch(function (data) {

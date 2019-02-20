@@ -30,16 +30,16 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                     window.plugin.notification.local.promptForPermission();
                 }
 
-                window.plugin.notification.local.ontrigger = function (id, state, json) {
-                    var notification = {
-                        id: id,
-                        state: state,
-                        json: json
-                    };
-                    $timeout(function () {
-                        $rootScope.$broadcast("$cordovaLocalNotification:trigger", notification);
-                    });
-                };
+//                window.plugin.notification.local.ontrigger = function (id, state, json) {
+//                    var notification = {
+//                        id: id,
+//                        state: state,
+//                        json: json
+//                    };
+//                    $timeout(function () {
+//                        $rootScope.$broadcast("$cordovaLocalNotification:trigger", notification);
+//                    });
+//                };
 
             });
         })
