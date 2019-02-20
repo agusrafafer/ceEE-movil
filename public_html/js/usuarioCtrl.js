@@ -143,10 +143,11 @@ angular.module('app.usuarioCtrl', [])
 
                     //Aca va la llamada al web service
                     //cada 5 segundos
-                    $ionicLoading.show({
-                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
-                    });
+
                     if ($scope.isLogueado()) {
+                        $ionicLoading.show({
+                            template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
+                        });
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
                                     $ionicLoading.hide();
