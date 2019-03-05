@@ -8,8 +8,8 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$timeout',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $timeout) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout) {
 
                 $scope.usuario = {
                     login: "",
@@ -130,46 +130,33 @@ angular.module('app.usuarioCtrl', [])
                     return usuarioFactory.usuario;
                 };
 
-                $scope.$on('$ionicView.loaded', function (event) {
-                    $scope.loopChequeo();
+                $scope.$on('$ionicView.afterEnter', function (event) {
+                    $scope.taskChequeoMsj();
                 });
 
-                $scope.loopChequeo = function () {
-                    //Comentar para pruebas locales
-                    cordova.plugins.notification.badge.configure({ autoClear: true });
-                    cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Escolar móvil',
-                        text: 'Verificando en background'
-                    });
+                $scope.$on('$ionicView.afterLeave', function () {
+                    // Anything you can think of
+                    $timeout.cancel();
+                });
 
-                    cordova.plugins.backgroundMode.enable();
-
-
-                    cordova.plugins.backgroundMode.onactivate = function () {
-                    $scope.taskChequeoMsj();
-                    };
-
-
-                };
                 $scope.taskChequeoMsj = function () {
 
                     //Aca va la llamada al web service
-                    //y el aumento del badget
+                    //cada 5 segundos
 
                     if ($scope.isLogueado()) {
+
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
-
+                                    
                                     usuarioFactory.mensajesNoLeidos = data;
-//                                    cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
 
                                 })
                                 .catch(function (data) {
-
+                                    
                                 });
                     }
 
-                    $timeout($scope.taskChequeoMsj, 5000);
                 };
 
                 $scope.getMensajesNoLeidos = function () {
@@ -381,12 +368,7 @@ angular.module('app.usuarioCtrl', [])
                     return usuarioFactory.sancionesPersonaSel;
                 };
 
-                $scope.verDetalleSancionPersonaSel = function (sancion) {                    
-                    let texto = "<ul><li>Fecha: <b>" + sancion.diaDelMes + "/" + sancion.mes + "/" + sancion.anho + "</b></li>";
-                    texto += (sancion.motivo === '' )? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
-                    texto += "<li>Tipo: <b>" + sancion.idSancionAlumnoTipo.nombre + "</b></li>";
-                    texto += (sancion.solicitadaPor === '')? "" : ("<li>Solicitado por: <b>"  + sancion.solicitadaPor + "</b></li></ul>");
-                    
+                    $timeout($scope.taskChequeoMsj, 60000);//Chequeo mensajes cada 1 minuto
                     $ionicPopup.alert({
                         title: 'Detalle de Acuerdo',
                         template: texto
@@ -442,4 +424,10 @@ angular.module('app.usuarioCtrl', [])
                 }
 
             }]);
+
+                $scope.verDetalleSancionPersonaSel = function (sancion) {
+                    let texto = "<ul><li>Fecha: <b>" + sancion.diaDelMes + "/" + sancion.mes + "/" + sancion.anho + "</b></li>";
+                    texto += (sancion.motivo === '') ? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
+                    texto += "<li>Tipo: <b>" + sancion.idSancionAlumnoTipo.nombre + "</b></li>";
+                    texto += (sancion.solicitadaPor === '') ? "" : ("<li>Solicitado por: <b>" + sancion.solicitadaPor + "</b></li></ul>");
 

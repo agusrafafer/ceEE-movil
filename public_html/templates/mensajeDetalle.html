@@ -1,6 +1,7 @@
 <ion-view title="Detalle de mensaje">
     <ion-content padding="true" class="has-header">
         <h3 style="color:#000000;">{{getMensajeSel().idMensaje.asunto}}</h3>
+        <h5 style="color:#000000;">{{getMensajeSel().idMensaje.fechayhora | date:'dd/MM/yyyy HH:mm:ss'}}</h5>
         <div class="list card">
             <ion-item class="item-avatar">
                 <img src="{{usuario.urlFoto}}{{getMensajeSel().idMensaje.idUsuarioEnvia.idPersona.foto}}">

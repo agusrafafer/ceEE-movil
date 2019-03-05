@@ -6,12 +6,12 @@
         version="0.0.1" 
         versionCode="001" 
         android-versionCode="001">
-    <name>Azules móvil</name>
+    <name>Azules MOVIL</name>
     <description>
         App Escolar móvil.
     </description>
-    <author email="agusrafafer@gmail.com" href="http://www.agura.com.ar">
-        GS y Agura
+    <author email="gs.correo@gmail.com" href="http://www.gruposistemas.com.ar">
+        GrupoSistemas y Agura
     </author>
     <access origin="*"/>
     <content src="index.html" />
@@ -34,6 +34,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="android">
+        <!--<preference name="android-targetSdkVersion" value="28" />-->
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
@@ -52,8 +53,6 @@
     
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <plugin name="cordova-plugin-splashscreen" source="npm"/>
-    <plugin name="cordova-plugin-background-mode" source="npm"/>
-    <plugin name="cordova-plugin-badge" source="npm"/>
     
     
     
