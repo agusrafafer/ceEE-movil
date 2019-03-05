@@ -12,9 +12,9 @@
             border-radius: 16px;
             background-color: #e4e4e4;
             margin-bottom: 5px;
-            margin-right: 5px;">Cantidad total: {{getAsistenciasPersonaSel().length}} -- Ref: 
-            <i class="icon ion-checkmark icon-accessory"></i>=Justificada ; 
-            <i class="icon ion-android-alert icon-accessory"></i>=Injustificada
+            margin-right: 5px;">Cantidad reg.: {{getAsistenciasPersonaSel().length}} -- Ref: 
+            <i class="icon ion-checkmark icon-accessory"></i>=Just. ; 
+            <i class="icon ion-android-alert icon-accessory"></i>=Inj.
         </h3>
             <ion-item class="item-icon-right" ng-repeat="asi in getAsistenciasPersonaSel()">
                 <h2>Fecha: {{asi.diaDelMes}}/{{asi.mes}}/{{asi.anho}}</h2>
