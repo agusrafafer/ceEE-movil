@@ -157,6 +157,7 @@ angular.module('app.usuarioCtrl', [])
                                 });
                     }
 
+                    $timeout($scope.taskChequeoMsj, 60000);//Chequeo mensajes cada 1 minuto
                 };
 
                 $scope.getMensajesNoLeidos = function () {
@@ -368,7 +369,12 @@ angular.module('app.usuarioCtrl', [])
                     return usuarioFactory.sancionesPersonaSel;
                 };
 
-                    $timeout($scope.taskChequeoMsj, 60000);//Chequeo mensajes cada 1 minuto
+                $scope.verDetalleSancionPersonaSel = function (sancion) {
+                    let texto = "<ul><li>Fecha: <b>" + sancion.diaDelMes + "/" + sancion.mes + "/" + sancion.anho + "</b></li>";
+                    texto += (sancion.motivo === '') ? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
+                    texto += "<li>Tipo: <b>" + sancion.idSancionAlumnoTipo.nombre + "</b></li>";
+                    texto += (sancion.solicitadaPor === '') ? "" : ("<li>Solicitado por: <b>" + sancion.solicitadaPor + "</b></li></ul>");
+
                     $ionicPopup.alert({
                         title: 'Detalle de Acuerdo',
                         template: texto
@@ -424,10 +430,4 @@ angular.module('app.usuarioCtrl', [])
                 }
 
             }]);
-
-                $scope.verDetalleSancionPersonaSel = function (sancion) {
-                    let texto = "<ul><li>Fecha: <b>" + sancion.diaDelMes + "/" + sancion.mes + "/" + sancion.anho + "</b></li>";
-                    texto += (sancion.motivo === '') ? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
-                    texto += "<li>Tipo: <b>" + sancion.idSancionAlumnoTipo.nombre + "</b></li>";
-                    texto += (sancion.solicitadaPor === '') ? "" : ("<li>Solicitado por: <b>" + sancion.solicitadaPor + "</b></li></ul>");
 
