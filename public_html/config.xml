@@ -3,14 +3,14 @@
         xmlns="http://www.w3.org/ns/widgets" 
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.1" 
-        versionCode="001" 
-        android-versionCode="001">
-    <name>Huerto MOVIL</name>
+        version="0.0.2" 
+        versionCode="002" 
+        android-versionCode="002">
+    <name>Escolar Huerto MOVIL</name>
     <description>
         App Escolar móvil.
     </description>
-    <author email="gs.correo@gmail.com" href="http://www.gruposistemas.com.ar">
+    <author email="apphuerto@gruposistemas.com.ar" href="http://www.gruposistemas.com.ar">
         GrupoSistemas y Agura
     </author>
     <access origin="*"/>
