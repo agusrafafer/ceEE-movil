@@ -15,7 +15,7 @@
     </author>
     <access origin="*"/>
     <content src="index.html" />
-    <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" />
+    <preference name="phonegap-version" value="cli-8.1.1" />
     <preference name="permissions" value="none" />
     <preference name="KeepRunning" value="true" /> 
     <preference name="exit-on-suspend" value="false" /> 
@@ -51,6 +51,7 @@
     </feature>
     <feature name="InAppBrowser" />
     
+    <plugin name="cordova-plugin-whitelist" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <plugin name="cordova-plugin-splashscreen" source="npm"/>
     
