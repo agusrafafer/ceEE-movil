@@ -4,8 +4,8 @@ angular.module('app.usuarioService', [])
             function ($http, $q, wsFactory, usuarioFactory) {
 
                 this.validarLogin = function (login, password) {
-                    //return $http.put(wsFactory.url + '/usuario', {login: login, clave: password})
-                    return $http.get(wsFactory.url + '/usuario/' + login + '/' +password)
+                    return $http.put(wsFactory.url + '/usuario', {login: login, clave: password})
+                    //return $http.get(wsFactory.url + '/usuario/' + login + '/' +password)
                             .then(function (response) {
                                 //todo ok
                                 //The response object has these properties:
