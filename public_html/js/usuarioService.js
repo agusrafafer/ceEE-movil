@@ -18,7 +18,7 @@ angular.module('app.usuarioService', [])
                                 return response;
                             }, function (response) {
                                 //Todo mal
-                                throw "Hubo un error al intentar ingresar: Status: " + response.status + " , StatusText: " + response.statusText;
+                                throw "Hubo un error al intentar ingresar";
                             });
                 };
 
