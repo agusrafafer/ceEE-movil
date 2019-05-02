@@ -3,9 +3,9 @@
         xmlns="http://www.w3.org/ns/widgets" 
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.2" 
-        versionCode="002" 
-        android-versionCode="002">
+        version="0.0.3" 
+        versionCode="003" 
+        android-versionCode="003">
     <name>Escolar Huerto MOVIL</name>
     <description>
         App Escolar móvil.
