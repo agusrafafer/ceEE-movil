@@ -5,6 +5,7 @@ angular.module('app.usuarioService', [])
 
                 this.validarLogin = function (login, password) {
                     return $http.put(wsFactory.url + '/usuario', {login: login, clave: password})
+                    //return $http.get(wsFactory.url + '/usuario/' + login + '/' +password)
                             .then(function (response) {
                                 //todo ok
                                 //The response object has these properties:
@@ -129,7 +130,7 @@ angular.module('app.usuarioService', [])
                                 return response.data;
                             }, function (response) {
                                 //Todo mal
-                                throw "Hubo un error al cargar las asistencias del alumno";
+                                throw "Hubo un error al cargar las inasistencias del alumno";
                             });
                 };
                 
@@ -159,7 +160,7 @@ angular.module('app.usuarioService', [])
                                 return response.data;
                             }, function (response) {
                                 //Todo mal
-                                throw "Hubo un error al cargar las sanciones del alumno";
+                                throw "Hubo un error al cargar el seguimiento del alumno";
                             });
                 };
 
