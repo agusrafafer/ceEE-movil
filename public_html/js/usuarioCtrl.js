@@ -315,7 +315,7 @@ angular.module('app.usuarioCtrl', [])
                                 } else {
                                     $ionicPopup.alert({
                                         title: 'Info',
-                                        template: 'No se encontraron asistencias cargadas para el alumno'
+                                        template: 'No se encontraron inasistencias cargadas para el alumno'
                                     });
                                 }
                             })
@@ -352,7 +352,7 @@ angular.module('app.usuarioCtrl', [])
                                 } else {
                                     $ionicPopup.alert({
                                         title: 'Info',
-                                        template: 'No se encontraron acuerdos cargados para el alumno'
+                                        template: 'No se encontraron datos cargados para el alumno'
                                     });
                                 }
                             })
@@ -376,7 +376,7 @@ angular.module('app.usuarioCtrl', [])
                     texto += (sancion.solicitadaPor === '') ? "" : ("<li>Solicitado por: <b>" + sancion.solicitadaPor + "</b></li></ul>");
 
                     $ionicPopup.alert({
-                        title: 'Detalle de Acuerdo',
+                        title: 'Detalle del Registro',
                         template: texto
                     });
                 };
