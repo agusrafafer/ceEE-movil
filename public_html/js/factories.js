@@ -25,13 +25,13 @@ angular.module('app.factories', [])
         .factory('wsFactory', function () {
             return {
 //                url: "http://localhost:8080/escuelasparroquiales/webresources"
-                url: "http://108.160.155.140:8080/escuelasparroquiales/webresources"
+                url: "http://www.escolarweb.com.ar:8080/escuelasparroquiales/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-                url: "http://108.160.155.140:8080/escuelasparroquiales/faces/resources/images/fotos/"
+                url: "http://www.escolarweb.com.ar:8080/escuelasparroquiales/faces/resources/images/fotos/"
             };
         });
 
