@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.gs.agura.ceEEmovil.hortus"  
+<widget id="com.gs.agura.ceEEmovil.nores"  
         xmlns="http://www.w3.org/ns/widgets" 
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.1" 
-        versionCode="001" 
-        android-versionCode="001">
-    <name>Escolar Hortus MOVIL</name>
+        version="0.0.3" 
+        versionCode="003" 
+        android-versionCode="003">
+    <name>Escolar Nores MOVIL</name>
     <description>
         App Escolar móvil.
     </description>
-    <author email="apphortus@gruposistemas.com.ar" href="http://www.gruposistemas.com.ar">
+    <author email="appnores@gruposistemas.com.ar" href="https://www.gruposistemas.com.ar">
         GrupoSistemas y Agura
     </author>
     <access origin="*"/>
