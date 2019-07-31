@@ -130,7 +130,7 @@ angular.module('app.usuarioService', [])
                                 return response.data;
                             }, function (response) {
                                 //Todo mal
-                                throw "Hubo un error al cargar las inasistencias del alumno";
+                                throw "Hubo un error al cargar las inasistencias";
                             });
                 };
                 
