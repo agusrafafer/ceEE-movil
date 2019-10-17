@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.gs.agura.ceEEmovil.nmusicos"  
+<widget id="com.gs.agura.ceEEmovil.sormaria"  
         xmlns="http://www.w3.org/ns/widgets" 
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.3" 
-        versionCode="003" 
-        android-versionCode="003">
-    <name>Escolar Niños Músicos MOVIL</name>
+        version="0.0.4" 
+        versionCode="004" 
+        android-versionCode="004">
+    <name>Escolar Sor María MOVIL</name>
     <description>
         App Escolar móvil.
     </description>
-    <author email="appnmusicos@gruposistemas.com.ar" href="https://www.gruposistemas.com.ar">
+    <author email="appsormaria@gruposistemas.com.ar" href="https://www.gruposistemas.com.ar">
         GrupoSistemas y Agura
     </author>
     <access origin="*"/>
