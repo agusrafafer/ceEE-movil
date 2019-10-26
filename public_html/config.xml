@@ -57,7 +57,7 @@
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <plugin name="cordova-plugin-splashscreen" source="npm"/>
-    <plugin name="https://github.com/extendedmind/cordova-plugin-local-notifications"/>
+    <plugin name="de.appplant.cordova.plugin.local-notification" source="npm"/>
     
     
     <icon src="mdpi.png" platform="android" qualifier="mdpi" />
