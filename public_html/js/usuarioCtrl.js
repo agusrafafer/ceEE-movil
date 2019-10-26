@@ -8,8 +8,24 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout) {
+        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout', '$cordovaLocalNotification',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout, $cordovaLocalNotification) {
+
+                $ionicPlatform.ready(function () {
+
+                    $scope.notifText = 'Hola mundo!';
+
+                    $scope.disparaNotificacion = function () {
+
+                        $cordovaLocalNotification.schedule({
+                            id: 1,
+                            title: 'Notificacion de prueba',
+                            text: $scope.notifText
+                        }).then(function (result) {
+                            console.log(result);
+                        });
+                    }
+                });
 
                 $scope.usuario = {
                     login: "",
@@ -148,12 +164,12 @@ angular.module('app.usuarioCtrl', [])
 
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
-                                    
+
                                     usuarioFactory.mensajesNoLeidos = data;
 
                                 })
                                 .catch(function (data) {
-                                    
+
                                 });
                     }
 
