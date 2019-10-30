@@ -21,25 +21,26 @@ angular.module('app.usuarioCtrl', [])
                             id: 1,
                             title: 'Notificacion de prueba',
                             text: $scope.notifText,
-                            every: 'minute'
+                            trigger: { every: 'minute' }
+                            //every: 'minute'
                         }).then(function (result) {
                             console.log(result);
                         });
 
-                        $cordovaLocalNotification.isPresent(1).then(function (present) {
-                            if (present) {
-
-                                $cordovaLocalNotification.update({
-                                    id: 1,
-                                    title: 'Notificacion actualizada',
-                                    text: $scope.notifText
-                                }).then(function (result) {
-                                    console.log(result);
-                                });
-                            } else {
-                                alert("Debe agendarse una notificacion primero");
-                            }
-                        });
+//                        $cordovaLocalNotification.isPresent(1).then(function (present) {
+//                            if (present) {
+//
+//                                $cordovaLocalNotification.update({
+//                                    id: 1,
+//                                    title: 'Notificacion actualizada',
+//                                    text: $scope.notifText
+//                                }).then(function (result) {
+//                                    console.log(result);
+//                                });
+//                            } else {
+//                                alert("Debe agendarse una notificacion primero");
+//                            }
+//                        });
                     };
 
 
