@@ -13,34 +13,70 @@ angular.module('app.usuarioCtrl', [])
 
                 $ionicPlatform.ready(function () {
 
-                    $scope.notifText = 'Hola mundo!';
+                    $scope.notifText = '';
 
                     $scope.disparaNotificacion = function () {
 
-                        $cordovaLocalNotification.schedule({
-                            id: 1,
-                            title: 'Notificacion de prueba',
-                            text: $scope.notifText,
-                            trigger: { every: 'minute' }
-                            //every: 'minute'
-                        }).then(function (result) {
-                            console.log(result);
-                        });
+                        if ($scope.isLogueado()) {
 
-//                        $cordovaLocalNotification.isPresent(1).then(function (present) {
-//                            if (present) {
-//
-//                                $cordovaLocalNotification.update({
-//                                    id: 1,
-//                                    title: 'Notificacion actualizada',
-//                                    text: $scope.notifText
-//                                }).then(function (result) {
-//                                    console.log(result);
-//                                });
-//                            } else {
-//                                alert("Debe agendarse una notificacion primero");
-//                            }
-//                        });
+                            usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
+                                    .then(function (data) {
+
+                                        usuarioFactory.mensajesNoLeidos = data;
+
+                                        if (usuarioFactory.mensajesNoLeidos.length === 0) {
+                                            if(usuarioFactory.mensajesNoLeidos.length === 1){
+                                                $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensaje sin leer.';
+                                            } else {
+                                                $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensajes sin leer.';
+                                            }
+                                            $cordovaLocalNotification.isPresent(1).then(function (present) {
+                                                if (present) {
+                                                    $cordovaLocalNotification.update({
+                                                        id: 1,
+                                                        title: 'Posees mensajes sin leer',
+                                                        text: $scope.notifText
+                                                    }).then(function (result) {
+                                                        console.log(result);
+                                                    });
+                                                } else {
+                                                    $cordovaLocalNotification.schedule({
+                                                        id: 1,
+                                                        title: 'Posees mensajes sin leer',
+                                                        text: $scope.notifText,
+                                                        trigger: {every: 'minute'}
+                                                        //every: 'minute'
+                                                    }).then(function (result) {
+                                                        console.log(result);
+                                                    });
+                                                }
+                                            });
+                                        }
+
+                                    })
+                                    .catch(function (data) {
+
+                                    });
+                        }
+
+
+
+
+
+                        $cordovaLocalNotification.isPresent(1).then(function (present) {
+                            if (present) {
+
+                                $cordovaLocalNotification.update({
+                                    id: 1,
+                                    title: 'Notificacion actualizada',
+                                    text: $scope.notifText
+                                }).then(function (result) {
+                                    console.log(result);
+                                });
+                            } else {
+                                alert("Debe agendarse una notificacion primero");
+                            }
+                        });
                     };
 
 
