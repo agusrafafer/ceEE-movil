@@ -27,19 +27,37 @@
     <preference name="fullscreen" value="false" /> 
     <preference name="android-windowSoftInputMode" value="adjustResize|stateHidden" />
     <preference name="orientation" value="portrait" />
-    <allow-navigation href="http://*/*" />
-    <allow-navigation href="https://*/*" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="LoadUrlTimeoutValue" value="70000" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="DisallowOverscroll" value="true"/>
+    <preference name="SuppressesLongPressGesture" value="true" />
+    <preference value="none" name="permissions"/>
+    
+    
+    <!--<allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />-->
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent target="_blank" target="_blank" target="_blank" href="http://*/*"/>
+    <allow-intent target="_blank" target="_blank" target="_blank" href="https://*/*"/>
+    <allow-navigation href="*" />
+    <access origin="*" subdomains="true" />
+    
+    
     <platform name="android">
-        <preference name="android-targetSdkVersion" value="28" />
-        <preference name="android-minSdkVersion" value="19" />
-        <!--<preference name="android-targetSdkVersion" value="26" /> -->
-        <allow-intent href="market:*" />
+        <!--<preference name="android-minSdkVersion" value="19" />
+<preference name="android-targetSdkVersion" value="28" />
+        <preference name="android-targetSdkVersion" value="26" /> 
+        <allow-intent href="market:*" />-->
+        <plugin name="cordova-android-support-gradle-release" source="npm">
+            <variable name="ANDROID_SUPPORT_VERSION" value="28.0.0"/>
+        </plugin>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -47,7 +65,7 @@
     </platform>
     
     
-   <feature name="InAppBrowser"> 
+    <feature name="InAppBrowser"> 
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser"/>
     </feature>
     <feature name="InAppBrowser">
