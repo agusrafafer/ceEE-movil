@@ -44,6 +44,7 @@
         <allow-intent href="market:*" />
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:usesCleartextTraffic="true" />
+            <uses-permission android:name="android.permission.INTERNET" />
         </edit-config>
     </platform>
     <platform name="ios">
