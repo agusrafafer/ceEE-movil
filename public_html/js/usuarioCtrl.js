@@ -20,11 +20,29 @@ angular.module('app.usuarioCtrl', [])
                         $cordovaLocalNotification.schedule({
                             id: 1,
                             title: 'Notificacion de prueba',
-                            text: $scope.notifText
+                            text: $scope.notifText,
+                            every: 'minute'
                         }).then(function (result) {
                             console.log(result);
                         });
-                    }
+
+                        $cordovaLocalNotification.isPresent(1).then(function (present) {
+                            if (present) {
+
+                                $cordovaLocalNotification.update({
+                                    id: 1,
+                                    title: 'Notificacion actualizada',
+                                    text: $scope.notifText
+                                }).then(function (result) {
+                                    console.log(result);
+                                });
+                            } else {
+                                alert("Debe agendarse una notificacion primero");
+                            }
+                        });
+                    };
+
+
                 });
 
                 $scope.usuario = {
