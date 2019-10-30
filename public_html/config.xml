@@ -53,11 +53,11 @@
     <platform name="android">
         <!--<preference name="android-minSdkVersion" value="19" />
 <preference name="android-targetSdkVersion" value="28" />
-        <preference name="android-targetSdkVersion" value="26" /> 
-        <allow-intent href="market:*" />-->
-        <plugin name="cordova-android-support-gradle-release" source="npm">
+        <preference name="android-targetSdkVersion" value="26" /> -->
+        <allow-intent href="market:*" />
+        <!--<plugin name="cordova-android-support-gradle-release" source="npm">
             <variable name="ANDROID_SUPPORT_VERSION" value="28.0.0"/>
-        </plugin>
+         </plugin>-->
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
