@@ -8,14 +8,20 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout', '$cordovaLocalNotification',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout, $cordovaLocalNotification) {
+        .controller('usuarioCtrl', ['$scope', '$rootScope', '$window', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout', '$cordovaLocalNotification',
+            function ($scope, $rootScope, $window, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout, $cordovaLocalNotification) {
 
                 $ionicPlatform.ready(function () {
 
                     $scope.notifText = '';
 
-                    $scope.disparaNotificacion = function () {
+                    $window.cordova.plugins.notification.local.on('click', function (notification, state) {
+                        $timeout(function () {
+                            $rootScope.$broadcast('$cordovaLocalNotification:click', notification, state);
+                        });
+                    });
+
+                    $scope.dispararNotificacion = function () {
 
                         if ($scope.isLogueado()) {
 
@@ -25,7 +31,7 @@ angular.module('app.usuarioCtrl', [])
                                         usuarioFactory.mensajesNoLeidos = data;
 
                                         if (usuarioFactory.mensajesNoLeidos.length > 0) {
-                                            if(usuarioFactory.mensajesNoLeidos.length === 1){
+                                            if (usuarioFactory.mensajesNoLeidos.length === 1) {
                                                 $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensaje sin leer.';
                                             } else {
                                                 $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensajes sin leer.';
@@ -59,9 +65,17 @@ angular.module('app.usuarioCtrl', [])
                                     });
                         }
 
+                        $scope.$on("$cordovaLocalNotification:click", function (id, state, json) {
+                            $scope.buscarMensajesUsuario();
+                        });
+
                     };
 
 
+                });
+                
+                $scope.$on('$ionicView.loaded', function (event) {
+                    $scope.dispararNotificacion();
                 });
 
                 $scope.usuario = {
