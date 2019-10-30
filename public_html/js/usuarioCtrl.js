@@ -57,7 +57,7 @@ angular.module('app.usuarioCtrl', [])
                                                         id: 1,
                                                         title: 'Posees mensajes sin leer',
                                                         text: $scope.notifText,
-                                                        trigger: {every: 'day', hour: 9}
+                                                        trigger: {every: 'minute'}
                                                         //every: 'minute'
                                                     }).then(function (result) {
                                                         //console.log(result);
