@@ -16,7 +16,6 @@
     <access origin="*"/>
     <content src="index.html" />
     <preference name="phonegap-version" value="cli-9.0.0" />
-    <!--<preference name="phonegap-version" value="cli-8.1.1" />-->
     <preference name="permissions" value="none" />
     <preference name="KeepRunning" value="true" /> 
     <preference name="exit-on-suspend" value="false" /> 
@@ -27,31 +26,21 @@
     <preference name="fullscreen" value="false" /> 
     <preference name="android-windowSoftInputMode" value="adjustResize|stateHidden" />
     <preference name="orientation" value="portrait" />
-    
-    
-    
-    <!--<allow-navigation href="http://*/*" />
-    <allow-navigation href="https://*/*" />-->
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <allow-intent target="_blank" target="_blank" target="_blank" href="http://*/*"/>
-    <allow-intent target="_blank" target="_blank" target="_blank" href="https://*/*"/>
     <allow-navigation href="*" />
     <access origin="*" subdomains="true" />
-    
-    
     <platform name="android">
-        <!--<preference name="android-minSdkVersion" value="19" />
-<preference name="android-targetSdkVersion" value="28" />
-        <preference name="android-targetSdkVersion" value="26" /> -->
+        <!--<preference name="android-targetSdkVersion" value="28" />
+        <preference name="android-minSdkVersion" value="19" />
+        <preference name="android-targetSdkVersion" value="26" />--> 
         <allow-intent href="market:*" />
-        <!--<plugin name="cordova-android-support-gradle-release" source="npm">
-            <variable name="ANDROID_SUPPORT_VERSION" value="28.0.0"/>
-         </plugin>-->
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -59,7 +48,7 @@
     </platform>
     
     
-    <feature name="InAppBrowser"> 
+   <feature name="InAppBrowser"> 
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser"/>
     </feature>
     <feature name="InAppBrowser">
