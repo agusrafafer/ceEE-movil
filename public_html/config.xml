@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.gs.agura.ceEEmovil"  
         xmlns="http://www.w3.org/ns/widgets" 
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         version="0.0.3" 
@@ -34,13 +35,14 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <allow-navigation href="*" />
-    <access origin="*" subdomains="true" />
     <platform name="android">
         <!--<preference name="android-targetSdkVersion" value="28" />
         <preference name="android-minSdkVersion" value="19" />
         <preference name="android-targetSdkVersion" value="26" />--> 
         <allow-intent href="market:*" />
+        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
