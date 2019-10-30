@@ -17,7 +17,7 @@ angular.module('app.usuarioCtrl', [])
 
                     $scope.disparaNotificacion = function () {
 
-                        if ($scope.isLogueado()) {
+                        //if ($scope.isLogueado()) {
 
                             usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                     .then(function (data) {
@@ -57,26 +57,8 @@ angular.module('app.usuarioCtrl', [])
                                     .catch(function (data) {
 
                                     });
-                        }
+                        //}
 
-
-
-
-
-                        $cordovaLocalNotification.isPresent(1).then(function (present) {
-                            if (present) {
-
-                                $cordovaLocalNotification.update({
-                                    id: 1,
-                                    title: 'Notificacion actualizada',
-                                    text: $scope.notifText
-                                }).then(function (result) {
-                                    console.log(result);
-                                });
-                            } else {
-                                alert("Debe agendarse una notificacion primero");
-                            }
-                        });
                     };
 
 
