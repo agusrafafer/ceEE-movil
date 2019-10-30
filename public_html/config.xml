@@ -40,6 +40,7 @@
         <preference name="android-minSdkVersion" value="19" />
         <preference name="android-targetSdkVersion" value="26" />--> 
         <preference name="android-targetSdkVersion" value="28" />
+        <preference name="android-minSdkVersion" value="19" />
         <allow-intent href="market:*" />
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:usesCleartextTraffic="true" />
