@@ -17,14 +17,14 @@ angular.module('app.usuarioCtrl', [])
 
                     $scope.disparaNotificacion = function () {
 
-                        //if ($scope.isLogueado()) {
+                        if ($scope.isLogueado()) {
 
                             usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                     .then(function (data) {
 
                                         usuarioFactory.mensajesNoLeidos = data;
 
-                                        if (usuarioFactory.mensajesNoLeidos.length === 0) {
+                                        if (usuarioFactory.mensajesNoLeidos.length > 0) {
                                             if(usuarioFactory.mensajesNoLeidos.length === 1){
                                                 $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensaje sin leer.';
                                             } else {
@@ -57,7 +57,7 @@ angular.module('app.usuarioCtrl', [])
                                     .catch(function (data) {
 
                                     });
-                        //}
+                        }
 
                     };
 
