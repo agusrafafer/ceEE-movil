@@ -27,13 +27,7 @@
     <preference name="fullscreen" value="false" /> 
     <preference name="android-windowSoftInputMode" value="adjustResize|stateHidden" />
     <preference name="orientation" value="portrait" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="LoadUrlTimeoutValue" value="70000" />
-    <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="DisallowOverscroll" value="true"/>
-    <preference name="SuppressesLongPressGesture" value="true" />
-    <preference value="none" name="permissions"/>
+    
     
     
     <!--<allow-navigation href="http://*/*" />
