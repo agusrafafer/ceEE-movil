@@ -20,6 +20,12 @@ angular.module('app.usuarioCtrl', [])
                             $rootScope.$broadcast('$cordovaLocalNotification:click', notification, state);
                         });
                     });
+                    
+                    $window.cordova.plugins.notification.local.on('update', function (notification, state) {
+                        $timeout(function () {
+                            $rootScope.$broadcast('$cordovaLocalNotification:update', notification, state);
+                        });
+                    });
 
                     $scope.dispararNotificacion = function () {
 
@@ -43,7 +49,7 @@ angular.module('app.usuarioCtrl', [])
                                                         title: 'Posees mensajes sin leer',
                                                         text: $scope.notifText
                                                     }).then(function (result) {
-                                                        console.log(result);
+                                                        //console.log(result);
                                                     });
                                                 } else {
                                                     $cordovaLocalNotification.schedule({
@@ -53,7 +59,7 @@ angular.module('app.usuarioCtrl', [])
                                                         trigger: {every: 'minute'}
                                                         //every: 'minute'
                                                     }).then(function (result) {
-                                                        console.log(result);
+                                                        //console.log(result);
                                                     });
                                                 }
                                             });
@@ -67,6 +73,10 @@ angular.module('app.usuarioCtrl', [])
 
                         $scope.$on("$cordovaLocalNotification:click", function (id, state, json) {
                             $scope.buscarMensajesUsuario();
+                        });
+                        
+                        $scope.$on("$cordovaLocalNotification:update", function (id, state, json) {
+                            $scope.dispararNotificacion();
                         });
 
                     };
