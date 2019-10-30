@@ -20,7 +20,7 @@ angular.module('app.usuarioCtrl', [])
                             $rootScope.$broadcast('$cordovaLocalNotification:click', notification, state);
                         });
                     });
-                    
+
                     $window.cordova.plugins.notification.local.on('update', function (notification, state) {
                         $timeout(function () {
                             $rootScope.$broadcast('$cordovaLocalNotification:update', notification, state);
@@ -97,7 +97,7 @@ angular.module('app.usuarioCtrl', [])
                         $scope.$on("$cordovaLocalNotification:click", function (id, state, json) {
                             $scope.buscarMensajesUsuario();
                         });
-                        
+
                         $scope.$on("$cordovaLocalNotification:update", function (id, state, json) {
                             $scope.dispararNotificacion();
                         });
@@ -106,9 +106,11 @@ angular.module('app.usuarioCtrl', [])
 
 
                 });
-                
+
                 $scope.$on('$ionicView.loaded', function (event) {
-                    $scope.dispararNotificacion();
+                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
+                        $scope.dispararNotificacion();
+                    }
                 });
 
                 $scope.usuario = {
