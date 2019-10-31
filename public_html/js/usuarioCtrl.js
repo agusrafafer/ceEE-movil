@@ -41,7 +41,7 @@ angular.module('app.usuarioCtrl', [])
                                         id: 1,
                                         title: 'Posees mensajes sin leer',
                                         text: $scope.notifText,
-                                        trigger: {every: 'minute'}
+                                        trigger: {hour: 9, minute: 0, second: 0}
                                     }).then(function (result) {
                                         //console.log(result);
                                     });
@@ -50,35 +50,35 @@ angular.module('app.usuarioCtrl', [])
                                         id: 1,
                                         title: 'Posees mensajes sin leer',
                                         text: $scope.notifText,
-                                        trigger: {every: 'minute'}
+                                        trigger: {hour: 9, minute: 0, second: 0}
                                         //every: 'minute'
                                     }).then(function (result) {
                                         //console.log(result);
                                     });
                                 }
                             });
-//                                            $cordovaLocalNotification.isPresent(2).then(function (present) {
-//                                                if (present) {
-//                                                    $cordovaLocalNotification.update({
-//                                                        id: 2,
-//                                                        title: 'Posees mensajes sin leer',
-//                                                        text: $scope.notifText,
-//                                                        trigger: {every: 'day', hour: 19}
-//                                                    }).then(function (result) {
-//                                                        //console.log(result);
-//                                                    });
-//                                                } else {
-//                                                    $cordovaLocalNotification.schedule({
-//                                                        id: 2,
-//                                                        title: 'Posees mensajes sin leer',
-//                                                        text: $scope.notifText,
-//                                                        trigger: {every: 'day', hour: 19}
-//                                                        //every: 'minute'
-//                                                    }).then(function (result) {
-//                                                        //console.log(result);
-//                                                    });
-//                                                }
-//                                            });
+                            $cordovaLocalNotification.isPresent(2).then(function (present) {
+                                if (present) {
+                                    $cordovaLocalNotification.update({
+                                        id: 2,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {hour: 19, minute: 0, second: 0}
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                } else {
+                                    $cordovaLocalNotification.schedule({
+                                        id: 2,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {hour: 19, minute: 0, second: 0}
+                                        //every: 'minute'
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                }
+                            });
                         }
                     };
 
