@@ -41,7 +41,7 @@ angular.module('app.usuarioCtrl', [])
                                         id: 1,
                                         title: 'Posees mensajes sin leer',
                                         text: $scope.notifText,
-                                        trigger: {hour: 9, minute: 0, second: 0}
+                                        trigger: {every: {hour: 9, minute: 0, second: 0}}
                                     }).then(function (result) {
                                         //console.log(result);
                                     });
@@ -50,7 +50,7 @@ angular.module('app.usuarioCtrl', [])
                                         id: 1,
                                         title: 'Posees mensajes sin leer',
                                         text: $scope.notifText,
-                                        trigger: {hour: 9, minute: 0, second: 0}
+                                        trigger: {every: {hour: 9, minute: 0, second: 0}}
                                         //every: 'minute'
                                     }).then(function (result) {
                                         //console.log(result);
@@ -63,7 +63,7 @@ angular.module('app.usuarioCtrl', [])
                                         id: 2,
                                         title: 'Posees mensajes sin leer',
                                         text: $scope.notifText,
-                                        trigger: {hour: 19, minute: 0, second: 0}
+                                        trigger: {every: {hour: 19, minute: 0, second: 0}}
                                     }).then(function (result) {
                                         //console.log(result);
                                     });
@@ -72,7 +72,7 @@ angular.module('app.usuarioCtrl', [])
                                         id: 2,
                                         title: 'Posees mensajes sin leer',
                                         text: $scope.notifText,
-                                        trigger: {hour: 19, minute: 0, second: 0}
+                                        trigger: {every: {hour: 19, minute: 0, second: 0}}
                                         //every: 'minute'
                                     }).then(function (result) {
                                         //console.log(result);
