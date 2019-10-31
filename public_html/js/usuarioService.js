@@ -100,7 +100,7 @@ angular.module('app.usuarioService', [])
                                 return response.data;
                             }, function (response) {
                                 //Todo mal
-                                throw "Hubo un error al cargar las notas del alumno";
+                                throw "Hubo un error al cargar las calificaciones";
                             });
                 };
                 
@@ -130,7 +130,7 @@ angular.module('app.usuarioService', [])
                                 return response.data;
                             }, function (response) {
                                 //Todo mal
-                                throw "Hubo un error al cargar las inasistencias del alumno";
+                                throw "Hubo un error al cargar las inasistencias";
                             });
                 };
                 
@@ -160,7 +160,7 @@ angular.module('app.usuarioService', [])
                                 return response.data;
                             }, function (response) {
                                 //Todo mal
-                                throw "Hubo un error al cargar el seguimiento del alumno";
+                                throw "Hubo un error al cargar el seguimiento";
                             });
                 };
 

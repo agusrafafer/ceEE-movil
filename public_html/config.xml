@@ -4,14 +4,14 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.3" 
-        versionCode="003" 
-        android-versionCode="003">
+        version="0.0.4" 
+        versionCode="004" 
+        android-versionCode="004">
     <name>Escolar Huerto MOVIL</name>
     <description>
         App Escolar móvil.
     </description>
-    <author email="apphuerto@gruposistemas.com.ar" href="http://www.gruposistemas.com.ar">
+    <author email="apphuerto@gruposistemas.com.ar" href="https://www.gruposistemas.com.ar">
         GrupoSistemas y Agura
     </author>
     <access origin="*"/>
