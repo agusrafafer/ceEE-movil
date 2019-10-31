@@ -21,7 +21,7 @@ angular.module('app.usuarioCtrl', [])
                         });
                     });
 
-                    $window.cordova.plugins.notification.local.on('update', function (notification, state) {
+                    $window.cordova.plugins.notification.local.on('trigger', function (notification, state) {
                         $timeout(function () {
                             $rootScope.$broadcast('$cordovaLocalNotification:trigger', notification, state);
                         });
@@ -29,41 +29,34 @@ angular.module('app.usuarioCtrl', [])
 
                     $scope.dispararNotificacion = function () {
 
-                        if ($scope.isLogueado()) {
-
-                            usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
-                                    .then(function (data) {
-
-                                        usuarioFactory.mensajesNoLeidos = data;
-
-                                        if (usuarioFactory.mensajesNoLeidos.length > 0) {
-                                            if (usuarioFactory.mensajesNoLeidos.length === 1) {
-                                                $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensaje sin leer.';
-                                            } else {
-                                                $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensajes sin leer.';
-                                            }
-                                            $cordovaLocalNotification.isPresent(1).then(function (present) {
-                                                if (present) {
-                                                    $cordovaLocalNotification.update({
-                                                        id: 1,
-                                                        title: 'Posees mensajes sin leer',
-                                                        text: $scope.notifText,
-                                                        trigger: {every: 'minute'}
-                                                    }).then(function (result) {
-                                                        //console.log(result);
-                                                    });
-                                                } else {
-                                                    $cordovaLocalNotification.schedule({
-                                                        id: 1,
-                                                        title: 'Posees mensajes sin leer',
-                                                        text: $scope.notifText,
-                                                        trigger: {every: 'minute'}
-                                                        //every: 'minute'
-                                                    }).then(function (result) {
-                                                        //console.log(result);
-                                                    });
-                                                }
-                                            });
+                        if (usuarioFactory.mensajesNoLeidos.length > 0) {
+                            if (usuarioFactory.mensajesNoLeidos.length === 1) {
+                                $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensaje sin leer.';
+                            } else {
+                                $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensajes sin leer.';
+                            }
+                            $cordovaLocalNotification.isPresent(1).then(function (present) {
+                                if (present) {
+                                    $cordovaLocalNotification.update({
+                                        id: 1,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {every: 'minute'}
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                } else {
+                                    $cordovaLocalNotification.schedule({
+                                        id: 1,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {every: 'minute'}
+                                        //every: 'minute'
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                }
+                            });
 //                                            $cordovaLocalNotification.isPresent(2).then(function (present) {
 //                                                if (present) {
 //                                                    $cordovaLocalNotification.update({
@@ -86,34 +79,25 @@ angular.module('app.usuarioCtrl', [])
 //                                                    });
 //                                                }
 //                                            });
-                                        }
-
-                                    })
-                                    .catch(function (data) {
-
-                                    });
                         }
-
-                        $scope.$on("$cordovaLocalNotification:click", function (id, state, json) {
-                            $scope.buscarMensajesUsuario();
-                        });
-
-                        $scope.$on("$cordovaLocalNotification:trigger", function (id, state, json) {
-                            $scope.dispararNotificacion();
-                        });
-
                     };
 
+                    $scope.$on("$cordovaLocalNotification:click", function (id, state, json) {
+                        $scope.buscarMensajesUsuario();
+                    });
 
-                });
-
-                $scope.$on('$ionicView.enter', function (ev) {
-                    if (ev.targetScope !== $scope)
-                        return;
-                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
+                    $scope.$on("$cordovaLocalNotification:trigger", function (id, state, json) {
                         $scope.dispararNotificacion();
-                    }
+                    });
                 });
+
+//                $scope.$on('$ionicView.enter', function (ev) {
+//                    if (ev.targetScope !== $scope)
+//                        return;
+//                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
+//                        $scope.dispararNotificacion();
+//                    }
+//                });
 //                $scope.$on('$ionicView.loaded', function (event) {
 //                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
 //                        $scope.dispararNotificacion();
@@ -259,7 +243,7 @@ angular.module('app.usuarioCtrl', [])
                                 .then(function (data) {
 
                                     usuarioFactory.mensajesNoLeidos = data;
-
+                                    $scope.dispararNotificacion();
                                 })
                                 .catch(function (data) {
 
