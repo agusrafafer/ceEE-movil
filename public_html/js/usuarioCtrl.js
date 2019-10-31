@@ -23,7 +23,7 @@ angular.module('app.usuarioCtrl', [])
 
                     $window.cordova.plugins.notification.local.on('update', function (notification, state) {
                         $timeout(function () {
-                            $rootScope.$broadcast('$cordovaLocalNotification:update', notification, state);
+                            $rootScope.$broadcast('$cordovaLocalNotification:trigger', notification, state);
                         });
                     });
 
@@ -98,7 +98,7 @@ angular.module('app.usuarioCtrl', [])
                             $scope.buscarMensajesUsuario();
                         });
 
-                        $scope.$on("$cordovaLocalNotification:update", function (id, state, json) {
+                        $scope.$on("$cordovaLocalNotification:trigger", function (id, state, json) {
                             $scope.dispararNotificacion();
                         });
 
