@@ -523,4 +523,3 @@ angular.module('app.usuarioCtrl', [])
                 }
 
             }]);
-
