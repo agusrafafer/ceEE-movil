@@ -107,11 +107,11 @@ angular.module('app.usuarioCtrl', [])
 
                 });
 
-                $scope.$on('$ionicView.loaded', function (event) {
-                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
-                        $scope.dispararNotificacion();
-                    }
-                });
+//                $scope.$on('$ionicView.loaded', function (event) {
+//                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
+//                        $scope.dispararNotificacion();
+//                    }
+//                });
 
                 $scope.usuario = {
                     login: "",
