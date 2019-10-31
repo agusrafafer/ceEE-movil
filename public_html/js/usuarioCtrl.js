@@ -107,6 +107,13 @@ angular.module('app.usuarioCtrl', [])
 
                 });
 
+                $scope.$on('$ionicView.enter', function (ev) {
+                    if (ev.targetScope !== $scope)
+                        return;
+                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
+                        $scope.dispararNotificacion();
+                    }
+                });
 //                $scope.$on('$ionicView.loaded', function (event) {
 //                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
 //                        $scope.dispararNotificacion();
