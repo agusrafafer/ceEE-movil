@@ -63,13 +63,58 @@ angular.module('app.usuarioCtrl', [])
                                         id: 2,
                                         title: 'Posees mensajes sin leer',
                                         text: $scope.notifText,
-                                        trigger: {every: {hour: 19, minute: 0, second: 0}}
+                                        trigger: {every: {hour: 12, minute: 0, second: 0}}
                                     }).then(function (result) {
                                         //console.log(result);
                                     });
                                 } else {
                                     $cordovaLocalNotification.schedule({
                                         id: 2,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {every: {hour: 12, minute: 0, second: 0}}
+                                        //every: 'minute'
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                }
+                            });
+                            // JUANPA
+			$cordovaLocalNotification.isPresent(3).then(function (present) {
+                                if (present) {
+                                    $cordovaLocalNotification.update({
+                                        id: 3,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {every: {hour: 15, minute: 0, second: 0}}
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                } else {
+                                    $cordovaLocalNotification.schedule({
+                                        id: 3,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {every: {hour: 15, minute: 0, second: 0}}
+                                        //every: 'minute'
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                }
+                            });
+			$cordovaLocalNotification.isPresent(4).then(function (present) {
+                                if (present) {
+                                    $cordovaLocalNotification.update({
+                                        id: 4,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {every: {hour: 19, minute: 0, second: 0}}
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                } else {
+                                    $cordovaLocalNotification.schedule({
+                                        id: 4,
                                         title: 'Posees mensajes sin leer',
                                         text: $scope.notifText,
                                         trigger: {every: {hour: 19, minute: 0, second: 0}}
@@ -79,6 +124,29 @@ angular.module('app.usuarioCtrl', [])
                                     });
                                 }
                             });
+			$cordovaLocalNotification.isPresent(5).then(function (present) {
+                                if (present) {
+                                    $cordovaLocalNotification.update({
+                                        id: 5,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {every: {hour: 21, minute: 0, second: 0}}
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                } else {
+                                    $cordovaLocalNotification.schedule({
+                                        id: 5,
+                                        title: 'Posees mensajes sin leer',
+                                        text: $scope.notifText,
+                                        trigger: {every: {hour: 21, minute: 0, second: 0}}
+                                        //every: 'minute'
+                                    }).then(function (result) {
+                                        //console.log(result);
+                                    });
+                                }
+                            });
+                            // Fin JUANPA
                         }
                     };
 
