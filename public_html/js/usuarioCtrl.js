@@ -315,7 +315,7 @@ angular.module('app.usuarioCtrl', [])
                                 } else {
                                     $ionicPopup.alert({
                                         title: 'Info',
-                                        template: 'No se encontraron asistencias cargadas para el alumno'
+                                        template: 'No se encontraron inasistencias cargadas'
                                     });
                                 }
                             })
@@ -352,7 +352,7 @@ angular.module('app.usuarioCtrl', [])
                                 } else {
                                     $ionicPopup.alert({
                                         title: 'Info',
-                                        template: 'No se encontraron acuerdos cargados para el alumno'
+                                        template: 'No se encontraron datos cargados'
                                     });
                                 }
                             })
