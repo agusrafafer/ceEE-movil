@@ -309,12 +309,12 @@ angular.module('app.usuarioCtrl', [])
 
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
-                                    
+
                                     usuarioFactory.mensajesNoLeidos = data;
                                     $scope.dispararNotificacion();
                                 })
                                 .catch(function (data) {
-                                    
+
                                 });
                     }
 
