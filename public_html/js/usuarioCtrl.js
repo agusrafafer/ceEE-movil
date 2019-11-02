@@ -144,7 +144,7 @@ angular.module('app.usuarioCtrl', [])
                                     }).then(function (result) {
                                         //console.log(result);
                                     });
-                                }
+                        }
                             });
                             // Fin JUANPA
                         }
