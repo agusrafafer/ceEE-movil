@@ -376,7 +376,7 @@ angular.module('app.usuarioCtrl', [])
                     texto += (sancion.solicitadaPor === '') ? "" : ("<li>Solicitado por: <b>" + sancion.solicitadaPor + "</b></li></ul>");
 
                     $ionicPopup.alert({
-                        title: 'Detalle de Acuerdo',
+                        title: 'Detalle de los datos registrados',
                         template: texto
                     });
                 };
