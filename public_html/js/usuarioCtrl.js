@@ -8,8 +8,169 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout) {
+        .controller('usuarioCtrl', ['$scope', '$rootScope', '$window', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout', '$cordovaLocalNotification',
+            function ($scope, $rootScope, $window, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout, $cordovaLocalNotification) {
+
+//                $ionicPlatform.ready(function () {
+//
+//                    $scope.notifText = '';
+//
+//                    $window.cordova.plugins.notification.local.on('click', function (notification, state) {
+//                        $timeout(function () {
+//                            $rootScope.$broadcast('$cordovaLocalNotification:click', notification, state);
+//                        });
+//                    });
+//
+//                    $window.cordova.plugins.notification.local.on('trigger', function (notification, state) {
+//                        $timeout(function () {
+//                            $rootScope.$broadcast('$cordovaLocalNotification:trigger', notification, state);
+//                        });
+//                    });
+//
+//                    $scope.dispararNotificacion = function () {
+//
+//                        if (usuarioFactory.mensajesNoLeidos.length > 0) {
+//                            if (usuarioFactory.mensajesNoLeidos.length === 1) {
+//                                $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensaje sin leer.';
+//                            } else {
+//                                $scope.notifText = 'Tienes ' + usuarioFactory.mensajesNoLeidos.length + ' mensajes sin leer.';
+//                            }
+//                            $cordovaLocalNotification.isPresent(1).then(function (present) {
+//                                if (present) {
+//                                    $cordovaLocalNotification.update({
+//                                        id: 1,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 9, minute: 0, second: 0}}
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                } else {
+//                                    $cordovaLocalNotification.schedule({
+//                                        id: 1,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 9, minute: 0, second: 0}}
+//                                        //every: 'minute'
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                }
+//                            });
+//                            $cordovaLocalNotification.isPresent(2).then(function (present) {
+//                                if (present) {
+//                                    $cordovaLocalNotification.update({
+//                                        id: 2,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 12, minute: 0, second: 0}}
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                } else {
+//                                    $cordovaLocalNotification.schedule({
+//                                        id: 2,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 12, minute: 0, second: 0}}
+//                                        //every: 'minute'
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                }
+//                            });
+//                            // JUANPA
+//			$cordovaLocalNotification.isPresent(3).then(function (present) {
+//                                if (present) {
+//                                    $cordovaLocalNotification.update({
+//                                        id: 3,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 15, minute: 0, second: 0}}
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                } else {
+//                                    $cordovaLocalNotification.schedule({
+//                                        id: 3,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 15, minute: 0, second: 0}}
+//                                        //every: 'minute'
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                }
+//                            });
+//			$cordovaLocalNotification.isPresent(4).then(function (present) {
+//                                if (present) {
+//                                    $cordovaLocalNotification.update({
+//                                        id: 4,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 19, minute: 0, second: 0}}
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                } else {
+//                                    $cordovaLocalNotification.schedule({
+//                                        id: 4,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 19, minute: 0, second: 0}}
+//                                        //every: 'minute'
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                }
+//                            });
+//			$cordovaLocalNotification.isPresent(5).then(function (present) {
+//                                if (present) {
+//                                    $cordovaLocalNotification.update({
+//                                        id: 5,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 21, minute: 0, second: 0}}
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                                } else {
+//                                    $cordovaLocalNotification.schedule({
+//                                        id: 5,
+//                                        title: 'Posees mensajes sin leer',
+//                                        text: $scope.notifText,
+//                                        trigger: {every: {hour: 21, minute: 0, second: 0}}
+//                                        //every: 'minute'
+//                                    }).then(function (result) {
+//                                        //console.log(result);
+//                                    });
+//                        }
+//                            });
+//                            // Fin JUANPA
+//                        }
+//                    };
+//
+//                    $scope.$on("$cordovaLocalNotification:click", function (id, state, json) {
+//                        $scope.buscarMensajesUsuario();
+//                    });
+//
+//                    $scope.$on("$cordovaLocalNotification:trigger", function (id, state, json) {
+//                        $scope.dispararNotificacion();
+//                    });
+//                });
+
+//                $scope.$on('$ionicView.enter', function (ev) {
+//                    if (ev.targetScope !== $scope)
+//                        return;
+//                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
+//                        $scope.dispararNotificacion();
+//                    }
+//                });
+//                $scope.$on('$ionicView.loaded', function (event) {
+//                    if (usuarioFactory.mensajesNoLeidos.length === 0) {
+//                        $scope.dispararNotificacion();
+//                    }
+//                });
 
                 $scope.usuario = {
                     login: "",
@@ -136,6 +297,7 @@ angular.module('app.usuarioCtrl', [])
 
                 $scope.$on('$ionicView.afterLeave', function () {
                     // Anything you can think of
+                    $scope.taskChequeoMsj();
                     $timeout.cancel();
                 });
 
@@ -148,12 +310,12 @@ angular.module('app.usuarioCtrl', [])
 
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
-                                    
-                                    usuarioFactory.mensajesNoLeidos = data;
 
+                                    usuarioFactory.mensajesNoLeidos = data;
+                                    $scope.dispararNotificacion();
                                 })
                                 .catch(function (data) {
-                                    
+
                                 });
                     }
 
@@ -430,4 +592,3 @@ angular.module('app.usuarioCtrl', [])
                 }
 
             }]);
-
