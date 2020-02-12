@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.gs.agura.ceEEmovil.nores"  
         xmlns="http://www.w3.org/ns/widgets" 
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.3" 
-        versionCode="003" 
-        android-versionCode="003">
+        version="0.0.5" 
+        versionCode="005" 
+        android-versionCode="005">
     <name>Escolar Nores MOVIL</name>
     <description>
         App Escolar móvil.
@@ -15,7 +16,7 @@
     </author>
     <access origin="*"/>
     <content src="index.html" />
-    <preference name="phonegap-version" value="cli-8.1.1" />
+    <preference name="phonegap-version" value="cli-9.0.0" />
     <preference name="permissions" value="none" />
     <preference name="KeepRunning" value="true" /> 
     <preference name="exit-on-suspend" value="false" /> 
@@ -35,10 +36,21 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="android">
-        <!--<preference name="android-targetSdkVersion" value="28" />-->
+        <!--<preference name="android-targetSdkVersion" value="28" />
         <preference name="android-minSdkVersion" value="19" />
-        <preference name="android-targetSdkVersion" value="26" /> 
+        <preference name="android-targetSdkVersion" value="26" />--> 
+        <preference name="android-targetSdkVersion" value="28" />
+        <preference name="android-minSdkVersion" value="19" />
         <allow-intent href="market:*" />
+        <edit-config xmlns:android="http://schemas.android.com/apk/res/android" 
+                     file="AndroidManifest.xml" mode="merge" target="/manifest/application"> 
+            <application android:usesCleartextTraffic="true" /> 
+        </edit-config>
+        <edit-config xmlns:android="http://schemas.android.com/apk/res/android" 
+                     file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:networkSecurityConfig="@xml/network_security_config" />
+        </edit-config>
+        <resource-file src="network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -57,7 +69,7 @@
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <plugin name="cordova-plugin-splashscreen" source="npm"/>
-    
+    <plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git" />
     
     
     <icon src="mdpi.png" platform="android" qualifier="mdpi" />
