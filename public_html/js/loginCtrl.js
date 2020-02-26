@@ -126,6 +126,7 @@ angular.module('app.loginCtrl', [])
                     usuarioService.obtenerTokenNotificacionPush()
                             .then(function (response) {
                                 usuarioFactory.tokenPushNotif = response;
+                                $scope.usuario.tokenPush = response;
                                 return usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif);
                             })
                     //usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif)
