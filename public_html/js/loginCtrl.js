@@ -5,8 +5,8 @@
  */
 angular.module('app.loginCtrl', [])
 
-        .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', '$webSql', 'jwtHelper',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, $webSql, jwtHelper) {
+        .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', '$webSql', 'jwtHelper', '$ionicPlatform',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, $webSql, jwtHelper, $ionicPlatform) {
 
                 $scope.db = $webSql.openDatabase('dbCeEE', '1.0', 'dbCeEE', 2 * 1024 * 1024);
 
@@ -110,14 +110,15 @@ angular.module('app.loginCtrl', [])
                 }
                 ;
 
+                $ionicPlatform.ready(function () {
+                    FCMPlugin.getToken(function (token) {
+                        $scope.usuario.tokenPush = token;
+                        usuarioFactory.tokenPushNotif = token;
+                    });
+                });
+
                 $scope.verTokenPush = function () {
                     FCMPlugin.getToken(function (token) {
-                        if (typeof (token) === "undefined" || token === null) {
-                            FCMPlugin.getToken(function (token1) {
-                                $scope.usuario.tokenPush = token1;
-                                usuarioFactory.tokenPushNotif = token1;
-                            });
-                        }
                         $scope.usuario.tokenPush = token;
                         usuarioFactory.tokenPushNotif = token;
                     });
