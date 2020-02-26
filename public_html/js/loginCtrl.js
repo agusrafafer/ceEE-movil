@@ -112,6 +112,12 @@ angular.module('app.loginCtrl', [])
 
                 $scope.verTokenPush = function () {
                     FCMPlugin.getToken(function (token) {
+                        if (typeof (token) === "undefined" || token === null) {
+                            FCMPlugin.getToken(function (token1) {
+                                $scope.usuario.tokenPush = token1;
+                                usuarioFactory.tokenPushNotif = token1;
+                            });
+                        }
                         $scope.usuario.tokenPush = token;
                         usuarioFactory.tokenPushNotif = token;
                     });
@@ -129,7 +135,7 @@ angular.module('app.loginCtrl', [])
                                 $scope.usuario.tokenPush = response;
                                 return usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif);
                             })
-                    //usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif)
+                            //usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif)
                             .then(function (response) {
                                 $ionicLoading.hide();
                                 tratarTokenAutorizacion(response.headers()['authorization']);
