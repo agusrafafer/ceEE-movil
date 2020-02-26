@@ -16,6 +16,20 @@ angular.module('app.usuarioCtrl', [])
                 });
                 
                 $scope.trustAsHtml = function(html) {
+                    let textoAux = html;
+                    let posHrefIni = textoAux.indexOf("a href=\"");
+                    if(posHrefIni !== -1) {
+                        textoAux = textoAux.substring(posHrefIni+9);
+                        let posComillasFinalHref = textoAux.indexOf("\"");
+                        if(posComillasFinalHref !== -1) {
+                            let url = textoAux.substring(posHrefIni+9, posComillasFinalHref);
+                            url = url.replaceAll("\"", "");
+                            let onclickcontenido = "window.open('" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');";
+                            textoAux = textoAux.replaceAll(url, onclickcontenido);
+                            textoAux = textoAux.replaceAll("href", "onclick");
+                        }
+                    }
+                    html = textoAux;
                     return $sce.trustAsHtml(html);
                 };
 
