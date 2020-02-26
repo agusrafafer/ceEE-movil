@@ -12,8 +12,7 @@ angular.module('app.loginCtrl', [])
 
                 $scope.usuario = {
                     login: "",
-                    clave: "",
-                    tokenPush: ""
+                    clave: ""
                 };
 
                 $scope.$on('$ionicView.loaded', function (event) {
@@ -47,17 +46,13 @@ angular.module('app.loginCtrl', [])
                             authToken = results.rows.item(0).authToken;
                             dateAuth = results.rows.item(0).authExpDate;
                             tokenPush = results.rows.item(0).tokenPushNotif;
-//                            alert(authToken);
+                            usuarioFactory.tokenPushNotif = tokenPush;
                             if (typeof (authToken) !== "undefined" && authToken !== null && authToken !== '') {
                                 tratarTokenAutorizacion(authToken);
                                 let expira = dateAuth;
                                 let fecha = new Date();
                                 if (fecha.getTime() > expira) {
-                                    usuarioService.obtenerTokenNotificacionPush()
-                                            .then(function (response) {
-                                                usuarioFactory.tokenPushNotif = response;
-                                                return usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha, usuarioFactory.tokenPushNotif);
-                                            })
+                                    usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha, usuarioFactory.tokenPushNotif)
                                             .then(function (response) {
                                                 $ionicLoading.hide();
                                                 tratarTokenAutorizacion(response.headers()['authorization']);
@@ -112,31 +107,16 @@ angular.module('app.loginCtrl', [])
 
                 $ionicPlatform.ready(function () {
                     FCMPlugin.getToken(function (token) {
-                        $scope.usuario.tokenPush = token;
                         usuarioFactory.tokenPushNotif = token;
                     });
                 });
-
-                $scope.verTokenPush = function () {
-                    FCMPlugin.getToken(function (token) {
-                        $scope.usuario.tokenPush = token;
-                        usuarioFactory.tokenPushNotif = token;
-                    });
-                };
 
                 $scope.validarUsuario = function () {
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
 
-
-                    usuarioService.obtenerTokenNotificacionPush()
-                            .then(function (response) {
-                                usuarioFactory.tokenPushNotif = response;
-                                $scope.usuario.tokenPush = response;
-                                return usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif);
-                            })
-                            //usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif)
+                    usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif)
                             .then(function (response) {
                                 $ionicLoading.hide();
                                 tratarTokenAutorizacion(response.headers()['authorization']);
