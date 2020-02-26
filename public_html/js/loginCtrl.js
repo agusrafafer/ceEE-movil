@@ -123,12 +123,12 @@ angular.module('app.loginCtrl', [])
                     });
 
 
-//                    usuarioService.obtenerTokenNotificacionPush()
-//                            .then(function (response) {
-//                                usuarioFactory.tokenPushNotif = response;
-//                                return usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif);
-//                            })
-                    usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif)
+                    usuarioService.obtenerTokenNotificacionPush()
+                            .then(function (response) {
+                                usuarioFactory.tokenPushNotif = response;
+                                return usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif);
+                            })
+                    //usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif)
                             .then(function (response) {
                                 $ionicLoading.hide();
                                 tratarTokenAutorizacion(response.headers()['authorization']);
