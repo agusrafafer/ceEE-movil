@@ -12,7 +12,8 @@ angular.module('app.loginCtrl', [])
 
                 $scope.usuario = {
                     login: "",
-                    clave: ""
+                    clave: "",
+                    tokenPush: ""
                 };
 
                 $scope.$on('$ionicView.loaded', function (event) {
@@ -107,6 +108,12 @@ angular.module('app.loginCtrl', [])
 
                 }
                 ;
+
+                $scope.verTokenPush = function() {
+                    FCMPlugin.getToken(function (token) {
+                        $scope.usuario.tokenPush =  token;
+                    });
+                };
 
                 $scope.validarUsuario = function () {
                     $ionicLoading.show({
