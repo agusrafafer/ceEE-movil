@@ -89,7 +89,8 @@ angular.module('app.loginCtrl', [])
                     usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
                     usuarioFactory.authExpDate = tokenPayload.exp;
                     guardarAutorizacion();
-                };
+                }
+                ;
 
                 function guardarAutorizacion() {
                     $scope.db.selectAll("authceEE").then(function (results) {
@@ -109,9 +110,10 @@ angular.module('app.loginCtrl', [])
                 }
                 ;
 
-                $scope.verTokenPush = function() {
+                $scope.verTokenPush = function () {
                     FCMPlugin.getToken(function (token) {
-                        $scope.usuario.tokenPush =  token;
+                        $scope.usuario.tokenPush = token;
+                        usuarioFactory.tokenPushNotif = token;
                     });
                 };
 
@@ -121,11 +123,12 @@ angular.module('app.loginCtrl', [])
                     });
 
 
-                    usuarioService.obtenerTokenNotificacionPush()
-                            .then(function (response) {
-                                usuarioFactory.tokenPushNotif = response;
-                                return usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif);
-                            })
+//                    usuarioService.obtenerTokenNotificacionPush()
+//                            .then(function (response) {
+//                                usuarioFactory.tokenPushNotif = response;
+//                                return usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif);
+//                            })
+                    usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif)
                             .then(function (response) {
                                 $ionicLoading.hide();
                                 tratarTokenAutorizacion(response.headers()['authorization']);
