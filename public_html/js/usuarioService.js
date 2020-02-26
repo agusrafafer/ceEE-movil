@@ -160,7 +160,7 @@ angular.module('app.usuarioService', [])
 
 
                 this.obtenerTokenNotificacionPush = function () {
-                    FCMPlugin.onTokenRefresh(function (token) {
+                    FCMPlugin.getToken(function (token) {
                         return token;
                     });
                 };
