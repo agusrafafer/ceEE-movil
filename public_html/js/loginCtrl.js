@@ -15,8 +15,8 @@ angular.module('app.loginCtrl', [])
                     clave: ""
                 };
 
-                $scope.$on('$ionicView.loaded', function (event) {                   
-                    
+                $scope.$on('$ionicView.loaded', function (event) {
+
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
@@ -37,20 +37,26 @@ angular.module('app.loginCtrl', [])
                         }
                     });
 
-                    var authToken = "";
-                    var dateAuth = -1;
+                    let authToken = "";
+                    let dateAuth = -1;
+                    let tokenPush = "";
 
                     $scope.db.selectAll("authceEE").then(function (results) {
                         if (results.rows.length > 0) {
                             authToken = results.rows.item(0).authToken;
                             dateAuth = results.rows.item(0).authExpDate;
+                            tokenPush = results.rows.item(0).tokenPushNotif;
 //                            alert(authToken);
                             if (typeof (authToken) !== "undefined" && authToken !== null && authToken !== '') {
                                 tratarTokenAutorizacion(authToken);
-                                var expira = dateAuth;
-                                var fecha = new Date();
+                                let expira = dateAuth;
+                                let fecha = new Date();
                                 if (fecha.getTime() > expira) {
-                                    usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
+                                    usuarioService.obtenerTokenNotificacionPush()
+                                            .then(function (response) {
+                                                usuarioFactory.tokenPushNotif = response;
+                                                return usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha, usuarioFactory.tokenPushNotif);
+                                            })
                                             .then(function (response) {
                                                 $ionicLoading.hide();
                                                 tratarTokenAutorizacion(response.headers()['authorization']);
@@ -64,6 +70,7 @@ angular.module('app.loginCtrl', [])
                                                 usuarioFactory.usuario = "";
                                                 usuarioFactory.authToken = "";
                                                 usuarioFactory.authExpDate = -1;
+                                                usuarioFactory.tokenPushNotif = "";
                                             });
                                 }
                             } else {
@@ -77,23 +84,22 @@ angular.module('app.loginCtrl', [])
 
                 function tratarTokenAutorizacion(headerAutorizacion) {
                     usuarioFactory.authToken = headerAutorizacion;
-                    var tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
+                    let tokenPayload = jwtHelper.decodeToken(usuarioFactory.authToken);
                     usuarioFactory.usuario = JSON.parse(tokenPayload.usuario);
                     usuarioFactory.authExpDate = tokenPayload.exp;
                     guardarAutorizacion();
-                }
-                ;
+                };
 
                 function guardarAutorizacion() {
                     $scope.db.selectAll("authceEE").then(function (results) {
                         var id = -1;
                         if (results.rows.length > 0) {
                             id = results.rows.item(0).id;
-                            $scope.db.update("authceEE", {"authToken": JSON.stringify(usuarioFactory.authToken), "authExpDate": usuarioFactory.authExpDate}, {
+                            $scope.db.update("authceEE", {"authToken": JSON.stringify(usuarioFactory.authToken), "authExpDate": usuarioFactory.authExpDate, "tokenPushNotif": usuarioFactory.tokenPushNotif}, {
                                 'id': id
                             });
                         } else {
-                            $scope.db.insert('authceEE', {"authToken": JSON.stringify(usuarioFactory.authToken), "authExpDate": usuarioFactory.authExpDate}).then(function (results) {
+                            $scope.db.insert('authceEE', {"authToken": JSON.stringify(usuarioFactory.authToken), "authExpDate": usuarioFactory.authExpDate, "tokenPushNotif": usuarioFactory.tokenPushNotif}).then(function (results) {
 
                             });
                         }
@@ -102,44 +108,17 @@ angular.module('app.loginCtrl', [])
                 }
                 ;
 
-//                $scope.onloadCtrl = function () {
-//                    $ionicLoading.show({
-//                        template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
-//                    });
-//                    var authToken = $localStorage.getItem("usuarioFactory.authToken");
-//                    if (authToken !== null) {
-//                        usuarioService.tratarTokenAutorizacion(authToken);
-//                        var expira = $localStorage.getItem("usuarioFactory.authExpDate");
-//                        var fecha = new Date();
-//                        if (fecha.getTime() > Number.parseInt(expira)) {
-//                            usuarioService.validarLogin(usuarioFactory.usuario.login, usuarioFactory.usuario.contrasenha)
-//                                    .then(function (response) {
-//                                        $ionicLoading.hide();
-//                                        usuarioService.tratarTokenAutorizacion(response.headers()['authorization']);
-//                                        $ionicHistory.nextViewOptions({
-//                                            disableBack: true
-//                                        });
-//                                        $state.go('menu.home', {}, {location: "replace"});
-//                                    })
-//                                    .catch(function (data) {
-//                                        $ionicLoading.hide();
-//                                        usuarioFactory.usuario = "";
-//                                        usuarioFactory.authToken = "";
-//                                        usuarioFactory.authExpDate = -1;
-//                                    });
-//                        }
-//                    } else {
-//                        $ionicLoading.hide();
-//                    }
-//                };
-
                 $scope.validarUsuario = function () {
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
 
 
-                    usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave)
+                    usuarioService.obtenerTokenNotificacionPush()
+                            .then(function (response) {
+                                usuarioFactory.tokenPushNotif = response;
+                                return usuarioService.validarLogin($scope.usuario.login, $scope.usuario.clave, usuarioFactory.tokenPushNotif);
+                            })
                             .then(function (response) {
                                 $ionicLoading.hide();
                                 tratarTokenAutorizacion(response.headers()['authorization']);
@@ -208,12 +187,6 @@ angular.module('app.loginCtrl', [])
                     });
 
                 };
-
-
-
-
-
-
 
             }]);
 

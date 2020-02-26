@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "485714942426",
+    "firebase_url": "https://notificacion-push-ceee.firebaseio.com",
+    "project_id": "notificacion-push-ceee",
+    "storage_bucket": "notificacion-push-ceee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485714942426:android:5a4fd077105957d0fe88e3",
+        "android_client_info": {
+          "package_name": "com.gs.agura.ceEEmovil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz-oTbZlxs2Mf3fNtbVMqngPzLWC6YBMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

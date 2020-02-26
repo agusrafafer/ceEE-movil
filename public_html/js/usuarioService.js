@@ -3,18 +3,11 @@ angular.module('app.usuarioService', [])
         .service('usuarioService', ['$http', '$q', 'wsFactory', 'usuarioFactory',
             function ($http, $q, wsFactory, usuarioFactory) {
 
-                this.validarLogin = function (login, password) {
-                    return $http.put(wsFactory.url + '/usuario', {login: login, clave: password})
-                    //return $http.get(wsFactory.url + '/usuario/' + login + '/' +password)
+                this.validarLogin = function (login, password, tokenNotifPush) {
+                    return $http.put(wsFactory.url + '/usuario', {login: login, clave: password, tokenNotifPush: tokenNotifPush})
+                            //return $http.get(wsFactory.url + '/usuario/' + login + '/' +password)
                             .then(function (response) {
                                 //todo ok
-                                //The response object has these properties:
-                                //data – {string|Object} – The response body transformed with the transform functions.
-                                //status – {number} – HTTP status code of the response.
-                                //headers – {function([headerName])} – Header getter function.
-                                //config – {Object} – The configuration object that was used to generate the request.
-                                //statusText – {string} – HTTP status text of the response.
-                                //xhrStatus – {string} – Status of the XMLHttpRequest (complete, error, timeout or abort).
                                 return response;
                             }, function (response) {
                                 //Todo mal
@@ -73,7 +66,7 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al cargar los mensajes";
                             });
                 };
-                
+
                 this.obtenerCalificacionesPersona = function (idPersona) {
                     var token = usuarioFactory.authToken;
 
@@ -82,7 +75,7 @@ angular.module('app.usuarioService', [])
                             'authorization': token
                         }
                     };
-                    
+
 //                    var hoy = new Date();
 //                    var anho = hoy.getFullYear().toString();
 //                    var anho = '2005';
@@ -103,7 +96,7 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al cargar las calificaciones";
                             });
                 };
-                
+
                 this.obtenerAsistenciaPersona = function (idPersona) {
                     var token = usuarioFactory.authToken;
 
@@ -112,7 +105,7 @@ angular.module('app.usuarioService', [])
                             'authorization': token
                         }
                     };
-                    
+
                     var hoy = new Date();
                     var anho = hoy.getFullYear().toString();
                     //var anho = '2017';
@@ -133,7 +126,7 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al cargar las inasistencias";
                             });
                 };
-                
+
                 this.obtenerSancionPersona = function (idPersona) {
                     var token = usuarioFactory.authToken;
 
@@ -142,7 +135,7 @@ angular.module('app.usuarioService', [])
                             'authorization': token
                         }
                     };
-                    
+
                     var hoy = new Date();
                     var anho = hoy.getFullYear().toString();
 //                    var anho = '2017';
@@ -162,6 +155,14 @@ angular.module('app.usuarioService', [])
                                 //Todo mal
                                 throw "Hubo un error al cargar el seguimiento";
                             });
+                };
+
+
+
+                this.obtenerTokenNotificacionPush = function () {
+                    FCMPlugin.onTokenRefresh(function (token) {
+                        return token;
+                    });
                 };
 
 
