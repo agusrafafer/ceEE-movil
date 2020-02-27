@@ -16,24 +16,24 @@ angular.module('app.usuarioCtrl', [])
                 });
 
                 $scope.aToOnclickHtml = function (html) {
-                    let textoAux = html.toUpperCase();
-                    let vec = textoAux.split("</A>");
+                    let textoAux = html;
+                    let vec = textoAux.split("</a>");
                     for (let i = 0; i < vec.length; i++) {
-                        let posHrefIni = vec[i].indexOf("A HREF=\"");
+                        let posHrefIni = vec[i].indexOf("a href=\"");
                         if (posHrefIni !== -1) {
                             let textoAux1 = vec[i].substring(posHrefIni + 8);
                             let posComillasFinalHref = textoAux1.indexOf("\"");
                             if (posComillasFinalHref !== -1) {
                                 let url = textoAux1.substring(0, posComillasFinalHref);
                                 url = url.replace("\"", "");
-                                let onclickcontenido = "WINDOW.OPEN('" + url + "', '_BLANK', 'location=yes,EnableViewPortScale=yes');\" STYLE=\"text-decoration: underline;color: blue;\"";
+                                let onclickcontenido = "window.open('" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');\" style=\"text-decoration: underline;color: blue;\"";
                                 vec[i] = vec[i].replace(url, onclickcontenido);
-                                vec[i] = vec[i].replace("HREF", "ONCLICK");
+                                vec[i] = vec[i].replace("href", "onclick");
                             }
                         }
                     }
                     if (vec.length > 0) {
-                        textoAux = vec.join("</A>");
+                        textoAux = vec.join("</a>");
                     }
                     return textoAux;
                 };
