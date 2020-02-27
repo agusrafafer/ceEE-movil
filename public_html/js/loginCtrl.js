@@ -34,6 +34,9 @@ angular.module('app.loginCtrl', [])
                         },
                         "authExpDate": {
                             "type": "INTEGER"
+                        },
+                        "tokenPushNotif": {
+                            "type": "TEXT"
                         }
                     });
 
