@@ -8,21 +8,41 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$rootScope', '$window', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout', '$sce', 
+        .controller('usuarioCtrl', ['$scope', '$rootScope', '$window', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout', '$sce',
             function ($scope, $rootScope, $window, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout, $sce) {
 
                 $ionicPlatform.ready(function () {
 
                 });
-                
-                $scope.trustAsHtml = function(html) {
+
+                $scope.aToOnclickHtml = function (html) {
                     let textoAux = html;
                     let posHrefIni = textoAux.indexOf("a href=\"");
-                    if(posHrefIni !== -1) {
-                        textoAux = textoAux.substring(posHrefIni+9);
+                    if (posHrefIni !== -1) {
+                        let textoAux1 = textoAux.substring(posHrefIni + 8);
+                        let posComillasFinalHref = textoAux1.indexOf("\"");
+                        if (posComillasFinalHref !== -1) {
+                            let url = textoAux1.substring(0, posComillasFinalHref);
+                            url = url.replace("\"", "");
+                            let onclickcontenido = "window.open('" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');\" style=\"text-decoration: underline;color: blue;\"";
+                            textoAux = textoAux.replace(url, onclickcontenido);
+                            textoAux = textoAux.replace("href", "onclick");
+                        }
+                    }
+                    return textoAux;
+                };
+
+                $scope.trustAsHtml = function (html) {
+                    //<a href="http://www.agura.com.ar">link</a>
+                    //<a onclick="window.open('http://www.agura.com.ar', '_blank', 'location=yes,EnableViewPortScale=yes');">link</a>
+
+                    let textoAux = html;
+                    let posHrefIni = textoAux.indexOf("a href=\"");
+                    if (posHrefIni !== -1) {
+                        textoAux = textoAux.substring(posHrefIni + 9);
                         let posComillasFinalHref = textoAux.indexOf("\"");
-                        if(posComillasFinalHref !== -1) {
-                            let url = textoAux.substring(posHrefIni+9, posComillasFinalHref);
+                        if (posComillasFinalHref !== -1) {
+                            let url = textoAux.substring(posHrefIni + 9, posComillasFinalHref);
                             url = url.replaceAll("\"", "");
                             let onclickcontenido = "window.open('" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');";
                             textoAux = textoAux.replaceAll(url, onclickcontenido);
