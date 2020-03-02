@@ -8,7 +8,8 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain>localhost</domain>
         <domain includeSubdomains="true">66.97.37.195</domain>
-        <domain includeSubdomains="true">www.gruposistemas.com.ar</domain>
+        <domain includeSubdomains="true">com.ar</domain>
+        <domain includeSubdomains="true">tv</domain>
         <!--	<domain includeSubdomains="true">http://www.escolarweb.com.ar</domain> -->
     </domain-config>
 </network-security-config>
