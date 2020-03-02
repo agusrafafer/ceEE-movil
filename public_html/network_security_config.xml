@@ -22,6 +22,8 @@
         <domain includeSubdomains="true">br</domain>
         <domain includeSubdomains="true">es</domain>
         <domain includeSubdomains="true">mx</domain>
+        <domain includeSubdomains="true">gov</domain>
+        <domain includeSubdomains="true">gob</domain>
         <!--	<domain includeSubdomains="true">http://www.escolarweb.com.ar</domain> -->
     </domain-config>
 </network-security-config>
