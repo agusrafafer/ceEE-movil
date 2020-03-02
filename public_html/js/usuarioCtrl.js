@@ -16,7 +16,7 @@ angular.module('app.usuarioCtrl', [])
                 });
                 
                 $scope.abrirUrlExterna = function(urlExterna) {
-                    $window.open("http://www.gruposistemas.com.ar:8080/redirigir?urlRedireccion=" + urlExterna, "_blank", "location=yes,clearsessioncache=yes,clearcache=yes");
+                    $window.open(urlExterna, "_blank", "location=yes,clearsessioncache=yes,clearcache=yes");
                 };
 
                 $scope.aToOnclickHtml = function (html) {
@@ -30,7 +30,7 @@ angular.module('app.usuarioCtrl', [])
                             if (posComillasFinalHref !== -1) {
                                 let url = textoAux1.substring(0, posComillasFinalHref);
                                 url = url.replace("\"", "");
-                                let onclickcontenido = "window.open('http://www.gruposistemas.com.ar:8080/redirigir?urlRedireccion=" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');\" style=\"text-decoration: underline;color: blue;\"";
+                                let onclickcontenido = "window.open('" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');\" style=\"text-decoration: underline;color: blue;\"";
                                 vec[i] = vec[i].replace(url, onclickcontenido);
                                 vec[i] = vec[i].replace("href", "onclick");
                             }
