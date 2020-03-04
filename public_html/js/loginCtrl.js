@@ -17,7 +17,7 @@ angular.module('app.loginCtrl', [])
                         FCMPlugin.getToken(
                                 function (token) {
                                     if (token === null || token === '' || typeof (token) === "undefined") {
-                                        $timeout($scope.obtenerTokenPush(), 2000);
+                                        $timeout($scope.obtenerTokenPush(), 1000);
                                     } else {
                                         usuarioFactory.tokenPushNotif = token;
                                         $scope.var.tokenFcm = token;
@@ -26,6 +26,7 @@ angular.module('app.loginCtrl', [])
                                 function (err) {
                                     usuarioFactory.tokenPushNotif = "";
                                     $scope.var.tokenFcm = "";
+                                    $timeout($scope.obtenerTokenPush(), 1000);
                                 }
                         );
                     } catch (e) {
