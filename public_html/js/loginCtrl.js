@@ -48,7 +48,7 @@ angular.module('app.loginCtrl', [])
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
 
-                    $scope.obtenerTokenPush();
+//                    $scope.obtenerTokenPush();
                     
                     $ionicLoading.hide();
 
@@ -139,11 +139,9 @@ angular.module('app.loginCtrl', [])
                 }
                 ;
 
-//                $ionicPlatform.ready(function () {
-//                    FCMPlugin.getToken(function (token) {
-//                        usuarioFactory.tokenPushNotif = token;
-//                    });
-//                });
+                $ionicPlatform.ready(function () {
+                    $scope.obtenerTokenPush();
+                });
 
                 $scope.validarUsuario = function () {
                     $ionicLoading.show({
