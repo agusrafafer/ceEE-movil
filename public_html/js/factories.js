@@ -33,6 +33,7 @@ angular.module('app.factories', [])
         .factory('urlFotoFactory', function () {
             return {
                 url: "http://108.160.155.140:8080/azules/faces/resources/images/fotos/"
+        
             };
         });
 
