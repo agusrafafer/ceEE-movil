@@ -8,6 +8,28 @@ angular.module('app.loginCtrl', [])
         .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', '$webSql', 'jwtHelper', '$ionicPlatform',
             function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, $webSql, jwtHelper, $ionicPlatform) {
 
+                $scope.var = {
+                    tokenFcm: ""
+                };
+
+                $scope.obtenerToken = function () {
+                    try {
+                        FCMPlugin.getToken(function (token) {
+//                            $ionicPopup.alert({
+//                                title: 'Token',
+//                                template: token
+//                            });
+                            $scope.var.tokenFcm = token;
+                        });
+                    } catch (e) {
+                        $ionicPopup.alert({
+                            title: 'Token Error',
+                            template: 'Excepcion: ' + e
+                        });
+                        $scope.var.tokenFcm = e;
+                    }
+                };
+
                 $scope.db = $webSql.openDatabase('dbCeEE', '1.0', 'dbCeEE', 2 * 1024 * 1024);
 
                 $scope.usuario = {
