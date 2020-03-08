@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "485714942426",
-    "firebase_url": "https://notificacion-push-ceee.firebaseio.com",
-    "project_id": "notificacion-push-ceee",
-    "storage_bucket": "notificacion-push-ceee.appspot.com"
+    "project_number": "383047540774",
+    "firebase_url": "https://notificacion-azules.firebaseio.com",
+    "project_id": "notificacion-azules",
+    "storage_bucket": "notificacion-azules.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:485714942426:android:ae373f727988bd0dfe88e3",
+        "mobilesdk_app_id": "1:383047540774:android:6ad7f4dd05aacafce806e7",
         "android_client_info": {
           "package_name": "com.gs.agura.ceEEmovil.azules"
         }
       },
       "oauth_client": [
         {
-          "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+          "client_id": "383047540774-1ld95cro8fr7g86p3oumuru1cmedgj59.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCz-oTbZlxs2Mf3fNtbVMqngPzLWC6YBMs"
+          "current_key": "AIzaSyDOs74F7ZQ409MocfZZ1ucHiUAWZjGJm94"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+              "client_id": "383047540774-1ld95cro8fr7g86p3oumuru1cmedgj59.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
