@@ -13,8 +13,15 @@
                 </label>
             </ion-list>
             <div class="spacer" style="height: 40px;"></div>
-            <a ng-click="validarUsuario()" class="button button-positive button-block">Ingresar</a>
-            <!--<br />
+            <a ng-click="validarUsuario()" class="button button-positive button-block">Ingresar</a>        
+            <!--<ion-list id="login-list2">
+                <label class="item item-input" id="login-input1">
+                    <span class="input-label">Token: </span>
+                    <input type="text" placeholder="Token" ng-model="var.tokenFcm">
+                </label>
+            </ion-list>
+            
+            <br />
             <a ng-click="verTokenPush()" class="button button-positive button-block">Ver Token Push</a>
             <br />
             <b>{{ usuario.tokenPush }}</b>

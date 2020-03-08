@@ -5,8 +5,35 @@
  */
 angular.module('app.loginCtrl', [])
 
-        .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', '$webSql', 'jwtHelper', '$ionicPlatform',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, $webSql, jwtHelper, $ionicPlatform) {
+        .controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', '$webSql', 'jwtHelper', '$ionicPlatform', '$timeout',
+            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, $webSql, jwtHelper, $ionicPlatform, $timeout) {
+
+//                $scope.var = {
+//                    tokenFcm: ""
+//                };
+
+                $scope.obtenerTokenPush = function () {
+                    try {
+                        FCMPlugin.getToken(
+                                function (token) {
+                                    if (token === null || token === '' || typeof (token) === "undefined") {
+                                        $timeout($scope.obtenerTokenPush(), 1000);
+                                    } else {
+                                        usuarioFactory.tokenPushNotif = token;
+//                                        $scope.var.tokenFcm = token;
+                                    }
+                                },
+                                function (err) {
+                                    usuarioFactory.tokenPushNotif = "";
+//                                    $scope.var.tokenFcm = "";
+                                    $timeout($scope.obtenerTokenPush(), 1000);
+                                }
+                        );
+                    } catch (e) {
+                        usuarioFactory.tokenPushNotif = "";
+//                        $scope.var.tokenFcm = "";
+                    }
+                };
 
                 $scope.db = $webSql.openDatabase('dbCeEE', '1.0', 'dbCeEE', 2 * 1024 * 1024);
 
@@ -20,6 +47,8 @@ angular.module('app.loginCtrl', [])
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
+                   
+                    $ionicLoading.hide();
 
                     $scope.db.createTable('authceEE', {
                         "id": {
@@ -109,9 +138,7 @@ angular.module('app.loginCtrl', [])
                 ;
 
                 $ionicPlatform.ready(function () {
-                    FCMPlugin.getToken(function (token) {
-                        usuarioFactory.tokenPushNotif = token;
-                    });
+                    $scope.obtenerTokenPush();
                 });
 
                 $scope.validarUsuario = function () {
@@ -190,4 +217,3 @@ angular.module('app.loginCtrl', [])
                 };
 
             }]);
-
