@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "167476998866",
+    "firebase_url": "https://notificacion-juanxxiii.firebaseio.com",
+    "project_id": "notificacion-juanxxiii",
+    "storage_bucket": "notificacion-juanxxiii.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167476998866:android:d2c6e8bcde69fb6e3fb30b",
+        "android_client_info": {
+          "package_name": "com.gs.agura.ceEEmovil.juanxxiii"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167476998866-rdobirarmepjb8gketpsrg18id0j7lte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAPTTOFUuOxsdwQKPzRN9m7NbODTy5BhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167476998866-rdobirarmepjb8gketpsrg18id0j7lte.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
