@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "485714942426",
-    "firebase_url": "https://notificacion-push-ceee.firebaseio.com",
-    "project_id": "notificacion-push-ceee",
-    "storage_bucket": "notificacion-push-ceee.appspot.com"
+    "project_number": "456980161437",
+    "firebase_url": "https://notificacion-dalmacio.firebaseio.com",
+    "project_id": "notificacion-dalmacio",
+    "storage_bucket": "notificacion-dalmacio.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:485714942426:android:d40faab04da377e0fe88e3",
+        "mobilesdk_app_id": "1:456980161437:android:3bd6d79f4bbe36be53c574",
         "android_client_info": {
           "package_name": "com.gs.agura.ceEEmovil.dalmacio"
         }
       },
       "oauth_client": [
         {
-          "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+          "client_id": "456980161437-ovr16catg8iupaum1qovlol379oucvs1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCz-oTbZlxs2Mf3fNtbVMqngPzLWC6YBMs"
+          "current_key": "AIzaSyD56DoTOvfTcnXlzj9mQtKo-I6OxyZfyR8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+              "client_id": "456980161437-ovr16catg8iupaum1qovlol379oucvs1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
