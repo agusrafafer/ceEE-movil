@@ -4,9 +4,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.5" 
-        versionCode="005" 
-        android-versionCode="005">
+        version="0.0.7" 
+        versionCode="007" 
+        android-versionCode="007">
     <name>Escolar Niños Músicos MOVIL</name>
     <description>
         App Escolar móvil.
@@ -50,7 +50,18 @@
                      file="AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:networkSecurityConfig="@xml/network_security_config" />
         </edit-config>
+        
+        <resource-file src="mdpi.png" target="app/src/main/res/drawable-hdpi/mdpi.png"/>
+        <resource-file src="hdpi.png" target="app/src/main/res/drawable-xhdpi/hdpi.png"/>
+        <resource-file src="xhdpi.png" target="app/src/main/res/drawable-xxhdpi/xhdpi.png"/>
+        <resource-file src="xxhdpi.png" target="app/src/main/res/drawable-xxxhdpi/xxhdpi.png"/>
+        <resource-file src="google-services.json" target="app/google-services.json" />
+        
         <resource-file src="network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
+        
+        <custom-config-file parent="./application" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
+            <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/mdpi" />
+        </custom-config-file>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -69,7 +80,10 @@
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <plugin name="cordova-plugin-splashscreen" source="npm"/>
+    
+    <plugin name="cordova-plugin-fcm-with-dependecy-updated" source="npm"/>
     <plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git" />
+    <plugin name="cordova-custom-config" source="npm"/>
     
     
     <icon src="mdpi.png" platform="android" qualifier="mdpi" />

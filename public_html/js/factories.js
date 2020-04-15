@@ -14,6 +14,7 @@ angular.module('app.factories', [])
                 mensajeSel: "",
                 authToken: "",
                 authExpDate: -1,
+                tokenPushNotif: "",
                 personaSel: null,
                 notasPersonaSel: [],
                 asistenciasPersonaSel: [],
