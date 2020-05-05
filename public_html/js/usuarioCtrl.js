@@ -8,8 +8,48 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$timeout',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $timeout) {
+        .controller('usuarioCtrl', ['$scope', '$rootScope', '$window', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout', '$sce',
+            function ($scope, $rootScope, $window, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout, $sce) {
+
+                $ionicPlatform.ready(function () {
+
+                });
+                
+                $scope.abrirUrlExterna = function(urlExterna) {
+                    $window.open(urlExterna, "_blank", "location=yes,clearsessioncache=yes,clearcache=yes");
+                };
+
+                $scope.aToOnclickHtml = function (html) {
+                    let textoAux = html;
+                    let vec = textoAux.split("</a>");
+                    for (let i = 0; i < vec.length; i++) {
+                        let posHrefIni = vec[i].indexOf("a href=\"");
+                        if (posHrefIni !== -1) {
+                            let textoAux1 = vec[i].substring(posHrefIni + 8);
+                            let posComillasFinalHref = textoAux1.indexOf("\"");
+                            if (posComillasFinalHref !== -1) {
+                                let url = textoAux1.substring(0, posComillasFinalHref);
+                                url = url.replace("\"", "");
+                                let onclickcontenido = "window.open('" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');\" style=\"text-decoration: underline;color: blue;\"";
+                                vec[i] = vec[i].replace(url, onclickcontenido);
+                                vec[i] = vec[i].replace("href", "onclick");
+                            }
+                        }
+                    }
+                    if (vec.length > 0) {
+                        textoAux = vec.join("</a>");
+                    }
+                    return textoAux;
+                };
+
+                $scope.trustAsHtml = function (html) {
+                    return $sce.trustAsHtml(html);
+                };
+
+                $ionicPlatform.on('pause', function () {
+                    $scope.taskChequeoMsj();
+                    $timeout.cancel();
+                });
 
                 $scope.usuario = {
                     login: "",
@@ -130,46 +170,33 @@ angular.module('app.usuarioCtrl', [])
                     return usuarioFactory.usuario;
                 };
 
-                $scope.$on('$ionicView.loaded', function (event) {
-                    $scope.loopChequeo();
+                $scope.$on('$ionicView.afterEnter', function (event) {
+                    $scope.taskChequeoMsj();
                 });
 
-                $scope.loopChequeo = function () {
-                    //Comentar para pruebas locales
-                    cordova.plugins.notification.badge.configure({ autoClear: true });
-                    cordova.plugins.backgroundMode.setDefaults({
-                        title: 'Escolar móvil',
-                        text: 'Verificando en background'
-                    });
-
-                    cordova.plugins.backgroundMode.enable();
-
-
-                    cordova.plugins.backgroundMode.onactivate = function () {
+                $scope.$on('$ionicView.beforeLeave', function () {
                     $scope.taskChequeoMsj();
-                    };
+                    $timeout.cancel();
+                });
 
-
-                };
                 $scope.taskChequeoMsj = function () {
 
                     //Aca va la llamada al web service
-                    //y el aumento del badget
+                    //cada X segundos
 
                     if ($scope.isLogueado()) {
+
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
 
                                     usuarioFactory.mensajesNoLeidos = data;
-//                                    cordova.plugins.notification.badge.set(usuarioFactory.mensajesNoLeidos.length);
-
                                 })
                                 .catch(function (data) {
 
                                 });
                     }
 
-                    $timeout($scope.taskChequeoMsj, 5000);
+                    $timeout($scope.taskChequeoMsj, 60000);//Chequeo mensajes cada 1 minuto
                 };
 
                 $scope.getMensajesNoLeidos = function () {
@@ -327,7 +354,7 @@ angular.module('app.usuarioCtrl', [])
                                 } else {
                                     $ionicPopup.alert({
                                         title: 'Info',
-                                        template: 'No se encontraron asistencias cargadas para el alumno'
+                                        template: 'No se encontraron inasistencias cargadas'
                                     });
                                 }
                             })
@@ -364,7 +391,7 @@ angular.module('app.usuarioCtrl', [])
                                 } else {
                                     $ionicPopup.alert({
                                         title: 'Info',
-                                        template: 'No se encontraron acuerdos cargados para el alumno'
+                                        template: 'No se encontraron datos cargados'
                                     });
                                 }
                             })
@@ -381,14 +408,14 @@ angular.module('app.usuarioCtrl', [])
                     return usuarioFactory.sancionesPersonaSel;
                 };
 
-                $scope.verDetalleSancionPersonaSel = function (sancion) {                    
+                $scope.verDetalleSancionPersonaSel = function (sancion) {
                     let texto = "<ul><li>Fecha: <b>" + sancion.diaDelMes + "/" + sancion.mes + "/" + sancion.anho + "</b></li>";
-                    texto += (sancion.motivo === '' )? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
+                    texto += (sancion.motivo === '') ? "" : ("<li>Motivo: <b>" + sancion.motivo + "</b></li>");
                     texto += "<li>Tipo: <b>" + sancion.idSancionAlumnoTipo.nombre + "</b></li>";
-                    texto += (sancion.solicitadaPor === '')? "" : ("<li>Solicitado por: <b>"  + sancion.solicitadaPor + "</b></li></ul>");
-                    
+                    texto += (sancion.solicitadaPor === '') ? "" : ("<li>Solicitado por: <b>" + sancion.solicitadaPor + "</b></li></ul>");
+
                     $ionicPopup.alert({
-                        title: 'Detalle de Acuerdo',
+                        title: 'Detalle de los datos registrados',
                         template: texto
                     });
                 };
@@ -442,4 +469,3 @@ angular.module('app.usuarioCtrl', [])
                 }
 
             }]);
-
