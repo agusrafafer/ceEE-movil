@@ -82,7 +82,7 @@
     <plugin name="cordova-plugin-splashscreen" source="npm"/>
     
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" source="npm"/>
-    <plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git" />
+    <!--<plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git" />-->
     <plugin name="cordova-custom-config" source="npm"/>
     
     
