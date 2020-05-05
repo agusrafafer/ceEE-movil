@@ -8,8 +8,48 @@
 
 angular.module('app.usuarioCtrl', [])
 
-        .controller('usuarioCtrl', ['$scope', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout',
-            function ($scope, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout) {
+        .controller('usuarioCtrl', ['$scope', '$rootScope', '$window', '$stateParams', '$state', '$ionicHistory', '$ionicPopup', '$ionicLoading', 'usuarioFactory', 'usuarioService', 'urlFotoFactory', '$ionicPlatform', '$timeout', '$sce',
+            function ($scope, $rootScope, $window, $stateParams, $state, $ionicHistory, $ionicPopup, $ionicLoading, usuarioFactory, usuarioService, urlFotoFactory, $ionicPlatform, $timeout, $sce) {
+
+                $ionicPlatform.ready(function () {
+
+                });
+                
+                $scope.abrirUrlExterna = function(urlExterna) {
+                    $window.open(urlExterna, "_blank", "location=yes,clearsessioncache=yes,clearcache=yes");
+                };
+
+                $scope.aToOnclickHtml = function (html) {
+                    let textoAux = html;
+                    let vec = textoAux.split("</a>");
+                    for (let i = 0; i < vec.length; i++) {
+                        let posHrefIni = vec[i].indexOf("a href=\"");
+                        if (posHrefIni !== -1) {
+                            let textoAux1 = vec[i].substring(posHrefIni + 8);
+                            let posComillasFinalHref = textoAux1.indexOf("\"");
+                            if (posComillasFinalHref !== -1) {
+                                let url = textoAux1.substring(0, posComillasFinalHref);
+                                url = url.replace("\"", "");
+                                let onclickcontenido = "window.open('" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');\" style=\"text-decoration: underline;color: blue;\"";
+                                vec[i] = vec[i].replace(url, onclickcontenido);
+                                vec[i] = vec[i].replace("href", "onclick");
+                            }
+                        }
+                    }
+                    if (vec.length > 0) {
+                        textoAux = vec.join("</a>");
+                    }
+                    return textoAux;
+                };
+
+                $scope.trustAsHtml = function (html) {
+                    return $sce.trustAsHtml(html);
+                };
+
+                $ionicPlatform.on('pause', function () {
+                    $scope.taskChequeoMsj();
+                    $timeout.cancel();
+                });
 
                 $scope.usuario = {
                     login: "",
@@ -134,26 +174,25 @@ angular.module('app.usuarioCtrl', [])
                     $scope.taskChequeoMsj();
                 });
 
-                $scope.$on('$ionicView.afterLeave', function () {
-                    // Anything you can think of
+                $scope.$on('$ionicView.beforeLeave', function () {
+                    $scope.taskChequeoMsj();
                     $timeout.cancel();
                 });
 
                 $scope.taskChequeoMsj = function () {
 
                     //Aca va la llamada al web service
-                    //cada 5 segundos
+                    //cada X segundos
 
                     if ($scope.isLogueado()) {
 
                         usuarioService.obtenerMensajesUsuario(usuarioFactory.usuario.idUsuario, true)
                                 .then(function (data) {
-                                    
-                                    usuarioFactory.mensajesNoLeidos = data;
 
+                                    usuarioFactory.mensajesNoLeidos = data;
                                 })
                                 .catch(function (data) {
-                                    
+
                                 });
                     }
 
@@ -315,7 +354,7 @@ angular.module('app.usuarioCtrl', [])
                                 } else {
                                     $ionicPopup.alert({
                                         title: 'Info',
-                                        template: 'No se encontraron asistencias cargadas para el alumno'
+                                        template: 'No se encontraron inasistencias cargadas'
                                     });
                                 }
                             })
@@ -352,7 +391,7 @@ angular.module('app.usuarioCtrl', [])
                                 } else {
                                     $ionicPopup.alert({
                                         title: 'Info',
-                                        template: 'No se encontraron acuerdos cargados para el alumno'
+                                        template: 'No se encontraron datos cargados'
                                     });
                                 }
                             })
@@ -376,7 +415,7 @@ angular.module('app.usuarioCtrl', [])
                     texto += (sancion.solicitadaPor === '') ? "" : ("<li>Solicitado por: <b>" + sancion.solicitadaPor + "</b></li></ul>");
 
                     $ionicPopup.alert({
-                        title: 'Detalle de Acuerdo',
+                        title: 'Detalle de los datos registrados',
                         template: texto
                     });
                 };
@@ -430,4 +469,3 @@ angular.module('app.usuarioCtrl', [])
                 }
 
             }]);
-
