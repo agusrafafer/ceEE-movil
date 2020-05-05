@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--<base-config cleartextTrafficPermitted="true"> 
+        <trust-anchors> 
+            <certificates src="system" /> 
+        </trust-anchors> 
+    </base-config>-->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain>localhost</domain>
+        <domain includeSubdomains="true">108.160.155.140</domain>
+        <domain includeSubdomains="true">66.97.37.195</domain>
+        <domain includeSubdomains="true">ar</domain>
+        <domain includeSubdomains="true">tv</domain>
+        <domain includeSubdomains="true">edu</domain>
+        <domain includeSubdomains="true">org</domain>
+        <domain includeSubdomains="true">com</domain>
+        <domain includeSubdomains="true">co</domain>
+        <domain includeSubdomains="true">info</domain>
+        <domain includeSubdomains="true">net</domain>
+        <domain includeSubdomains="true">biz</domain>
+        <domain includeSubdomains="true">uk</domain>
+        <domain includeSubdomains="true">us</domain>
+        <domain includeSubdomains="true">br</domain>
+        <domain includeSubdomains="true">es</domain>
+        <domain includeSubdomains="true">mx</domain>
+        <domain includeSubdomains="true">gov</domain>
+        <domain includeSubdomains="true">gob</domain>
+        <!--	<domain includeSubdomains="true">http://www.escolarweb.com.ar</domain> -->
+    </domain-config>
+</network-security-config>
