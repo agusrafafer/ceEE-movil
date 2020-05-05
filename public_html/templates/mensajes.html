@@ -10,7 +10,8 @@
                 ng-click="verMensaje($index, true)">
                 <img src="{{usuario.urlFoto}}{{msj.idMensaje.idUsuarioEnvia.idPersona.foto}}">
                 <h2>{{msj.idMensaje.asunto}}</h2>
-                <p>{{msj.idMensaje.texto}}</p>
+                <h5>{{msj.idMensaje.fechayhora | date:'dd/MM/yyyy HH:mm:ss'}}</h5>
+                <p ng-bind-html="trustAsHtml(aToOnclickHtml(msj.idMensaje.texto))"></p>
                 <i class="icon ion-email-unread" ng-hide="{{msj.leido}}"></i>
                 <i class="icon ion-ios-email-outline" ng-show="{{msj.leido}}"></i>
                 <ion-option-button class="button-balanced"
