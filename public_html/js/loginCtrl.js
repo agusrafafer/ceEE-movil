@@ -47,7 +47,7 @@ angular.module('app.loginCtrl', [])
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });
-                   
+
                     $ionicLoading.hide();
 
                     $scope.db.createTable('authceEE', {
@@ -139,7 +139,7 @@ angular.module('app.loginCtrl', [])
 
                 $ionicPlatform.ready(function () {
                     $scope.obtenerTokenPush();
-                });
+                    });
 
                 $scope.validarUsuario = function () {
                     $ionicLoading.show({
