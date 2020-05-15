@@ -7,11 +7,11 @@
         version="0.0.7" 
         versionCode="007" 
         android-versionCode="007">
-    <name>Loreto MOVIL</name>
+    <name>Escolar Loreto MOVIL</name>
     <description>
         App Escolar móvil.
     </description>
-    <author email="appazules@gruposistemas.com.ar" href="https://www.gruposistemas.com.ar">
+    <author email="apploreto@gruposistemas.com.ar" href="https://www.gruposistemas.com.ar">
         GrupoSistemas y Agura
     </author>
     <access origin="*"/>
