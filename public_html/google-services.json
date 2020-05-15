@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "485714942426",
-    "firebase_url": "https://notificacion-push-ceee.firebaseio.com",
-    "project_id": "notificacion-push-ceee",
-    "storage_bucket": "notificacion-push-ceee.appspot.com"
+    "project_number": "52776599998",
+    "firebase_url": "https://notificacion-loreto.firebaseio.com",
+    "project_id": "notificacion-loreto",
+    "storage_bucket": "notificacion-loreto.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:485714942426:android:284b254fb3209393fe88e3",
+        "mobilesdk_app_id": "1:52776599998:android:ea3243d215abd25b4779ef",
         "android_client_info": {
           "package_name": "com.gs.agura.ceEEmovil.loreto"
         }
       },
       "oauth_client": [
         {
-          "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+          "client_id": "52776599998-bvsc8eu2116bk8ggbeb783dfb2df0cpe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCz-oTbZlxs2Mf3fNtbVMqngPzLWC6YBMs"
+          "current_key": "AIzaSyDR2xQ3upcn0KXpb45vdS8lzCPzFsUBft0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+              "client_id": "52776599998-bvsc8eu2116bk8ggbeb783dfb2df0cpe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
