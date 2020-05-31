@@ -25,16 +25,16 @@ angular.module('app.factories', [])
 
         .factory('wsFactory', function () {
             return {
-//                url: "http://66.97.37.195:8080/cepmariareina/webresources"
-//                url: "http://www.escolarweb.com.ar:8080/cepmariareina/webresources"
-                url: "http://www.gruposistemas.com.ar:8080/cepmariareina/webresources"
+//                url: "http://66.97.37.195:8080/cepmreina/webresources"
+//                url: "http://www.escolarweb.com.ar:8080/cepmreina/webresources"
+                url: "http://www.gruposistemas.com.ar:8080/cepmreina/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-//                url: "http://www.escolarweb.com.ar:8080/cepmariareina/faces/resources/images/fotos/"
-                url:"http://www.gruposistemas.com.ar:8080/cepmariareina/faces/resources/images/fotos/"
+//                url: "http://www.escolarweb.com.ar:8080/cepmreina/faces/resources/images/fotos/"
+                url:"http://www.gruposistemas.com.ar:8080/cepmreina/faces/resources/images/fotos/"
             };
         });
 
