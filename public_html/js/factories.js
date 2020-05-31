@@ -14,6 +14,7 @@ angular.module('app.factories', [])
                 mensajeSel: "",
                 authToken: "",
                 authExpDate: -1,
+                tokenPushNotif: "",
                 personaSel: null,
                 notasPersonaSel: [],
                 asistenciasPersonaSel: [],
@@ -24,14 +25,16 @@ angular.module('app.factories', [])
 
         .factory('wsFactory', function () {
             return {
-//                url: "http://localhost:8080/escuelasparroquiales/webresources"
-                url: "http://www.escolarweb.com.ar:8080/cepmariareina/webresources"
+//                url: "http://66.97.37.195:8080/cepmariareina/webresources"
+//                url: "http://www.escolarweb.com.ar:8080/cepmariareina/webresources"
+                url: "http://www.gruposistemas.com.ar:8080/cepmariareina/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-                url: "http://www.escolarweb.com.ar:8080/cepmariareina/faces/resources/images/fotos/"
+//                url: "http://www.escolarweb.com.ar:8080/cepmariareina/faces/resources/images/fotos/"
+                url:"http://www.gruposistemas.com.ar:8080/cepmariareina/faces/resources/images/fotos/"
             };
         });
 
