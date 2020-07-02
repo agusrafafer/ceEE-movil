@@ -42,8 +42,8 @@ angular.module('app.loginCtrl', [])
                     clave: ""
                 };
 
-                $scope.$on('$ionicView.loaded', function (event) {
-
+                $scope.$on('$ionicView.loaded', function (event) {                   
+                    
                     $ionicLoading.show({
                         template: '<ion-spinner icon=\"android\" class=\"spinner-energized\"></ion-spinner>'
                     });

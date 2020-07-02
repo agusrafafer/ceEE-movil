@@ -14,7 +14,7 @@ angular.module('app.usuarioCtrl', [])
                 $ionicPlatform.ready(function () {
 
                 });
-                
+
                 $scope.abrirUrlExterna = function(urlExterna) {
                     $window.open(urlExterna, "_blank", "location=yes,clearsessioncache=yes,clearcache=yes");
                 };

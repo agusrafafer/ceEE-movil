@@ -26,14 +26,15 @@ angular.module('app.factories', [])
         .factory('wsFactory', function () {
             return {
                 //url: "http://66.97.37.195:8080/huerto/webresources"
-                url: "http://108.160.155.140:8080/huerto/webresources"
+                //url: "http://108.160.155.140:8080/huerto/webresources"
+                url: "http://www.gruposistemas.com.ar:8080/huerto/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-                url: "http://108.160.155.140:8080/huerto/faces/resources/images/fotos/"
-//                url: "http://66.97.37.195:8080/huerto/faces/resources/images/fotos/"
+//                url: "http://108.160.155.140:8080/huerto/faces/resources/images/fotos/"
+                url:"http://www.gruposistemas.com.ar:8080/huerto/faces/resources/images/fotos/"
             };
         });
 
