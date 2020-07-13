@@ -14,6 +14,7 @@ angular.module('app.factories', [])
                 mensajeSel: "",
                 authToken: "",
                 authExpDate: -1,
+                tokenPushNotif: "",
                 personaSel: null,
                 notasPersonaSel: [],
                 asistenciasPersonaSel: [],
@@ -25,14 +26,15 @@ angular.module('app.factories', [])
         .factory('wsFactory', function () {
             return {
 //                url: "http://localhost:8080/loreto/webresources"
-                url: "http://www.escolarweb.com.ar:8080/hortus/webresources"
+//                url: "http://www.escolarweb.com.ar:8080/hortus/webresources"
+                url: "http://www.gruposistemas.com.ar:8080/hortus/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-  //              url: "http://108.160.155.140:8080/fhDiehl/faces/resources/images/fotos/"
-               url: "http://www.escolarweb.com.ar:8080/hortus/faces/resources/images/fotos/"
+//              url: "http://108.160.155.140:8080/fhDiehl/faces/resources/images/fotos/"
+               url: "http://www.gruposistemas.com.ar:8080/hortus/faces/resources/images/fotos/"
             };
         });
 

@@ -1,5 +1,8 @@
 <ion-view title="Escolar movil" id="page1">
     <ion-nav-buttons side="right" class="has-header" ng-hide="!isLogueado()">
+        <button style="margin-right: 10px;" class="button button-positive icon ion-android-open" ng-click="abrirUrlExterna('http://gruposistemas.com.ar/hortusweb/login.php')" >
+<!--        <button style="margin-right: 10px;" class="button button-positive icon ion-android-open" ng-click="abrirUrlExterna('http://deiocba.dyndns.tv:8081/SAG/LogIn.aspx?ReturnUrl=/SAG/CtaCte.aspx')" >-->
+        </button>
         <button class="button button-positive icon ion-android-notifications" ng-click="buscarMensajesUsuario()" >
             <ion-icon name="notifications">
                 <ion-badge class="badge badge-assertive" style="left: -10px;">{{getMensajesNoLeidos().length}}</ion-badge>
