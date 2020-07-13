@@ -5,7 +5,7 @@ angular.module('app.usuarioService', [])
 
                 this.validarLogin = function (login, password, tokenNotifPush) {
                     return $http.put(wsFactory.url + '/usuario', {login: login, clave: password, tokenNotifPush: tokenNotifPush})
-                            //return $http.get(wsFactory.url + '/usuario/' + login + '/' +password)
+                    //return $http.get(wsFactory.url + '/usuario/' + login + '/' +password)
                             .then(function (response) {
                                 //todo ok
                                 return response;
@@ -66,7 +66,7 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al cargar los mensajes";
                             });
                 };
-
+                
                 this.obtenerCalificacionesPersona = function (idPersona) {
                     var token = usuarioFactory.authToken;
 
@@ -75,7 +75,7 @@ angular.module('app.usuarioService', [])
                             'authorization': token
                         }
                     };
-
+                    
 //                    var hoy = new Date();
 //                    var anho = hoy.getFullYear().toString();
 //                    var anho = '2005';
@@ -96,7 +96,7 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al cargar las calificaciones";
                             });
                 };
-
+                
                 this.obtenerAsistenciaPersona = function (idPersona) {
                     var token = usuarioFactory.authToken;
 
@@ -105,7 +105,7 @@ angular.module('app.usuarioService', [])
                             'authorization': token
                         }
                     };
-
+                    
                     var hoy = new Date();
                     var anho = hoy.getFullYear().toString();
                     //var anho = '2017';
@@ -126,7 +126,7 @@ angular.module('app.usuarioService', [])
                                 throw "Hubo un error al cargar las inasistencias";
                             });
                 };
-
+                
                 this.obtenerSancionPersona = function (idPersona) {
                     var token = usuarioFactory.authToken;
 
@@ -135,7 +135,7 @@ angular.module('app.usuarioService', [])
                             'authorization': token
                         }
                     };
-
+                    
                     var hoy = new Date();
                     var anho = hoy.getFullYear().toString();
 //                    var anho = '2017';
