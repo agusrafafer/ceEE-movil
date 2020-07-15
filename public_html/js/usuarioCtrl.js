@@ -16,7 +16,7 @@ angular.module('app.usuarioCtrl', [])
                 });
                 
                 $scope.abrirUrlExterna = function(urlExterna) {
-                    $window.open(urlExterna, "_blank", "location=yes,clearsessioncache=yes,clearcache=yes");
+                    $window.open(urlExterna, "_system", "location=yes,clearsessioncache=yes,clearcache=yes");
                 };
 
                 $scope.aToOnclickHtml = function (html) {
