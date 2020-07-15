@@ -73,7 +73,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
                     element.bind('click', function (event) {
 
-                        window.open(href, '_system', 'location=yes');
+                        window.open(href, '_system', 'footer=yes,location=yes,clearsessioncache=yes,clearcache=yes,transitionstyle=fliphorizontal,toolbarposition=bottom,closebuttoncaption=X');
 
                         event.preventDefault();
                         event.stopPropagation();
