@@ -13,7 +13,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
         })
 
-        .run(function ($ionicPlatform, $rootScope, $timeout) {
+        .run(function ($ionicPlatform, $rootScope, $timeout, $ionicHistory) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -27,59 +27,66 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                 }
 
             });
+            $ionicPlatform.registerBackButtonAction(function (event) {
+                if ($state.current.disableHardwareBackButton) {
+                    event.preventDefault();
+                } else {
+                    $ionicHistory.goBack();
+                }
+            });
         })
 
-        /*
-         This directive is used to disable the "drag to open" functionality of the Side-Menu
-         when you are dragging a Slider component.
-         */
-        .directive('disableSideMenuDrag', ['$ionicSideMenuDelegate', '$rootScope', function ($ionicSideMenuDelegate, $rootScope) {
-                return {
-                    restrict: "A",
-                    controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
+                /*
+                 This directive is used to disable the "drag to open" functionality of the Side-Menu
+                 when you are dragging a Slider component.
+                 */
+                .directive('disableSideMenuDrag', ['$ionicSideMenuDelegate', '$rootScope', function ($ionicSideMenuDelegate, $rootScope) {
+                        return {
+                            restrict: "A",
+                            controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
 
-                            function stopDrag() {
-                                $ionicSideMenuDelegate.canDragContent(false);
-                            }
+                                    function stopDrag() {
+                                        $ionicSideMenuDelegate.canDragContent(false);
+                                    }
 
-                            function allowDrag() {
-                                $ionicSideMenuDelegate.canDragContent(true);
-                            }
+                                    function allowDrag() {
+                                        $ionicSideMenuDelegate.canDragContent(true);
+                                    }
 
-                            $rootScope.$on('$ionicSlides.slideChangeEnd', allowDrag);
-                            $element.on('touchstart', stopDrag);
-                            $element.on('touchend', allowDrag);
-                            $element.on('mousedown', stopDrag);
-                            $element.on('mouseup', allowDrag);
+                                    $rootScope.$on('$ionicSlides.slideChangeEnd', allowDrag);
+                                    $element.on('touchstart', stopDrag);
+                                    $element.on('touchend', allowDrag);
+                                    $element.on('mousedown', stopDrag);
+                                    $element.on('mouseup', allowDrag);
 
-                        }]
-                };
-            }])
+                                }]
+                        };
+                    }])
 
-        /*
-         This directive is used to open regular and dynamic href links inside of inappbrowser.
-         */
-        .directive('hrefInappbrowser', function () {
-            return {
-                restrict: 'A',
-                replace: false,
-                transclude: false,
-                link: function (scope, element, attrs) {
-                    var href = attrs['hrefInappbrowser'];
+                /*
+                 This directive is used to open regular and dynamic href links inside of inappbrowser.
+                 */
+                .directive('hrefInappbrowser', function () {
+                    return {
+                        restrict: 'A',
+                        replace: false,
+                        transclude: false,
+                        link: function (scope, element, attrs) {
+                            var href = attrs['hrefInappbrowser'];
 
-                    attrs.$observe('hrefInappbrowser', function (val) {
-                        href = val;
-                    });
+                            attrs.$observe('hrefInappbrowser', function (val) {
+                                href = val;
+                            });
 
-                    element.bind('click', function (event) {
+                            element.bind('click', function (event) {
 
-                        window.open(href, '_system', 'location=yes,clearsessioncache=yes,clearcache=yes,fullscreen=no');
+                                window.open(href, '_system', 'location=yes,clearsessioncache=yes,clearcache=yes,fullscreen=no');
 
-                        event.preventDefault();
-                        event.stopPropagation();
+                                event.preventDefault();
+                                event.stopPropagation();
 
-                    });
-                }
-            };
-        });
+                            });
+                        }
+                    };
+                });
 
