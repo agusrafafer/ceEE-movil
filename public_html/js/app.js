@@ -14,9 +14,6 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
         })
 
         .run(function ($ionicPlatform, $rootScope, $timeout, $ionicHistory, $state) {
-            $ionicPlatform.registerBackButtonAction(function () {
-                event.preventDefault();
-            }, 100);
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -30,13 +27,6 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
                 }
 
             });
-//            $ionicPlatform.registerBackButtonAction(function (event) {
-//                if ($state.current.disableHardwareBackButton) {
-//                    event.preventDefault();
-//                } else {
-//                    $ionicHistory.goBack();
-//                }
-//            });
         })
 
         /*
