@@ -17,7 +17,8 @@ angular.module('app.usuarioCtrl', [])
                 
                 $scope.abrirUrlExterna = function(urlExterna) {
 //                    $window.open(urlExterna, "_blank", "toolbar=yes,toolbartranslucent=no,location=yes,clearsessioncache=yes,clearcache=yes,fullscreen=no");
-                      $window.open(urlExterna, "_blank", "location=yes,fullscreen=no");
+//                      $window.open(urlExterna, "_blank", "location=yes,fullscreen=no");
+                        cordova.InAppBrowser.open(urlExterna, "_system");
                 };
 
                 $scope.aToOnclickHtml = function (html) {
