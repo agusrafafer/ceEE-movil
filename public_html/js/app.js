@@ -80,7 +80,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
                             element.bind('click', function (event) {
 
-                                window.open(href, '_system', 'location=yes,clearsessioncache=yes,clearcache=yes,fullscreen=no');
+                                window.open(href, '_system', 'location=yes,fullscreen=no');
 
                                 event.preventDefault();
                                 event.stopPropagation();
