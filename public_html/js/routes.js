@@ -16,7 +16,8 @@ angular.module('app.routes', [])
                                 templateUrl: 'templates/home.html',
                                 controller: 'usuarioCtrl'
                             }
-                        }
+                        },
+                        disableHardwareBackButton: true
                     })
 
 
