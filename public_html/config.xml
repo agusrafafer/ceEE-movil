@@ -4,9 +4,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.7" 
-        versionCode="007" 
-        android-versionCode="007">
+        version="0.0.9" 
+        versionCode="009" 
+        android-versionCode="009">
     <name>Escolar Hortus MOVIL</name>
     <description>
         App Escolar móvil.
@@ -82,8 +82,7 @@
     <plugin name="cordova-plugin-splashscreen" source="npm"/>
     
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" source="npm"/>
-    <!-- <plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git" /> -->
-    
+    <!--<plugin spec="https://github.com/katzer/cordova-plugin-local-notifications.git" />-->
     
     <plugin name="cordova-custom-config" source="npm"/>
     

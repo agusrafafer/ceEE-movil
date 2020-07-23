@@ -25,16 +25,16 @@ angular.module('app.factories', [])
 
         .factory('wsFactory', function () {
             return {
-//                url: "http://localhost:8080/loreto/webresources"
-//                url: "http://www.escolarweb.com.ar:8080/hortus/webresources"
-                url: "http://www.gruposistemas.com.ar:8080/hortus/webresources"
+//                url: "http://66.97.37.195:8080/azuleso/webresources"
+                url: "https://www.escolarweb.com.ar:8080/hortus/webresources"
+//                url: "http://www.gruposistemas.com.ar:8080/azules/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-//              url: "http://108.160.155.140:8080/fhDiehl/faces/resources/images/fotos/"
-               url: "http://www.gruposistemas.com.ar:8080/hortus/faces/resources/images/fotos/"
+                url: "https://www.escolarweb.com.ar:8080/hortus/faces/resources/images/fotos/"
+//                url: "http://66.97.37.195:8080/azules/faces/resources/images/fotos/"
             };
         });
 
