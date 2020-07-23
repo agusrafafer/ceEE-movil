@@ -14,7 +14,7 @@ angular.module('app.usuarioCtrl', [])
                 $ionicPlatform.ready(function () {
 
                 });
-
+                
                 $scope.abrirUrlExterna = function(urlExterna) {
 //                    $window.open(urlExterna, "_blank", "toolbar=yes,toolbartranslucent=no,location=yes,clearsessioncache=yes,clearcache=yes,fullscreen=no");
 //                      $window.open(urlExterna, "_blank", "location=yes,fullscreen=no");
@@ -32,7 +32,7 @@ angular.module('app.usuarioCtrl', [])
                             if (posComillasFinalHref !== -1) {
                                 let url = textoAux1.substring(0, posComillasFinalHref);
                                 url = url.replace("\"", "");
-                                let onclickcontenido = "window.open('" + url + "', '_blank', 'location=yes,EnableViewPortScale=yes');\" style=\"text-decoration: underline;color: blue;\"";
+                                let onclickcontenido = "cordova.InAppBrowser.open('" + url + "', '_system');\" style=\"text-decoration: underline;color: blue;\"";
                                 vec[i] = vec[i].replace(url, onclickcontenido);
                                 vec[i] = vec[i].replace("href", "onclick");
                             }
