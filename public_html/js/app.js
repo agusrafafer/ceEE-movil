@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes', 'app.directives', 'app.usuarioService', 'app.factories', 'angular-jwt', 'angular-websql'])
+angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes', 'app.directives', 'app.usuarioService', 'app.factories', 'angular-jwt', 'angular-websql', 'ngCordova'])
 
         .config(function ($ionicConfigProvider, $sceDelegateProvider) {
 
@@ -13,7 +13,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
         })
 
-        .run(function ($ionicPlatform, $rootScope, $timeout) {
+        .run(function ($ionicPlatform, $rootScope, $timeout, $ionicHistory, $state) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -73,7 +73,7 @@ angular.module('app', ['ionic', 'app.loginCtrl', 'app.usuarioCtrl', 'app.routes'
 
                     element.bind('click', function (event) {
 
-                        window.open(href, '_system', 'location=yes');
+                        window.open(href, '_system', 'location=yes,fullscreen=no');
 
                         event.preventDefault();
                         event.stopPropagation();
