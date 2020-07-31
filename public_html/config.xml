@@ -4,9 +4,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.9" 
-        versionCode="009" 
-        android-versionCode="009">
+        version="0.0.10" 
+        versionCode="0010" 
+        android-versionCode="0010">
     <name>Escolar Azules MOVIL</name>
     <description>
         App Escolar móvil.
