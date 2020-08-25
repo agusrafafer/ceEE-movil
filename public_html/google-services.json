@@ -1,6 +1,6 @@
 {
   "project_info": {
-    "project_number": "485714942426",
+    "project_number": "156197252622",
     "firebase_url": "https://notificacion-nmusicos.firebaseio.com",
     "project_id": "notificacion-nmusicos",
     "storage_bucket": "notificacion-nmusicos.appspot.com"
@@ -8,27 +8,27 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:485714942426:android:bba20ebea1f4a398fe88e3",
+        "mobilesdk_app_id": "1:156197252622:android:b6080fb3bd10c23b2b965f",
         "android_client_info": {
           "package_name": "com.gs.agura.ceEEmovil.nmusicos"
         }
       },
       "oauth_client": [
         {
-          "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+          "client_id": "156197252622-oj0a3b3833g1cjghfulfv8nc5h9mqo1n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCz-oTbZlxs2Mf3fNtbVMqngPzLWC6YBMs"
+          "current_key": "AIzaSyCXJuvo74KCZH9cTa9HLNxSyPbtz7BLCXg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "485714942426-jhovh1p8tu7ja617kg1g55bvjvatvfei.apps.googleusercontent.com",
+              "client_id": "156197252622-oj0a3b3833g1cjghfulfv8nc5h9mqo1n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
