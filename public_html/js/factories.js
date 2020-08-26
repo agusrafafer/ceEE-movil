@@ -27,13 +27,13 @@ angular.module('app.factories', [])
             return {
 //                url: "http://66.97.37.195:8080/azules/webresources"
 //                url: "http://108.160.155.140:8080/azules/webresources"
-                  url: "https://www.escolarweb.com.ar:8080/velez/webresources"
+                  url: "http://www.escolarweb.com.ar:8080/velez/webresources"
             };
         })
         
         .factory('urlFotoFactory', function () {
             return {
-                url: "https://www.escolarweb.com.ar:8080/velez/faces/resources/images/fotos/"
+                url: "http://www.escolarweb.com.ar:8080/velez/faces/resources/images/fotos/"
             };
         });
 
