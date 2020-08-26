@@ -4,9 +4,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:cdv="http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        version="0.0.7" 
-        versionCode="007" 
-        android-versionCode="007">
+        version="0.0.9" 
+        versionCode="009" 
+        android-versionCode="009">
     <name>Escolar Loreto MOVIL</name>
     <description>
         App Escolar móvil.
@@ -38,8 +38,9 @@
     <platform name="android">
         <!--<preference name="android-targetSdkVersion" value="28" />
         <preference name="android-minSdkVersion" value="19" />
-        <preference name="android-targetSdkVersion" value="26" />--> 
-        <preference name="android-targetSdkVersion" value="28" />
+        <preference name="android-targetSdkVersion" value="26" />
+        <preference name="android-targetSdkVersion" value="28" />--> 
+        <preference name="android-targetSdkVersion" value="29" />
         <preference name="android-minSdkVersion" value="19" />
         <allow-intent href="market:*" />
         <edit-config xmlns:android="http://schemas.android.com/apk/res/android" 
